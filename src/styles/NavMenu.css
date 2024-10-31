@@ -1,0 +1,37 @@
+.nav-menu {
+    height: 60vh;
+    width: 20%;
+    position: fixed;
+    top: 10%;
+    right: 0;
+    background-color: #f5f5f5;
+    box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.7);
+    transition: 0.5s;
+    z-index: 5;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    display: none;
+}
+
+.nav-menu-active {
+    display: block;
+}
+
+.menu-content a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.nav-links {
+    display: flex;
+    padding-top: 10px;
+}
+
+.nav-links img {
+    width: 45px;
+}
