@@ -1,5 +1,4 @@
 # fliits_app
- Here's a sample README.md file for your FLiiTS project. You can customize it further based on your specific needs and features.
 
 ```markdown
 # FLiiTS
