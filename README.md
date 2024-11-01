@@ -91,6 +91,8 @@ We welcome contributions to FLiiTS! If you'd like to contribute, please follow t
 
 ## Contact
 
+their no contacts for now
+
 For any inquiries or feedback, please reach out:
 
 - **Kasy Jonan**: [jonanrayan06@gmail.com](mailto:your.email@example.com)
