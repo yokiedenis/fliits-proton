@@ -6,7 +6,9 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        
+      <div className="logo">
+        <a href="#">FL<span style={{ color: 'gold' }}>ii</span>TS</a>
+      </div>
         <div className="footer-section">
           <h3>Company</h3>
           <ul>
