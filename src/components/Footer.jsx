@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Footer.css'; 
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'; 
+import ShareButton from './ShareButton';
 
 const Footer = () => {
   return (
