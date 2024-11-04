@@ -1,9 +1,6 @@
-# fliits_app
-
-```markdown
 # FLiiTS
 
-FLiiTS is an innovative car-sharing platform that offers a convenient and flexible way to access vehicles for rental, taxi services, and more. Our goal is to provide a seamless experience for users looking to rent or share cars, ensuring they have reliable transportation when they need it.
+FLiiTS is an innovative car-sharing platform that offers a convenient and flexible way to access vehicles for rental, taxi services, and more. Our goal is to provide a seamless experience for users looking to rent or share cars, ensuring reliable transportation whenever they need it.
 
 ## Table of Contents
 
@@ -30,7 +27,7 @@ To run FLiiTS locally, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/fliits.git
+   git clone https://github.com/Kasy256/fliits.git
    ```
 
 2. **Navigate into the project directory**:
@@ -48,7 +45,8 @@ To run FLiiTS locally, follow these steps:
    npm run dev
    ```
 
-5. **Open your browser** and visit `http://localhost:3000` to see the app in action.
+5. **Access the local server**:
+   Open your browser and go to [http://localhost:5173](http://localhost:5173) to see the app in action.
 
 ## Usage
 
@@ -63,8 +61,8 @@ FLiiTS is built using the following technologies:
 
 - **Frontend**: React.js, Vite, Tailwind CSS
 - **Backend**: Node.js, Express.js (if applicable)
-- **Database**: mySQL
-- **Deployment**: 
+- **Database**: MySQL
+- **Deployment**: (Add your deployment details here)
 
 ## Contributing
 
@@ -77,7 +75,7 @@ We welcome contributions to FLiiTS! If you'd like to contribute, please follow t
    ```
 3. **Make your changes and commit them**:
    ```bash
-   git commit -m "Add your message about the changes"
+   git commit -m "Describe your changes"
    ```
 4. **Push to the branch**:
    ```bash
@@ -91,14 +89,8 @@ We welcome contributions to FLiiTS! If you'd like to contribute, please follow t
 
 ## Contact
 
-their no contacts for now
+For inquiries or feedback, feel free to reach out:
 
-For any inquiries or feedback, please reach out:
+- **Kasy Jonan**: [jonanrayan06@gmail.com](mailto:jonanrayan06@gmail.com)
+- **GitHub**: [Kasy256](https://github.com/Kasy256)
 
-- **Kasy Jonan**: [jonanrayan06@gmail.com](mailto:your.email@example.com)
-- **GitHub**: [Kasy256](https://github.com/yourusername)
-```
-
-### Notes:
-- Make sure to replace placeholders like `yourusername`, `your.email@example.com`, and any specific technology details with your actual information.
-- Feel free to add any additional sections relevant to your project, such as a changelog, roadmap, or specific usage instructions.
