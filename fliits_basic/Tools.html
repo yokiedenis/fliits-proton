@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://kit.fontawesome.com/3a0fd8d349.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/fliits-logo.png" type="image/png">
+    <script language="javascript" src="fliits.js"></script>
+</head>
+<body>
+    <!--Header section-->
+    <div class="host-headercontainer">
+        <div class="logo">
+         <a href="index.html">FL<span style="color:gold;">ii</span>TS</a>
+        </div>
+
+         <!--destination-->
+         <div class="location">
+            <button id="host-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="search" name="destination" id="host-destination" placeholder="City, Hotel or Airport" required>
+        </div>
+        <div>
+            <ul>
+             <li>
+                 <img src="icons/add-user.png" alt="menu-bar" class="host-header-icon" id="acc-menu-icon"onclick="togglelogin()">
+             </li>
+             <li>
+                 <img src="icons/menu.png" alt="menu-bar" class="host-header-icon" id="nav-menu-icon"onclick="toggleMenu()">
+             </li>
+            </ul>     
+        </div>
+     </div><br>
+<!--navigation menu-->
+<div class="nav-menu" id="nav-menu">
+    <div class="menu-content">
+        <div class="nav-links">
+            <img src="icons/car.png" alt="car">
+            <a href="host.html">Be a Host</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/about.png" alt="car">
+            <a href="About.html">About</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/calculator.png" alt="car">
+            <a href="#calculator-section">Calculator</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/customer-service.png" alt="car">
+            <a href="Contact.html">Contact Support</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/support.png" alt="car">
+            <a href="Tools.html">Tools</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/careers.png" alt="car">
+            <a href="#">Careers</a>
+        </div>
+    </div>
+</div>
+
+<!--Account login and sugn up menu-->
+<div class="login-menu" id="login-menu">
+    <div class="menu-content">
+        <div class="nav-links">
+            <img src="icons/login-button.png" alt="login">
+            <a href="host.html">Login</a>
+        </div>
+        <div class="nav-links">
+            <img src="icons/add-user.png" alt="Sign up">
+            <a href="host.html">Sign up</a>
+        </div>
+    </div>
+</div>
+<!-- Hero section-->
+<div class="tools-hero">
+    <h1>FL<span style="color: #ffd700">ii</span>TS<br>Income Estimator</h1>
+    <p>Explore how much you can earn by sharing different vehicles on FL<span style="color: #ffd700">ii</span>TS</p>
+</div>
+
+<!--calculator section-->
+<div class="calculator-section" id="calculator-section">
+    <h1>Discover the potential income you could generate as you grow your fleet with FL<span style="color: #ffd700">ii</span>TS</h1>
+    <p>Note: Earnings depend on your car's availability, pricing, local demand and seasonal trends</p>
+</div>
+<!--budget calculator-->
+<select id="cal-options" onchange="displayOptions()">
+    <option value="vehicle">Search by Vehicle</option>
+    <option value="budget">Search by Budget</option>
+</select><br>
+
+<!-- Search by Vehicle Options -->
+<div id="vehicle-options" class="budget-calculator">
+    <div class="budget-options">
+        <label>Region</label><br>
+        <select id="location-options-vehicle">
+            <option value="London">London</option>
+            <option value="Kampala">Kampala</option>
+        </select>
+    </div>
+    <div class="budget-options">
+        <label>Make and model</label><br>
+        <select id="model-options-vehicle">
+            <option value="Audi Q3">Audi Q3</option>
+            <option value="Benz GLE 63">Benz GLE 63</option>
+        </select>
+    </div>
+    <div class="budget-options">
+        <label>Duration</label><br>
+        <select id="duration-options-vehicle">
+            <option value="Yearly">Yearly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Daily">Daily</option>
+        </select>
+    </div>
+</div>
+
+<!-- Search by Budget Options -->
+<div id="budget-options" class="budget-calculator hidden">
+    <div class="budget-options">
+        <label>Region</label><br>
+        <select id="location-options-budget">
+            <option value="London">London</option>
+            <option value="Kampala">Kampala</option>
+        </select>
+    </div>
+    <div class="budget-options">
+        <label>Vehicle budget range</label><br>
+        <select id="model-options-budget">
+            <option>$10k to $15k</option>
+            <option>$15k to $40k</option>
+        </select>
+    </div>
+    <div class="budget-options">
+        <label>Duration</label><br>
+        <select id="duration-options-budget">
+            <option value="Yearly">Yearly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Daily">Daily</option>
+        </select>
+    </div>
+</div>
+
+<div class="budget-button">
+    <input type="button" value="Calculate" id="budget-button" onclick="calculateResults()">
+</div>
+ <!--Results -->
+ <div class="budget-results">
+    <div class="value">
+        <label>Estimated Value</label>
+        <div id="value-results"></div>
+    </div>
+    <div class="value">
+        <label>Annual ROI</label>
+        <div id="ROI-results"></div>
+    </div>
+    <div class="value">
+        <label>Avg. earnings</label>
+        <div id="avg-results"></div>
+    </div>
+</div>
+
+
+<!--Get started section-->
+<div class="getstarted-section">
+    <h1>Launch Your Own Car Rental Business with FL<span style="color: #ffd700">ii</span>TS</h1>
+    <a href="share-car.html" id="get-started-button">Get Started</a>
+</div>
+<br><br><br>
+
+    <div class="footer-seperator"></div>
+    <!--Footer section-->
+    <footer>
+        <div class="footer-logo">
+            <div class="logo">
+                <a href="#">FL<span style="color:gold;">ii</span>TS</a>
+               </div><br>
+                <a href="host.html" class="share-car-button-footer">Share Your Car</a>
+        </div>
+        
+        <!--Comapany links-->
+        <div class="page-links">
+            <label class="page-link-header">Company</label>
+            <p class="page-link-subtext">About us</p>
+            <p class="page-link-subtext">Careers</p>
+            <p class="page-link-subtext">Investors</p>
+            <p class="page-link-subtext">Blog</p>
+            <p class="page-link-subtext">Policies</p>
+        </div>
+        
+        <!--Comapany Products-->
+        <div class="page-links">
+            <label class="page-link-header">Products</label>
+            <a href="host.html"><p class="page-link-subtext">Host with us</p></a>
+            <p class="page-link-subtext">Ride with us</p>
+            <p class="page-link-subtext">FliiTS Freight</p>
+            <p class="page-link-subtext">Calculator</p>
+            <p class="page-link-subtext">Host Tools</p>
+        </div>
+        
+        <!--Comapany Locations-->
+        <div class="page-links">
+            <label class="page-link-header">Locations</label>
+            <p class="page-link-subtext">Africa</p>
+            <p class="page-link-subtext">Asia & UAE</p>
+            <p class="page-link-subtext">Europe</p>
+            <p class="page-link-subtext">North America</p>
+            <p class="page-link-subtext">South America</p>
+        </div>
+        
+        <div class="footer-socials">
+            <div class="social-media-logo">
+                <img src="icons/facebook (1).png" alt="facebook">
+                <img src="icons/twitter (1).png" alt="X">
+                <img src="icons/instagram (1).png" alt="instagram">
+                <img src="icons/tiktok.png" alt="tiktok">
+                <img src="icons/youtube (1).png" alt="youtube">
+            </div>
+        
+            <div class="app-download-button">
+                <img src="icons/download_buttons.png" alt="facebook" id="download-button">
+        
+                <div class="language-location-button">
+                    <img src="icons/flag.png" alt="flag"> 
+                    <select>
+                        <option>English</option>
+                        <option>French</option>
+                        <option>Chinese</option>
+                    </select>
+                    <p>
+                        <img src="icons/location-pin.png" alt="location" id="location-pin">
+                        <label id="location-name">London</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+     </footer>
+    <p class="copyright">&copy; 2024 FLiiTS, Inc</p>
+</body>
+</html>
