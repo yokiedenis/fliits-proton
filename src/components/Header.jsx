@@ -24,7 +24,6 @@ const Header = () => {
           <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={toggleModal} />
         </li>
         <li>
-          <FaBars className="header-icon" id="nav-menu-icon" onClick={() => console.log('Nav Menu Toggled')} />
             <FaBars
               className="header-icon"
               id="nav-menu-icon"
