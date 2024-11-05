@@ -1,4 +1,3 @@
-/* Header section CSS */
 .headercontainer {
     background-color: white;
     display: flex;
@@ -33,9 +32,9 @@ ul li {
 }
 
 .header-icon {
-    font-size: 32px; /* Sets the icon size */
+    font-size: 32px; 
     cursor: pointer;
-    color: black; /* Icon color */
+    color: black; 
 }
 
 /* Header.css or a separate modal.css */
@@ -45,7 +44,7 @@ ul li {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,11 +63,10 @@ ul li {
   .close-button {
     background: none;
     border: none;
-    font-size: 1.2em;
     cursor: pointer;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 90px;
+    right: 485px;
   }
   
 
@@ -97,6 +95,14 @@ ul li {
     }
 
     .header-icon {
-        font-size: 25px; /* Adjusted size for smaller screens */
+        font-size: 25px; 
     }
+    .close-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 100px;
+        right: 60px;
+      }
 }

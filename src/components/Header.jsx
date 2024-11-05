@@ -1,45 +1,84 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
-import { FaUserPlus, FaBars } from 'react-icons/fa';
-import Login from './Loginpage'; // Import the Login component
+import { FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; 
+import Login from './Loginpage';
+import NavMenu from './NavMenu'; 
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [navMenuOpen, setNavMenuOpen] = useState(false);
 
-  // Function to toggle the modal
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleMouseEnter = () => {
+    setNavMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!navMenuOpen) {
+      setNavMenuOpen(false);
+    }
+  };
+
+  const handleClick = () => {
+    setNavMenuOpen((prev) => !prev); // Toggle the menu on click
+  };
+
+  const handleOutsideClick = (e) => {
+    if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
+      setNavMenuOpen(false);
+    }
+  };
+
+  const handleLinkClick = () => {
+    setNavMenuOpen(false); // Close the nav menu
+  };
+
+  React.useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [navMenuOpen]);
+
   return (
     <div className="headercontainer">
       <div className="logo">
-        <a href="#">FL<span style={{ color: 'gold' }}>ii</span>TS</a>
+        <Link to="/" className="logo-link">
+          FL<span style={{ color: 'gold' }}>ii</span>TS
+        </Link>
       </div>
       <ShareButton />
       <ul>
         <li>
-          {/* Toggle modal on FaUserPlus click */}
           <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={toggleModal} />
         </li>
-        <li>
-            <FaBars
-              className="header-icon"
-              id="nav-menu-icon"
-              onClick={() => console.log('Nav Menu Toggled')}
-            />
+        <li 
+          onMouseEnter={handleMouseEnter} 
+          onMouseLeave={handleMouseLeave}
+          onClick={handleClick}
+        >
+          <FaBars className="header-icon" id="nav-menu-icon" />
         </li>
       </ul>
-
-      {/* Render the Login modal if isModalOpen is true */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={toggleModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <Login />
-            <button className="close-button" onClick={toggleModal}>Close</button>
+            <button className="close-button" onClick={toggleModal}><FaTimes size={25} /></button>
           </div>
         </div>
+      )}
+      {navMenuOpen && (
+        <>
+          <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
+            <NavMenu onClose={handleMouseLeave} onLinkClick={handleLinkClick} />
+          </div>
+        </>
       )}
     </div>
   );
