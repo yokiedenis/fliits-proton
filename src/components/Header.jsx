@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
 import { FaUserPlus, FaBars } from 'react-icons/fa';
@@ -26,6 +25,11 @@ const Header = () => {
         </li>
         <li>
           <FaBars className="header-icon" id="nav-menu-icon" onClick={() => console.log('Nav Menu Toggled')} />
+            <FaBars
+              className="header-icon"
+              id="nav-menu-icon"
+              onClick={() => console.log('Nav Menu Toggled')}
+            />
         </li>
       </ul>
 

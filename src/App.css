@@ -1,3 +1,245 @@
 *{
     text-decoration: none;
 }
+/* Section 2 CSS */
+.content-heading {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 15px;
+}
+
+.content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.content-text {
+    flex: 1;
+}
+
+.content-image {
+    flex: 1;
+}
+
+.content-image img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.content-subtext {
+    background-color: transparent;
+    padding: 0;
+    margin: 10px 0;
+    font-family: 'Segoe UI';
+    font-size: 30px;
+    text-align: center;
+}
+
+/* How it works section */
+.works-section {
+    background-color: #f5f5f5;
+}
+
+.client-headings {
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+.how-we-work {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 40px;
+    margin-top: -50px;
+}
+
+.hosts-list, .rider-list {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 20px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.works-content {
+    display: none;
+    margin: 0 auto;
+}
+
+.works-content.active {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.fliits-options-buttons {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+.fliits-work-buttons.active {
+    border-bottom: 5px solid #FFD700;
+}
+
+.fliits-work-buttons {
+    background-color: transparent;
+    border: none;
+    padding: 0 200px 0;
+    margin: 10px;
+}
+
+/* Book your style section */
+.card-container {
+    padding: 10px;
+    margin: 0 auto; 
+    flex: 0 0 auto;
+    width: 20%; 
+}
+
+.cars::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cars::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners on the scrollbar thumb */
+}
+
+.cars::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Background of the scrollbar track */
+}
+
+.cars {
+    background-color: transparent;
+    width: 100%;
+    justify-content: space-between;
+    display: flex; 
+    overflow-x: scroll; 
+    white-space: nowrap; 
+}
+
+.cards {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.cards img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
+}
+
+.label1 {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Review section CSS */
+.review-section {
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+.reviews {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    overflow-x: auto; 
+    white-space: nowrap; 
+    margin-top: 10px;
+}
+
+.reviews::-webkit-scrollbar {
+    height: 8px;
+}
+
+.reviews::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners on the scrollbar thumb */
+}
+
+.reviews::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Background of the scrollbar track */
+}
+
+.review-card {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 20px;
+    margin: 5px;
+}
+
+.review-image img {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+}
+
+.review-message {
+    font-family: 'Segoe UI';
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word; /* Breaks long words if necessary */
+    word-break: break-word; /* Ensures words will break to a new line */
+    white-space: normal; /* Allows the text to wrap to a new line */
+    overflow: hidden; /* Hides any overflow content */
+    text-overflow: ellipsis;
+}
+
+.review-profile {
+    display: flex;
+    padding: 10px;
+}
+
+.reviewer-name {
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.profile-name {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.profile-type {
+    text-align: center;
+    font-size: 15px;
+    margin-top: -20px;
+}
+
+.review-ratings {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.rating-star {
+    width: 8%;
+}
