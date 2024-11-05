@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/NavMenu.css';
 
 const NavMenu = () => {
@@ -6,28 +7,28 @@ const NavMenu = () => {
     <div className="nav-menu" id="nav-menu">
       <div className="menu-content">
         <div className="nav-links">
-          <img src="assests/icons/car.png" alt="car" />
-          <a href="host.html">Be a Host</a>
+          <img src="/assets/icons/car.png" alt="car" />
+          <Link to="/host">Be a Host</Link>
         </div>
         <div className="nav-links">
-          <img src="assests/icons/about.png" alt="about" />
-          <a href="About.html">About</a>
+          <img src="/assets/icons/about.png" alt="about" />
+          <Link to="/about">About</Link>
         </div>
         <div className="nav-links">
-          <img src="assests/icons/calculator.png" alt="calculator" />
-          <a href="Tools.html">Calculator</a>
+          <img src="/assets/icons/calculator.png" alt="calculator" />
+          <Link to="/calculator">Calculator</Link>
         </div>
         <div className="nav-links">
-          <img src="assests/icons/customer-service.png" alt="contact support" />
-          <a href="Contact.html">Contact Support</a>
+          <img src="/assets/icons/customer-service.png" alt="contact support" />
+          <Link to="/contact">Contact Support</Link>
         </div>
         <div className="nav-links">
-          <img src="assests/icons/support.png" alt="tools" />
-          <a href="Tools.html">Tools</a>
+          <img src="/assets/icons/support.png" alt="tools" />
+          <Link to="/tools">Tools</Link>
         </div>
         <div className="nav-links">
-          <img src="assests/icons/careers.png" alt="careers" />
-          <a href="#">Careers</a>
+          <img src="/assets/icons/careers.png" alt="careers" />
+          <Link to="/careers">Careers</Link>
         </div>
       </div>
     </div>

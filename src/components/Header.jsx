@@ -19,11 +19,11 @@ const Header = () => {
           />
         </li>
         <li>
-          <FaBars
-            className="header-icon"
-            id="nav-menu-icon"
-            onClick={() => console.log('Nav Menu Toggled')}
-          />
+            <FaBars
+              className="header-icon"
+              id="nav-menu-icon"
+              onClick={() => console.log('Nav Menu Toggled')}
+            />
         </li>
       </ul>
     </div>
