@@ -99,12 +99,5 @@ ul li {
     .header-icon {
         font-size: 25px; 
     }
-    .close-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        position: absolute;
-        top: 100px;
-        right: 60px;
-      }
+   
 }

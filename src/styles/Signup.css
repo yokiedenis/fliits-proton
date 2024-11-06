@@ -90,7 +90,9 @@
   }
   
   .signup-button:hover {
-    background-color: #FFC700;
+    background-color: black;
+    color: white;
+    transition: 0.3ms;
   }
   
   /* Divider Styles */
