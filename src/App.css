@@ -67,6 +67,7 @@
 
 .client-headings {
     font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     text-align: center;
 }
@@ -80,26 +81,29 @@
     margin-top: -50px;
 }
 
-.hosts-list, .rider-list {
+.hosts-list, .rider-list { /* Updated for consistent class name */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    padding: 50px;
-    margin: 10px;
+    padding: 15px;
+    margin: 5px;
     background-color: white;
     border-radius: 20px;
     font-size: 18px;
     text-align: left;
+    height: 35vh;
 }
 
 .works-content {
     display: none;
     margin: 0 auto;
+    height: auto;
 }
 
 .works-content.active {
     display: block;
     margin: 0 auto;
     margin-top: 30px;
-    padding: 20px;
+    padding: 0px;
+   
 }
 
 .fliits-options-buttons {
@@ -299,7 +303,7 @@
     .how-we-work{
         flex-direction: column;
     }
-    .Hosts-list,
+    .hosts-list,
     .rider-list {
         flex: none;
         max-width: 100%;
