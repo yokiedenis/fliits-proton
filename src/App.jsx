@@ -6,6 +6,8 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import Home from './pages/Home'; 
 import './App.css';
+import SignUp from './components/Signup';
+import Login from './components/Loginpage';
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         
         <Routes>
           {/* Define routes for each page */}
+        <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />

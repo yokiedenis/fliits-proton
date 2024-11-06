@@ -1,8 +1,9 @@
 // LoginPage.jsx
 import { useState } from 'react';
-import '../styles/Login.css'; // Update the path as needed
+import { Link } from 'react-router-dom';
+import '../styles/Login.css';
 
-function Login() {
+function Login({ onSignUpLinkClick }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,7 +42,7 @@ function Login() {
       </form>
       <div className="Signup_link">
         <span>Don’t have an account? </span>
-        <a href="/signup" className="footer-link">Sign up</a>
+        <Link to="#" className="footer-link" onClick={onSignUpLinkClick}>Sign up</Link>
       </div>
     </div>
   );
