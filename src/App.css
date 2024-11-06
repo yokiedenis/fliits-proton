@@ -129,16 +129,16 @@
 }
 
 .cars::-webkit-scrollbar {
-    height: 8px;
+    height: 5px;
 }
 
 .cars::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color of the scrollbar thumb */
+    background-color: black; /* Color of the scrollbar thumb */
     border-radius: 4px; /* Rounded corners on the scrollbar thumb */
 }
 
 .cars::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Background of the scrollbar track */
+    background-color: transparent; /* Background of the scrollbar track */
 }
 
 .cars {
@@ -164,6 +164,7 @@
 }
 
 .label1 {
+    color: black;
     font-weight: bold;
     font-size: 18px;
     padding-bottom: 10px;
@@ -256,4 +257,98 @@
 
 .rating-star {
     width: 8%;
+}
+
+/*Responsiveness for home page*/
+@media (max-width: 800px){
+
+    /* Responsiveness for the content section*/
+    .content-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .content-heading{
+        font-size: 25px;
+        margin-top: 30px;
+        padding-top: 10px;
+    }
+    .content-image,
+    .content-text {
+        flex: none;
+        width: 100%;
+        text-align: center;
+    }
+    .content-image img {
+        max-width: 100%;
+        height: auto;
+    }
+    .content-subtext{
+        font-size: 25px;
+    }
+
+    /* Responsiveness for the how we work section*/
+    .fliits-work-buttons{
+        padding: 0 50px 0;
+    }
+    .fliits-options-buttons{
+        margin: 30px;
+    }
+    .client-headings{
+        font-size: 15px;
+    }
+    .how-we-work{
+        flex-direction: column;
+    }
+    .Hosts-list,
+    .rider-list {
+        flex: none;
+        max-width: 100%;
+        height: auto;
+        font-size: 15px;
+    }
+
+    /*Responsiveness for book your style section*/
+    .card-container{
+        width: 50%; 
+    }
+    img{
+        width: 100%;
+        height: auto;
+    }
+    .label1{
+        font-size: 14px;
+    }
+
+    /* Responsiveness for the review section
+    .review-card{
+        width: 100%;
+        padding: 1px;
+        margin: 3px;
+    }
+    .review-image  img{
+        width: 70px;
+        height: 70px;
+    }
+    .review-message{
+        font-size: 13px;
+        margin-top: -30px;
+    }
+    .reviewer-name{
+        margin: 0 auto;
+        padding: 5px;
+    }
+    .profile-name{
+        font-size: 20px;
+        margin-top: 3px;
+    }
+    .profile-type{
+        font-size: 12px;
+    }
+    .review-ratings{
+        text-align: center;
+    }
+    .rating-star{
+        width: 7%;
+        margin-top: -10px;
+    } */
 }

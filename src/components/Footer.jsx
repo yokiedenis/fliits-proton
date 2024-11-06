@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/Footer.css'; 
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'; 
-import ShareButton from './ShareButton';
 
 const Footer = () => {
   return (
@@ -48,7 +47,7 @@ const Footer = () => {
             <Link to="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
               <FaFacebook />
             </Link>
-            <aLink to="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <aLink to="https://x.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
               <FaTwitter />
             </aLink>
             <Link to="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
