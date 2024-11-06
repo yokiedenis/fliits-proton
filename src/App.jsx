@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import './App.css';
 import SignUp from './components/Signup';
 import Login from './components/Loginpage';
+import '@fontsource/roboto'; 
 
 function App() {
   return (
