@@ -6,6 +6,8 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import Home from './pages/Home'; 
 import './App.css';
+import '@fontsource/roboto'; 
+
 
 function App() {
   return (
