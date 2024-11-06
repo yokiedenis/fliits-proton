@@ -1,13 +1,16 @@
+// Header.jsx
 import React, { useState } from 'react';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
 import { FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; 
-import Login from './Loginpage';
+import Login from '../components/Loginpage';
+import SignUp from '../components/Signup';
 import NavMenu from './NavMenu'; 
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginForm, setIsLoginForm] = useState(true); // Track whether to show Login or Sign Up
   const [navMenuOpen, setNavMenuOpen] = useState(false);
 
   const toggleModal = () => {
@@ -55,7 +58,7 @@ const Header = () => {
       <ShareButton />
       <ul>
         <li>
-          <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={toggleModal} />
+          <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={() => { toggleModal(); setIsLoginForm(true); }} />
         </li>
         <li 
           onMouseEnter={handleMouseEnter} 
@@ -68,7 +71,11 @@ const Header = () => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={toggleModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <Login />
+            {isLoginForm ? (
+              <Login onSignUpLinkClick={() => setIsLoginForm(false)} />
+            ) : (
+              <SignUp />
+            )}
             <button className="close-button" onClick={toggleModal}><FaTimes size={25} /></button>
           </div>
         </div>
