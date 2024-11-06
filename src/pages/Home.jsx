@@ -8,7 +8,7 @@ const Home = () => {
       <p className="content-heading">Share Your Car With FL<span style={{ color: 'gold' }}>ii</span>TS</p>
       <div className="content-section">
         <div className="content-image">
-          <img src="images/share.webp" alt="Share your car with FLiiTS" />
+        <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt="Share your car with FLiiTS" />
         </div>
         <div className="content-text">
           <div className="content-subtext">
