@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Footer.css'; 
+import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'; 
 import ShareButton from './ShareButton';
 
@@ -7,51 +8,52 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-      <div className="logo">
-        <a href="#">FL<span style={{ color: 'gold' }}>ii</span>TS</a>
+      <div className="footer-logo">
+        <Link to='/'>FL<span style={{ color: 'gold' }}>ii</span>TS</Link>
+        
       </div>
         <div className="footer-section">
           <h3>Company</h3>
           <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/careers">Careers</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/investors">Investors</a></li>
-            <li><a href="/policies">Policies</a></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/careers">Careers</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
+            <li><Link to="/investors">Investors</Link></li>
+            <li><Link to="/policies">Policies</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h3>Products</h3>
           <ul>
-            <li><a href="/host">Host with Us</a></li>
-            <li><a href="/ride">Ride with Us</a></li>
-            <li><a href="/host-tools">Host Tools</a></li>
+            <li><Link to="/host">Host with Us</Link></li>
+            <li><Link to="/ride">Ride with Us</Link></li>
+            <li><Link to="/host-tools">Host Tools</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h3>Location</h3>
           <ul>
-            <li><a href="/africa">Africa</a></li>
-            <li><a href="/asia">Asia</a></li>
-            <li><a href="/north-america">North America</a></li>
-            <li><a href="/south-america">South America</a></li>
+            <li><Link to="/africa">Africa</Link></li>
+            <li><Link to="/asia">Asia</Link></li>
+            <li><Link to="/north-america">North America</Link></li>
+            <li><Link to="/south-america">South America</Link></li>
           </ul>
         </div>
 
         <div className="footer-social">
           <h3>Follow Us</h3>
           <div className="social-icons">
-            <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <Link to="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
               <FaFacebook />
-            </a>
-            <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            </Link>
+            <aLink to="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
               <FaTwitter />
-            </a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            </aLink>
+            <Link to="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <FaLinkedin />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
