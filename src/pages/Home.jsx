@@ -1,23 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <div className="home">
-
       {/* Sample Information section */}
       <p className="content-heading">Share Your Car With FL<span style={{ color: 'gold' }}>ii</span>TS</p>
       <div className="content-section">
         <div className="content-image">
-        <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt="Share your car with FLiiTS" />
+          <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt="Share your car with FLiiTS" />
         </div>
         <div className="content-text">
           <div className="content-subtext">
-            <p className="section-subtext">Unlock the potential of your vehicle by joining the <b>FL<span style={{ color: 'gold' }}>ii</span>TS</b> community. Earn extra income by renting out your car when you're not using it. It's simple, safe, and rewarding.</p>
-            <a href="host.html" className="share-car-button">Share Your Car</a>
+            <p className="section-subtext">Unlock the potential of your vehicle by joining the <b>FL<span style={{ color: 'gold' }}>ii</span>TS</b> community. Earn extra income by renting out your car when you're not using it. It's simple, safe, and rewarding.</p><br/>
+            <Link to='/Host' className="share-car-button">Share Your Car</Link>
           </div>
         </div>
       </div>
-
       {/* How it works section */}
       <div className="works-section">
         <p className="content-heading">How FL<span style={{ color: 'gold' }}>ii</span>TS Works</p>
@@ -33,7 +32,6 @@ const Home = () => {
             </button>
           </div>
         </div>
-
         <div className="how-we-work">
           <div className="works-content" id="riders">
             <ul className="rider-list">
@@ -49,7 +47,6 @@ const Home = () => {
               <a href="rides.html" className="share-car-button">Order a ride</a>
             </ul>
           </div>
-
           {/* FLiiTS Host */}
           <div className="works-content" id="hosts">
             <ul className="hosts-list">
@@ -67,26 +64,23 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       {/* Book your style section */}
-      <p className="content-heading">Browse our limitless car sharing marketplace</p>
-      <center><a href="rides.html" className="share-car-button">Book Your Style</a></center>
+      <p className="content-heading">Browse our limitless car sharing marketplace</p><br />
+      <center><Link to='/Host' className="share-car-button">Book Your Style</Link></center><br />
       <br />
-
       {/* Car type options */}
       <section className="cars">
         {['benz', 'bmw', 'jeep', 'subaru'].map((car, index) => (
           <div className="card-container" key={index}>
             <div className="cards">
               <a href="#">
-                <img src={`images/${car}.jfif`} alt={car} />
+                <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt={car} />
                 <p className="label1">{car.charAt(0).toUpperCase() + car.slice(1)}</p>
               </a>
             </div>
           </div>
         ))}
       </section>
-
     </div>
   );
 };
