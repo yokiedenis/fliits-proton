@@ -121,7 +121,7 @@
     background-color: transparent;
     border: none;
     padding: 0 200px 0;
-    margin: 10px;
+    margin: 5px;
 }
 
 /* Book your style section */
@@ -295,7 +295,7 @@
         padding: 0 50px 0;
     }
     .fliits-options-buttons{
-        margin: 30px;
+        margin: 5px;
     }
     .client-headings{
         font-size: 15px;
