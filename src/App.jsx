@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Loginpage';
+import Carshare from './pages/Carshare'
 import Home from './pages/Home'; 
 import './App.css';
 import '@fontsource/roboto'; 
@@ -12,12 +12,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        
       
         <Routes>
           {/* Define routes for each page */}
         <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+        <Route path="/Carshare" element={<Carshare />} />
+        <Route path="/" element={<Home />} />
         </Routes>
        
         <Footer />
