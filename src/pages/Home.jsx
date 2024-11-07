@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Hero from '../components/Hero';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -9,6 +10,9 @@ const Home = () => {
 
   return (
     <div className="home">
+      
+      <Hero />
+
       {/* Sample Information section */}
       <p className="content-heading">Share Your Car With FL<span style={{ color: 'gold' }}>ii</span>TS</p>
       <div className="content-section">
