@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import BookCarStyle from '../components/BookYourStyle';
 import { Link } from 'react-router-dom';
-import CarImage from '../assets/images/share.webp'
-import Subaru from '../assets/images/subaru.jfif'
-import Jeep  from '../assets/images/jeep.jfif'
-import Benz  from '../assets/images/benz.jfif'
-import BMW  from '../assets/images/bmw.jfif'
-import Hilux  from '../assets/images/hilux.jpeg'
+import CarImage from '../assets/images/Share.webp'
+
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('riders'); // Set 'riders' as the default
@@ -15,14 +12,6 @@ const Home = () => {
   const showRiders = () => setActiveSection('riders');
   const showHosts = () => setActiveSection('hosts');
 
-
-  const CarsData = [
-    { name: 'Subaru', image: Subaru},
-    { name: 'Jeep', image: Jeep},
-    { name:  'Benz', image: Benz},
-    { name: 'BMW', image: BMW},
-    { name: 'Hilux', image: Hilux}
-  ];
 
   return (
     <div className="home">
@@ -93,19 +82,8 @@ const Home = () => {
       <center><Link to='/Host' className="share-car-button">Book Your Style</Link></center><br />
       <br />
 
-      {/* Car type options */}
-      <section className="cars">
-      {CarsData.map((car, index) => (
-        <div className="card-container" key={index}>
-          <div className="cards">
-            <Link to="/">
-              <img src={car.image} alt={car.name} />
-              <p className="label1">{car.name.charAt(0).toUpperCase() + car.name.slice(1)}</p>
-            </Link>
-          </div>
-        </div>
-      ))}
-    </section> <br />
+      <BookCarStyle />
+      <br />
     </div>
   );
 };

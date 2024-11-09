@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Login from './components/Loginpage';
-import Carshare from './pages/Carshare'
+import Carshare from './pages/Carshare';
 import Home from './pages/Home'; 
 import './App.css';
 import '@fontsource/roboto'; 
