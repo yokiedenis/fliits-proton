@@ -8,7 +8,7 @@ const NavMenu = ({ onClose, onLinkClick }) => {
     <div className="menu-content">
       <div className="nav-links" onClick={() => { onLinkClick(); onClose(); }}>
         <FaCar size={25} />
-        <Link to="/host">Be a Host</Link>
+        <Link to="/Carshare">Be a Host</Link>
       </div>
       <div className="nav-links" onClick={() => { onLinkClick(); onClose(); }}>
         <FaInfoCircle size={25} />

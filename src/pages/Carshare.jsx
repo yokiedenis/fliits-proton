@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import BookingHeader from '../components/BookingHeader';
 import '../styles/CarShare.css';
 
@@ -14,7 +15,7 @@ function LandingPage() {
       <BookingHeader />
 
       {/* Hero Section */}
-      <section className="hero-section">
+      {/* <section className="hero-section">
         <div className="hero-content">
           <h1>Turn Your Car into Extra Cash!</h1>
           <p>Share your car, earn effortlessly. No commitments, no hassles, just opportunities.</p>
@@ -26,7 +27,15 @@ function LandingPage() {
             <button className="button-primary">Get Started</button>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <section className="hero-section">
+    <div className="hero-content">
+        <p className="hero-heading">Turn Your Car into Extra Cash!</p>
+        <p className="hero-subheading">Share your car, earn effortlessly. No commitments, no hassles just opportunities.</p><br />
+        <Link to="" className="button-primary">Get Started</Link>
+    </div>
+    </section>
 
       {/* Main Feature Section */}
       <section className="feature-section">

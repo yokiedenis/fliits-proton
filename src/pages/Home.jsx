@@ -2,12 +2,27 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import { Link } from 'react-router-dom';
+import CarImage from '../assets/images/share.webp'
+import Subaru from '../assets/images/subaru.jfif'
+import Jeep  from '../assets/images/jeep.jfif'
+import Benz  from '../assets/images/benz.jfif'
+import BMW  from '../assets/images/bmw.jfif'
+import Hilux  from '../assets/images/hilux.jpeg'
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('riders'); // Set 'riders' as the default
 
   const showRiders = () => setActiveSection('riders');
   const showHosts = () => setActiveSection('hosts');
+
+
+  const CarsData = [
+    { name: 'Subaru', image: Subaru},
+    { name: 'Jeep', image: Jeep},
+    { name:  'Benz', image: Benz},
+    { name: 'BMW', image: BMW},
+    { name: 'Hilux', image: Hilux}
+  ];
 
   return (
     <div className="home">
@@ -18,7 +33,7 @@ const Home = () => {
       <p className="content-heading">Share Your Car With FL<span style={{ color: 'gold' }}>ii</span>TS</p>
       <div className="content-section">
         <div className="content-image">
-          <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt="Share your car with FLiiTS" />
+          <img src= {CarImage} alt="Share your car with FLiiTS" />
         </div>
         <div className="content-text">
           <div className="content-subtext">
@@ -80,17 +95,17 @@ const Home = () => {
 
       {/* Car type options */}
       <section className="cars">
-        {['benz', 'bmw', 'jeep', 'subaru', 'Range Rover', 'Toyota'].map((car, index) => (
-          <div className="card-container" key={index}>
-            <div className="cards">
-              <Link to="/">
-                <img src="https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg" alt={car} />
-                <p className="label1">{car.charAt(0).toUpperCase() + car.slice(1)}</p>
-              </Link>
-            </div>
+      {CarsData.map((car, index) => (
+        <div className="card-container" key={index}>
+          <div className="cards">
+            <Link to="/">
+              <img src={car.image} alt={car.name} />
+              <p className="label1">{car.name.charAt(0).toUpperCase() + car.name.slice(1)}</p>
+            </Link>
           </div>
-        ))}
-      </section><br />
+        </div>
+      ))}
+    </section> <br />
     </div>
   );
 };

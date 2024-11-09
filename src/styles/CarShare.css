@@ -13,25 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
-}
-
-.hero-content {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-top: 10px;
 }
 
 .hero-buttons {
@@ -57,15 +39,40 @@
     gap: 0.5rem;
 }
 
-.button-primary {
-    background: #FFD700;
-    border: none;
-    color: black;
-}
-
 .play-icon {
     font-size: 1.2rem;
 }
+
+.hero-content{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.hero-heading{
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+.hero-subheading{
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.button-primary {
+    background-color: #FFD700;
+    padding: 10px 30px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+}
+.button-primary:hover{
+    background-color: black;
+    transition: 1ms;
+}
+
+
+
+
 
 /* Feature Section */
 .feature-section {
@@ -152,8 +159,13 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
+    .hero-heading{
+        font-size: 30px;
+    }
+    .hero-subheading{
+        color: white;
+        font-size: 14px;
+        margin-top: 10px;
     }
 
     .feature-content {
