@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Products</h3>
           <ul>
-            <li><Link to="/host">Host with Us</Link></li>
+            <li><Link to="/Carshare">Host with Us</Link></li>
             <li><Link to="/ride">Ride with Us</Link></li>
             <li><Link to="/host-tools">Host Tools</Link></li>
           </ul>

@@ -1,6 +1,6 @@
 .hero {
     background-color: black;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://avvenice.com/img/cms/SUPERIOR%20CAR%20RENTAL/2%20Avvenice%20-%20Superior%20Car%20Rental%20Dubai%20-%20Luxury%20Lifestyle%20-%20Desert%20-%20Blue%20-%20Lamborghini%20Huraca%CC%81n%20EVO%20RWD%20Spyder%20-%20Ferrari%20-%20Porsche%20McLaren.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/images/hero.jpg');
     background-position: center;
     background-size: cover;
     width: 100%;
