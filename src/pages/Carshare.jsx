@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookingHeader from '../components/BookingHeader';
 import { FaCar, FaCalendarAlt, FaKey, FaDollarSign, FaHandshake } from 'react-icons/fa';
@@ -11,6 +11,7 @@ function LandingPage() {
   const showSecure = () => setActivePackage('secure');
   const showStandard = () => setActivePackage('standard');
 
+
   return (
     <div className="landing-page">
       <BookingHeader />
@@ -20,7 +21,7 @@ function LandingPage() {
         <div className="hero-content">
           <p className="hero-heading">Turn Your Car into Extra Cash!</p>
           <p className="hero-subheading">Share your car, earn effortlessly. No commitments, no hassles just opportunities.</p><br />
-          <Link to="" className="button-primary">Get Started</Link>
+          <Link to="/car-listing" className="button-primary">Get Started</Link> 
         </div>
       </section>
 
