@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import Reviews from '../components/ReviewCard';
 import BookCarStyle from '../components/BookYourStyle';
 import { Link } from 'react-router-dom';
 import CarImage from '../assets/images/Share.webp'
+import ReviewData from '../components/ReviewData'
 
 
 const Home = () => {
+
+  const reviewcard = ReviewData.map(items => {
+    return(
+    <Reviews 
+    key = {items.id}
+    items = {items}
+    />
+  );
+  });
+
   const [activeSection, setActiveSection] = useState('riders'); // Set 'riders' as the default
 
   const showRiders = () => setActiveSection('riders');
@@ -81,8 +93,12 @@ const Home = () => {
       <p className="content-heading">Browse our limitless car sharing marketplace</p><br />
       <center><Link to='/Host' className="share-car-button">Book Your Style</Link></center><br />
       <br />
-
       <BookCarStyle />
+      <br />
+      <h1 className='Review-Heading'>Recent Feedback</h1>
+      <section className='Review-section'>
+      {reviewcard }
+    </section>
       <br />
     </div>
   );
