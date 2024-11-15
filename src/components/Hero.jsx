@@ -1,8 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaSearch } from 'react-icons/fa';
 import '../styles/Hero.css';
 
 const Hero = () => {
+
+
+
+
+
   return (
     <section className="hero">
       <form className="booking">
@@ -67,9 +73,11 @@ const Hero = () => {
             />
           </div>
         </div>
-        <button type="submit" id="search">
+        <Link to='/AfterSearch'>
+        <button type="submit" id="search" >
           <FaSearch/>
         </button>
+        </Link>
       </form>
     </section>
   );

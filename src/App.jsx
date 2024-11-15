@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import CarListingForm from './pages/CarListingForm';
 import './App.css';
 import '@fontsource/roboto'; 
+import AfterSearch from './pages/AfterSearch';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/Carshare" element={<Carshare />} />
         <Route path="/car-listing" element={<CarListingForm />} />
+        <Route path="/AfterSearch" element={<AfterSearch/>} />
         <Route path="/" element={<Home />} />
         </Routes>
        
