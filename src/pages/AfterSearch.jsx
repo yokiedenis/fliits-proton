@@ -1,9 +1,22 @@
 import React from 'react'
 import BookingHeader from '../components/BookingHeader'
 import { FaFilter } from 'react-icons/fa';
+import cardata from '../components/cardata'
 import '../styles/AfterSearch.css'
+import CarCard from '../components/CarCard';
+import Map from '../components/Map'
 
 function AfterSearch() {
+
+    const carCards = cardata.map(items =>{
+        return(
+            <CarCard
+            key = {items.id}
+            items = {items}
+            />
+        );
+    });
+
   return (
       <div className='AfterSearch-container'>
           <BookingHeader />
@@ -34,24 +47,17 @@ function AfterSearch() {
                     <h5>All filters</h5>
                 </div>
             </div>
-          </div>
+    </div>
           <div className="separater"></div>
             <div className="Search-results">
                 <div className="car-results">
-                <h1>Car results</h1>
-                <h1>Car results</h1>
-                <h1>Car results</h1>
-                <h1>Car results</h1>
-                <h1>Car results</h1>
+                {carCards}
                 </div>
                 <div className="map-results">
-                    <h1>MAPS</h1>
-                    <h1>MAPS</h1>
-                    <h1>MAPS</h1>
-                    <h1>MAPS</h1>
+                  <Map />
                 </div>
             </div>
-    </div>
+          </div>
   )
 }
 

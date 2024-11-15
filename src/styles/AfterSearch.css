@@ -7,6 +7,7 @@
     display: flex;
     margin-top: 70px;
     padding: 5px;
+    width: 100%;
 }
 .filter-icon{
     font-size: 18px;
@@ -27,22 +28,34 @@
     display: flex;
 }
 .car-results{
-    background-color: #d9d9d9;
-    width: 50%;
-    height: 100vh;
-    margin: 10px;
-    padding: 10px;
+    width: 45%;
+    height: auto;
 }
 .map-results{
-    background-color: #d9d9d9;
-    width: 50%;
-    height: 100vh;
+    width: 55%;
     margin: 10px;
-    padding: 10px;
+    z-index: 1;
 }
 .separater{
     background-color: gray;
     height: 2px;
     width: 98%;
     margin: 0 auto;
+}
+@media(max-width: 800px){
+    .filter-icon{
+        padding: 5px;
+        margin: 5px;
+    }
+    .filters{
+        padding: 5px;
+        margin: 5px;
+        font-size: 16px;
+    }
+    .car-results{
+        width: 60%;
+    }
+    .map-results{
+        width: 40%;
+    }
 }
