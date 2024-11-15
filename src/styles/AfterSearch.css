@@ -1,0 +1,48 @@
+.search-Container{
+    background-color: transparent;
+    width: 100%;
+    display: flex;
+}
+.search-filter{
+    display: flex;
+    margin-top: 70px;
+    padding: 5px;
+}
+.filter-icon{
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+}
+.filters{
+    background-color: #d9d9d9;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+.Search-results{
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+}
+.car-results{
+    background-color: #d9d9d9;
+    width: 50%;
+    height: 100vh;
+    margin: 10px;
+    padding: 10px;
+}
+.map-results{
+    background-color: #d9d9d9;
+    width: 50%;
+    height: 100vh;
+    margin: 10px;
+    padding: 10px;
+}
+.separater{
+    background-color: gray;
+    height: 2px;
+    width: 98%;
+    margin: 0 auto;
+}
