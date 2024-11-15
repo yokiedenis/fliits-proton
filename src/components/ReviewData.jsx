@@ -1,7 +1,7 @@
 const Data = [
         {
             id : '001',
-            img: '../public/review 1.jpg',
+            img: '/review 1.jpg',
             name : 'Kasy Jonan',
             type : 'Fliits Host',
             rating : [1],
@@ -9,7 +9,7 @@ const Data = [
         },
         {
             id : '001',
-            img: '../public/review 2.jpg',
+            img: '/review 2.jpg',
             name : 'Issa Mohsen',
             type : 'Fliits Rider',
             rating : [2],
@@ -17,7 +17,7 @@ const Data = [
         },
         {
             id : '001',
-            img: '../public/review 3.jpg',
+            img: '/review 3.jpg',
             name : 'Shuby Hannah',
             type : 'Fliits Rider',
             rating : [3],
@@ -25,7 +25,7 @@ const Data = [
         },
         {
             id : '001',
-            img: '../public/team 3.webp',
+            img: '/team 3.webp',
             name : 'Philip Hinny',
             type : 'Fliits Host',
             rating : [5],
