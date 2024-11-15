@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import BookingHeader from '../components/BookingHeader';
 import '../styles/CarListingForm.css';
 
 const CarListingForm = () => {
+
+
+
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     // Personal Information
@@ -82,7 +87,6 @@ const CarListingForm = () => {
   const handleBack = () => {
     setStep(step - 1);
   };
-
   const renderPersonalInfo = () => (
     <>
       <h2 className="sub-title">Personal Information</h2>
@@ -397,7 +401,10 @@ const CarListingForm = () => {
   );
 
   return (
-    <div className="list-your-car-container">
+    <section className='carForm'>
+        <BookingHeader />
+        <br />
+      <div className="list-your-car-container">
       <h1 className="main-title">List Your Car On FL<span className="highlight">ii</span>Ts</h1>
       
       <form onSubmit={handleSubmit}>
@@ -418,6 +425,7 @@ const CarListingForm = () => {
         </div>
       </form>
     </div>
+      </section>
   );
 };
 
