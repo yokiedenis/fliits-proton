@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {FaStar, FaHeart, FaMedal, FaMapMarkerAlt } from 'react-icons/fa'
 import '../styles/CarCard.css'
 
@@ -12,16 +13,22 @@ for(let icon = 0; icon < (items.stars);  icon++){
 
 //function for changing color of the like icon when clicked
 const [iconColor, setIconColor] = useState('black');
-const handleClick = () =>{
+const handleClick = (e) =>{
+  e.stopPropagation(); // Prevents triggering the parent container's click event
   setIconColor(iconColor === 'black' ? 'gold' : 'black')
+};
+
+//function to handle  clicks to display car info
+const navigate = useNavigate();
+const CarInfo = () => {
+  navigate('/Bookingpage', { state: { car:items } });
 };
 
 
   return (
-    <div className='Card-container'> 
+    <div className='Card-container' onClick={CarInfo}>
     <img src={items.img} alt="Car-image" className='car-img'/>
     <div className="car-info">
-
       <div className="car-name">
       <h4>{items.name}</h4>
       <div className='heart-icon'><FaHeart style={{ color: iconColor, cursor: 'pointer' }} onClick={handleClick}/></div>

@@ -6,6 +6,7 @@ import '../styles/AfterSearch.css'
 import CarCard from '../components/CarCard';
 import Map from '../components/Map'
 
+
 function AfterSearch() {
 
     const carCards = cardata.map(items =>{
@@ -17,8 +18,10 @@ function AfterSearch() {
         );
     });
 
+   
+
   return (
-      <div className='AfterSearch-container'>
+      <div className='AfterSearch-container' >
           <BookingHeader />
           <div className="search-Container">
             <div className="search-filter">
@@ -50,7 +53,7 @@ function AfterSearch() {
     </div>
           <div className="separater"></div>
             <div className="Search-results">
-                <div className="car-results">
+                <div className="car-results" >
                 {carCards}
                 </div>
                 <div className="map-results">
