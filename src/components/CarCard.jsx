@@ -21,7 +21,7 @@ const handleClick = (e) =>{
 //function to handle  clicks to display car info
 const navigate = useNavigate();
 const CarInfo = () => {
-  navigate('/Bookingpage', { state: { car:items } });
+  navigate('/CarInfoPage', { state: { car:items } });
 };
 
 
