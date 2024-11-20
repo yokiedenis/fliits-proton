@@ -1,7 +1,7 @@
 const cardata = [
     {
         id : '001',
-        img: 'bmw.jfif',
+        img: 'benz.jfif',
         name: 'BMW 2018',
         trips: '12',
         rating: '4.5',

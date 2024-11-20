@@ -7,11 +7,11 @@ function CarInfo({items}) {
     <div>
         <div className="car-pics">
         <div className="main-pic-section">
-            <img src='/team2.jpg' alt='car pic' className="Main-pic"/>
+            <img src='/benz.jfif' alt='car pic' className="Main-pic"/>
         </div>
         <div className="more-pics">
-        <img src='/team2.jpg' alt='car pic' className="sub-pics"/>
-        <img src='/team2.jpg' alt='car pic' className="sub-pics"/>
+        <img src='/benz side view.webp' alt='car pic' className="sub-pics"/>
+        <img src='/benz-interior.jpg' alt='car pic' className="sub-pics"/>
         </div>
          </div>
 
