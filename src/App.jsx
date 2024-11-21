@@ -8,6 +8,7 @@ import './App.css';
 import '@fontsource/roboto'; 
 import AfterSearch from './pages/AfterSearch';
 import CarInfoPage from './pages/CarInfoPage';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           {/* Define routes for each page */}
         <Route path="/login" element={<Login />} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/Carshare" element={<Carshare />} />
         <Route path="/car-listing" element={<CarListingForm />} />
         <Route path="/AfterSearch" element={<AfterSearch/>} />

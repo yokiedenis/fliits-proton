@@ -36,9 +36,11 @@ function Login({ onSignUpLinkClick }) {
           className="login-input"
           required
         />
+        <Link to = '/Dashboard'>
         <button type="submit" className="login-button">
           Log in
         </button>
+        </Link>
       </form>
       <div className="Signup_link">
         <span>Don’t have an account? </span>
