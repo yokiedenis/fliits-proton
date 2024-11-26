@@ -47,14 +47,48 @@ npm install
 
 For the **backend**:
 
-Navigate to the `backend` folder (if applicable), then install dependencies:
+Navigate to the `Backend` folder, then install dependencies:
 
 ```bash
-cd backend
+cd Backend
 npm install
 ```
 
-### 4. Start the development server
+### 4. Set up MongoDB locally
+
+To run FLiiTS with a local MongoDB server, follow these steps:
+
+#### Option 1: Install MongoDB locally (if not installed already)
+
+- **For Windows**: Follow the [MongoDB installation guide for Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/).
+- **For macOS**: Use Homebrew:
+  ```bash
+  brew tap mongodb/brew
+  brew install mongodb-community@5.0
+  ```
+- **For Linux**: Follow the [MongoDB installation guide for Linux](https://docs.mongodb.com/manual/installation/).
+
+#### Option 2: Start the MongoDB service
+
+After installing MongoDB, start the service:
+
+- **Windows**: MongoDB should start automatically; if not, you can start it using:
+  ```bash
+  net start MongoDB
+  ```
+- **macOS / Linux**:
+  ```bash
+  brew services start mongodb/brew/mongodb-community
+  ```
+
+Alternatively, you can start MongoDB manually:
+```bash
+mongod
+```
+
+By default, MongoDB runs on `mongodb://localhost:27017`.
+
+### 5. Start the development server
 
 For the **frontend**:
 
@@ -65,10 +99,10 @@ npm run dev
 For the **backend**:
 
 ```bash
-npm run start
+node Server.js
 ```
 
-### 5. Access the local server
+### 6. Access the local server
 
 Once both servers are running, open your browser and go to [http://localhost:5173](http://localhost:5173) to see the app in action. The backend API will typically run on [http://localhost:5000](http://localhost:5000).
 
@@ -124,4 +158,3 @@ For any inquiries, suggestions, or feedback, feel free to contact us:
 
 - **Kasy Jonan**: [jonanrayan06@gmail.com](mailto:jonanrayan06@gmail.com)
 - **GitHub**: [Kasy256](https://github.com/Kasy256)
-
