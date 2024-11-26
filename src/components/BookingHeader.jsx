@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../styles/BookingHeader.css';
 import { FaUserPlus, FaBars, FaTimes, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; 
-import Login from '../components/Loginpage';
+import Login from './Login';
 import SignUp from '../components/Signup';
 import NavMenu from './NavMenu'; 
 

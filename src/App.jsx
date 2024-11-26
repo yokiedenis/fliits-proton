@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
-import Login from './components/Loginpage';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import Carshare from './pages/Carshare';
 import Home from './pages/Home'; 
 import CarListingForm from './pages/CarListingForm';
@@ -11,14 +12,15 @@ import CarInfoPage from './pages/CarInfoPage';
 import Dashboard from './pages/Dashboard';
 
 function App() {
+  
   return (
     <Router>
       <div className="App">
-        
-      
+    
         <Routes>
           {/* Define routes for each page */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/Carshare" element={<Carshare />} />
         <Route path="/car-listing" element={<CarListingForm />} />
