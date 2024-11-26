@@ -4,7 +4,7 @@ import ShareButton from './ShareButton';
 import '../styles/Header.css';
 import { FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; 
-import Login from '../components/Loginpage';
+import Login from '../components/Login';
 import SignUp from '../components/Signup';
 import NavMenu from './NavMenu'; 
 
