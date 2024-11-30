@@ -2,9 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-
-// Import routes
-import authRoutes from './routes/auth.js'; // Combined routes from auth.js
+import authRoutes from './routes/auth.js'; 
 
 dotenv.config();
 
@@ -24,14 +22,14 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => {
     console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit if the database connection fails
+    process.exit(1); 
   });
 
 // Middleware
-app.use(express.json()); // Parse JSON request bodies
+app.use(express.json()); 
 
 // Routes
-app.use('/api/auth', authRoutes); // Using the combined auth.js routes
+app.use('/api/auth', authRoutes); 
 
 // Health Check Endpoint
 app.get('/', (req, res) => {
