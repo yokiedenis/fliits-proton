@@ -1,86 +1,97 @@
-// Dashboard.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaBars, FaHome, FaUser, FaCar, FaSearch, FaHistory, FaMoneyBill, FaFileAlt, FaQuestionCircle, FaCog } from 'react-icons/fa'; // Importing Font Awesome icons
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
   const [activeNav, setActiveNav] = useState('Dashboard');
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(false); 
 
   useEffect(() => {
-    // Retrieve the user data from localStorage
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser); // Set the user state with the retrieved data
-    }
-  }, []); // Empty dependency array to run this effect only once when the component mounts
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/userdata', { 
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
+        setUser(data); 
+      } catch (error) {
+        setError(error.message); 
+      } finally {
+        setLoading(false); 
+      }
+    };
 
-  // Fallback if user is not found in localStorage
-  const name = user?.name || 'User';
-  const email = user?.email || 'No email found';
+    fetchUserData(); 
+  }, []); 
+
+  const name = user?.fullName || 'Kasy';
+  const email = user?.email || 'jonanrayan06@gmail.com';
 
   const navItems = [
-    'Dashboard', 'Profile', 'Add/Edit Car', 'Track Vehicle', 
-    'Trip history', 'Transactions', 'Reports', 'Help', 'Settings'
-  ];
-
-  const customerData = [
-    { name: 'John Doe', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Good' },
-    { name: 'Jane Smith', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Good' },
-    { name: 'Alex Johnson', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Damaged' },
-    { name: 'Emily Davis', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Good' },
-    { name: 'Michael Brown', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Good' },
-    { name: 'Sarah Wilson', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Damaged' },
-    { name: 'David Clark', license: 'DL-12345', date: '2024-08-05', amount: 120, status: 'Good' },
-  ];
-
-  const weeklyData = [
-    { day: 'Mon', earnings: 150 },
-    { day: 'Tue', earnings: 50 },
-    { day: 'Wed', earnings: 100 },
-    { day: 'Thu', earnings: 250 },
-    { day: 'Fri', earnings: 175 },
-    { day: 'Sat', earnings: 0 },
-    { day: 'Sun', earnings: 0 },
+    { label: 'Dashboard', icon: <FaHome className="Dashboard-icons"/> },
+    { label: 'Profile', icon: <FaUser className="Dashboard-icons"/> },
+    { label: 'Add/Edit Car', icon: <FaCar className="Dashboard-icons"/> },
+    { label: 'Track Vehicle', icon: <FaSearch className="Dashboard-icons"/> },
+    { label: 'Trip history', icon: <FaHistory className="Dashboard-icons"/> },
+    { label: 'Transactions', icon: <FaMoneyBill className="Dashboard-icons"/> },
+    { label: 'Reports', icon: <FaFileAlt className="Dashboard-icons"/> },
+    { label: 'Help', icon: <FaQuestionCircle className="Dashboard-icons"/> },
+    { label: 'Settings', icon: <FaCog className="Dashboard-icons"/> },
   ];
 
   return (
     <div className="dashboard">
-      <aside className="sidebar">
-        <div className="logo"> 
+      <aside className={`sidebar ${sidebarVisible ? 'visible' : ''}`}>
+        <div className="logo">
           <Link to="/" className="logo-link">
             FL<span style={{ color: 'gold' }}>ii</span>TS
           </Link>
         </div>
-        <nav>
+        <nav className="Dashboard-options">
           {navItems.map((item) => (
             <a
-              key={item}
+              key={item.label}
               href="#"
-              className={activeNav === item ? 'active' : ''}
-              onClick={() => setActiveNav(item)}
+              className={activeNav === item.label ? 'active' : ''}
+              onClick={() => setActiveNav(item.label)}
             >
-              {item}
+              {item.icon}
+              <span>{item.label}</span>
             </a>
           ))}
         </nav>
       </aside>
 
       <main className="main-content">
-        <header>
+        <header className="Dashboard-header">
           <div className="user-info">
             <div className="avatar">
-              <img src='/review 1.jpg' alt='profile' className="Profile"/>
+              <img src="/review 1.jpg" alt="profile" className="Profile" />
             </div>
             <div>
-              <h1>Hello, {name}</h1>
-              <p>{email}</p>
+              <h1 className='header-name'>Hello, {loading ? 'Loading...' : name}</h1>
+              <p className='header-email'>{loading ? 'Fetching data...' : email}</p>
             </div>
           </div>
           <div className="notifications">
             <button>🔔</button>
             <button>✉️</button>
           </div>
+          <FaBars 
+            className="header-nav" 
+            id="header-nav" 
+            onClick={() => setSidebarVisible(!sidebarVisible)} 
+          />
         </header>
 
         <div className="balance-section">
@@ -103,15 +114,7 @@ export default function Dashboard() {
         <div className="chart-section">
           <h3>Weekly Earnings</h3>
           <div className="chart">
-            {weeklyData.map((data) => (
-              <div key={data.day} className="bar-container">
-                <div 
-                  className="bar" 
-                  style={{ height: `${(data.earnings / 250) * 100}%` }}
-                ></div>
-                <span>{data.day}</span>
-              </div>
-            ))}
+            {/* Render chart bars */}
           </div>
         </div>
 
@@ -127,26 +130,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {customerData.map((customer, index) => (
-                <tr key={index}>
-                  <td>
-                    <div className="customer-name">
-                      <div className="avatar_small">
-                        <img src='/review 1.jpg' alt='profile' className="Profile_small"/>
-                      </div>
-                      {customer.name}
-                    </div>
-                  </td>
-                  <td>{customer.license}</td>
-                  <td>{customer.date}</td>
-                  <td>{customer.amount}</td>
-                  <td>
-                    <span className={`status ${customer.status.toLowerCase()}`}>
-                      {customer.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
+              {/* Render customer data */}
             </tbody>
           </table>
         </div>

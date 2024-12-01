@@ -10,24 +10,25 @@ function Login({ onSignUpLinkClick }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: email, // Pass the email from the state variable
-        password: password, // Pass the password from the state variable
-        }),
+        body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         console.log('Login successful:', data);
-        navigate('/Dashboard'); // Redirect to the Dashboard on successful login
+
+        // Save the token in localStorage
+        localStorage.setItem('token', data.token);
+
+        navigate('/Dashboard'); 
       } else {
         setError(data.message || 'An error occurred during login.');
       }
@@ -36,7 +37,7 @@ function Login({ onSignUpLinkClick }) {
       setError('Unable to connect to the server. Please try again later.');
     }
   };
-  
+
   return (
     <div className="login-container">
       <h1 className="login-title">

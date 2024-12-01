@@ -10,7 +10,7 @@ import NavMenu from './NavMenu';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginForm, setIsLoginForm] = useState(true); // Track whether to show Login or Sign Up
+  const [isLoginForm, setIsLoginForm] = useState(true); 
   const [navMenuOpen, setNavMenuOpen] = useState(false);
 
   const toggleModal = () => {
