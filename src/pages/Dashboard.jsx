@@ -52,8 +52,8 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <aside className={`sidebar ${sidebarVisible ? 'visible' : ''}`}>
-        <div className="logo">
-          <Link to="/" className="logo-link">
+        <div className="dashboard-logo">
+          <Link to="/">
             FL<span style={{ color: 'gold' }}>ii</span>TS
           </Link>
         </div>
