@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars, FaHome, FaUser, FaCar, FaSearch, FaHistory, FaMoneyBill, FaFileAlt, FaQuestionCircle, FaCog } from 'react-icons/fa'; // Importing Font Awesome icons
+import { FaBars, FaHome, FaUser, FaCar, FaSearch, FaHistory, FaMoneyBill, FaFileAlt, FaQuestionCircle, FaCog } from 'react-icons/fa'; 
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
