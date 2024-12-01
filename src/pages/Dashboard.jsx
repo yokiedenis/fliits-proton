@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaCar, FaSearch, FaHistory, FaMoneyBill, FaFileAlt, FaQuestionCircle, FaCog } from 'react-icons/fa'; // Importing Font Awesome icons
+import { FaBars, FaHome, FaUser, FaCar, FaSearch, FaHistory, FaMoneyBill, FaFileAlt, FaQuestionCircle, FaCog } from 'react-icons/fa'; // Importing Font Awesome icons
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
   const [activeNav, setActiveNav] = useState('Dashboard');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(false); 
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -50,7 +51,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarVisible ? 'visible' : ''}`}>
         <div className="logo">
           <Link to="/" className="logo-link">
             FL<span style={{ color: 'gold' }}>ii</span>TS
@@ -72,20 +73,25 @@ export default function Dashboard() {
       </aside>
 
       <main className="main-content">
-        <header>
+        <header className="Dashboard-header">
           <div className="user-info">
             <div className="avatar">
               <img src="/review 1.jpg" alt="profile" className="Profile" />
             </div>
             <div>
-              <h1>Hello, {loading ? 'Loading...' : name}</h1>
-              <p>{loading ? 'Fetching data...' : email}</p>
+              <h1 className='header-name'>Hello, {loading ? 'Loading...' : name}</h1>
+              <p className='header-email'>{loading ? 'Fetching data...' : email}</p>
             </div>
           </div>
           <div className="notifications">
             <button>🔔</button>
             <button>✉️</button>
           </div>
+          <FaBars 
+            className="header-nav" 
+            id="header-nav" 
+            onClick={() => setSidebarVisible(!sidebarVisible)} 
+          />
         </header>
 
         <div className="balance-section">
