@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
-import { FaUserPlus, FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
+import { FaUserPlus, FaBars, FaTimes, FaUser, FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Login from '../components/Login';
 import SignUp from '../components/Signup';
-import NavMenu from './NavMenu'; 
+import NavMenu from './NavMenu';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginForm, setIsLoginForm] = useState(true); 
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const [navMenuOpen, setNavMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const isUserLoggedIn = localStorage.getItem("token");
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -58,10 +60,38 @@ const Header = () => {
       <ShareButton />
       <ul>
         <li>
-          <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={() => { toggleModal(); setIsLoginForm(true); }} />
+          {!isUserLoggedIn ? (
+            <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={() => { toggleModal(); setIsLoginForm(true); }} />
+          ) : (
+            <div className="avatar-dropdown">
+              <img src="/review 1.jpg" alt="profile" className="Profile" onClick={() => setDropdownOpen((prev) => !prev)} />
+              {dropdownOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/dashboard" className="dropdown-item">
+                    <FaHome className="Dashboard-icons" />
+                    Dashboard
+                  </Link>
+                  <Link to="/profile" className="dropdown-item">
+                    <FaUser className="Dashboard-icons" />
+                    Profile
+                  </Link>
+                  <button
+                    className="loggout dropdown-item"
+                    onClick={() => {
+                      localStorage.removeItem('token');
+                      window.location.reload();
+                    }}
+                  >
+                    <FaSignOutAlt  className="Dashboard-icons" />
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </li>
-        <li 
-          onMouseEnter={handleMouseEnter} 
+        <li
+          onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleClick}
         >
