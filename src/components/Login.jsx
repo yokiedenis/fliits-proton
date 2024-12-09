@@ -28,7 +28,7 @@ function Login({ onSignUpLinkClick }) {
         // Save the token in localStorage
         localStorage.setItem('token', data.token);
 
-        navigate('/Dashboard'); 
+        navigate('/'); 
       } else {
         setError(data.message || 'An error occurred during login.');
       }

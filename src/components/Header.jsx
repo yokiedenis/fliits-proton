@@ -67,7 +67,7 @@ const Header = () => {
               <img src="/review 1.jpg" alt="profile" className="Profile" onClick={() => setDropdownOpen((prev) => !prev)} />
               {dropdownOpen && (
                 <div className="dropdown-menu">
-                  <Link to="/dashboard" className="dropdown-item">
+                  <Link to="/Dashboard" className="dropdown-item">
                     <FaHome className="Dashboard-icons" />
                     Dashboard
                   </Link>
