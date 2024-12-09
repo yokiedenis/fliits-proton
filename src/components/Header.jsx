@@ -1,9 +1,9 @@
-// Header.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
 import { FaUserPlus, FaBars, FaTimes, FaUser, FaHome, FaSignOutAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Login from '../components/Login';
 import SignUp from '../components/Signup';
 import NavMenu from './NavMenu';
@@ -13,24 +13,27 @@ const Header = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const isUserLoggedIn = localStorage.getItem("token");
+  const [user, setUser] = useState(null); // Store the authenticated user
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        setIsModalOpen(false); // Close modal when user logs in
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleMouseEnter = () => {
-    setNavMenuOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (!navMenuOpen) {
-      setNavMenuOpen(false);
-    }
-  };
-
   const handleClick = () => {
-    setNavMenuOpen((prev) => !prev); // Toggle the menu on click
+    setNavMenuOpen((prev) => !prev);
   };
 
   const handleOutsideClick = (e) => {
@@ -40,10 +43,10 @@ const Header = () => {
   };
 
   const handleLinkClick = () => {
-    setNavMenuOpen(false); // Close the nav menu
+    setNavMenuOpen(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
@@ -60,11 +63,23 @@ const Header = () => {
       <ShareButton />
       <ul>
         <li>
-          {!isUserLoggedIn ? (
-            <FaUserPlus className="header-icon" id="acc-menu-icon" onClick={() => { toggleModal(); setIsLoginForm(true); }} />
+          {!user ? (
+            <FaUserPlus
+              className="header-icon"
+              id="acc-menu-icon"
+              onClick={() => {
+                toggleModal();
+                setIsLoginForm(true);
+              }}
+            />
           ) : (
             <div className="avatar-dropdown">
-              <img src="/review 1.jpg" alt="profile" className="Profile" onClick={() => setDropdownOpen((prev) => !prev)} />
+              <img
+                src={user.photoURL || "/review 1.jpg"}
+                alt="profile"
+                className="Profile-avatar"
+                onClick={() => setDropdownOpen((prev) => !prev)}
+              />
               {dropdownOpen && (
                 <div className="dropdown-menu">
                   <Link to="/Dashboard" className="dropdown-item">
@@ -78,11 +93,11 @@ const Header = () => {
                   <button
                     className="loggout dropdown-item"
                     onClick={() => {
-                      localStorage.removeItem('token');
-                      window.location.reload();
+                      auth.signOut();
+                      setUser(null);
                     }}
                   >
-                    <FaSignOutAlt  className="Dashboard-icons" />
+                    <FaSignOutAlt className="Dashboard-icons" />
                     Log Out
                   </button>
                 </div>
@@ -90,11 +105,7 @@ const Header = () => {
             </div>
           )}
         </li>
-        <li
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleClick}
-        >
+        <li onClick={handleClick}>
           <FaBars className="header-icon" id="nav-menu-icon" />
         </li>
       </ul>
@@ -106,16 +117,16 @@ const Header = () => {
             ) : (
               <SignUp />
             )}
-            <button className="close-button" onClick={toggleModal}><FaTimes size={25} /></button>
+            <button className="close-button" onClick={toggleModal}>
+              <FaTimes size={25} />
+            </button>
           </div>
         </div>
       )}
       {navMenuOpen && (
-        <>
-          <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
-            <NavMenu onClose={handleMouseLeave} onLinkClick={handleLinkClick} />
-          </div>
-        </>
+        <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
+          <NavMenu onClose={() => setNavMenuOpen(false)} onLinkClick={handleLinkClick} />
+        </div>
       )}
     </div>
   );

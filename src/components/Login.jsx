@@ -1,69 +1,105 @@
 import { useState } from 'react';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {app} from '../firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 function Login({ onSignUpLinkClick }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider;
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); 
+    setLoading(true); 
 
-    try {
-      const response = await fetch('http://localhost:5000/api/auth/Login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+    const { email, password } = formData;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setTimeout(() => {
+          navigate('/'); 
+        }, 2000);
+      })
+      .catch((error) => {
+        let customErrorMessage;
+        if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+          customErrorMessage = "Invalid Email or Password.";
+        } else {
+          customErrorMessage = "Invalid Email or Password.";
+        }
+        setError(customErrorMessage);
+      })
+      .finally(() => {
+        setLoading(false); 
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log('Login successful:', data);
-
-        // Save the token in localStorage
-        localStorage.setItem('token', data.token);
-
-        navigate('/'); 
-      } else {
-        setError(data.message || 'An error occurred during login.');
-      }
-    } catch (err) {
-      console.error('Login error:', err);
-      setError('Unable to connect to the server. Please try again later.');
-    }
   };
 
+  const handleClick = async (e) =>{
+    signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setTimeout(() => {
+          navigate('/'); 
+        }, 2000);
+      })
+      .catch((error) => {
+        const errorMessage = error.message || 'An error occurred during sign up.';
+        setError(errorMessage);
+      })
+      .finally(() => {
+        setLoading(false); 
+      });
+  }
   return (
     <div className="login-container">
       <h1 className="login-title">
         Welcome to FL<span className="highlight">ii</span>TS
       </h1>
-      <h3>Login With Google</h3>
+      <h3 onClick={handleClick}>Login With Google</h3>
+
       {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          placeholder="Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="login-input"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="login-input"
-          required
-        />
-        <button type="submit" className="login-button">
-          Log in
+
+      <form onSubmit={handleSubmit} className="signup-form">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="form-input"
+            placeholder='Your Email'
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="form-input"
+             placeholder='Your Password'
+            required
+          />
+        <button type="submit" className="login-button" disabled={loading}>
+          {loading ? 'Logining in...' : 'Login'}
         </button>
       </form>
       <div className="Signup_link">
