@@ -33,6 +33,7 @@ h3 {
   color: #888888;
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  cursor: pointer;
 }
 
 .login-input {
