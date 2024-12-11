@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWith
 import '../styles/Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-function SignUp({onLoginLinkClick}) {
+function SignUp() {
   const auth = getAuth();
   const provider =  new GoogleAuthProvider;
   const navigate = useNavigate();
@@ -67,6 +67,7 @@ function SignUp({onLoginLinkClick}) {
       });
   }
   return (
+    <div className="signup-page">
     <div className="signup-container">
       <h1 className="signup-title">
         Join FL<span className="highlight">ii</span>TS Today
@@ -103,11 +104,12 @@ function SignUp({onLoginLinkClick}) {
 
         <div className="login-link">
           Already have an account?{' '}
-          <Link to="/Login" className="footer-link" onClick={onLoginLinkClick}>
+          <Link to="/Login" className="footer-link" >
           Login
         </Link>
         </div>
       </form>
+    </div>
     </div>
   );
 }

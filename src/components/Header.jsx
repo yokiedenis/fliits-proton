@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ShareButton from './ShareButton';
 import '../styles/Header.css';
-import { FaUserPlus, FaBars, FaTimes, FaUser, FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { FaBars, FaUser, FaHome, FaSignOutAlt,FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Login from '../components/Login';
-import SignUp from '../components/Signup';
 import NavMenu from './NavMenu';
 
 const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginForm, setIsLoginForm] = useState(true);
   const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser] = useState(null); // Store the authenticated user
@@ -20,17 +16,10 @@ const Header = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      if (currentUser) {
-        setIsModalOpen(false); // Close modal when user logs in
-      }
     });
 
     return () => unsubscribe();
   }, [auth]);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   const handleClick = () => {
     setNavMenuOpen((prev) => !prev);
@@ -64,14 +53,12 @@ const Header = () => {
       <ul>
         <li>
           {!user ? (
-            <FaUserPlus
+            <Link to="/signup">
+             <FaUserPlus
               className="header-icon"
               id="acc-menu-icon"
-              onClick={() => {
-                toggleModal();
-                setIsLoginForm(true);
-              }}
             />
+            </Link>
           ) : (
             <div className="avatar-dropdown">
               <img
@@ -109,20 +96,6 @@ const Header = () => {
           <FaBars className="header-icon" id="nav-menu-icon" />
         </li>
       </ul>
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={toggleModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {isLoginForm ? (
-              <Login onSignUpLinkClick={() => setIsLoginForm(false)} />
-            ) : (
-              <SignUp />
-            )}
-            <button className="close-button" onClick={toggleModal}>
-              <FaTimes size={25} />
-            </button>
-          </div>
-        </div>
-      )}
       {navMenuOpen && (
         <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
           <NavMenu onClose={() => setNavMenuOpen(false)} onLinkClick={handleLinkClick} />

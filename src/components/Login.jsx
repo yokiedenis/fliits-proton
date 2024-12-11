@@ -4,7 +4,7 @@ import {app} from '../firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
-function Login({ onSignUpLinkClick }) {
+function Login() {
   
   const auth = getAuth();
   const provider = new GoogleAuthProvider;
@@ -70,6 +70,7 @@ function Login({ onSignUpLinkClick }) {
       });
   }
   return (
+  <div className="login-page">
     <div className="login-container">
       <h1 className="login-title">
         Welcome to FL<span className="highlight">ii</span>TS
@@ -84,7 +85,7 @@ function Login({ onSignUpLinkClick }) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="form-input"
+            className="login-input"
             placeholder='Your Email'
             required
           />
@@ -94,7 +95,7 @@ function Login({ onSignUpLinkClick }) {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="form-input"
+            className="login-input"
              placeholder='Your Password'
             required
           />
@@ -104,11 +105,12 @@ function Login({ onSignUpLinkClick }) {
       </form>
       <div className="Signup_link">
         <span>Don’t have an account? </span>
-        <Link to="#" className="footer-link" onClick={onSignUpLinkClick}>
+        <Link to="/Signup" className="footer-link" >
           Sign up
         </Link>
       </div>
     </div>
+  </div>
   );
 }
 
