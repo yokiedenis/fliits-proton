@@ -1,8 +1,8 @@
 *{
     text-decoration: none;
     font-family: 'roboto';
+    margin: 0px;
 }
-/* Section 2 CSS */
 .content-heading {
     font-weight: bold;
     font-size: 40px;
