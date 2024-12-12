@@ -5,123 +5,6 @@ import '../styles/CarListingForm.css';
 
 const CarListingForm = () => {
 
-  //Identifcation types
-  const idtype =[
-    {option: 'Drivers licence' },
-    {option: 'National Identification'},
-    {option: 'Passport'}
-  ]
-
-  //country codes
-  const countryCodes = [
-    { code: '+1' },
-    { code: '+20' },
-    { code: '+27' },
-    { code: '+30' },
-    { code: '+31' },
-    { code: '+32' },
-    { code: '+33' },
-    { code: '+34' },
-    { code: '+36' },
-    { code: '+39' },
-    { code: '+40' },
-    { code: '+41' },
-    { code: '+44' },
-    { code: '+45' },
-    { code: '+46' },
-    { code: '+47' },
-    { code: '+48' },
-    { code: '+49' },
-    { code: '+51' },
-    { code: '+52' },
-    { code: '+53' },
-    { code: '+54' },
-    { code: '+55' },
-    { code: '+56' },
-    { code: '+57' },
-    { code: '+58' },
-    { code: '+60' },
-    { code: '+61' },
-    { code: '+62' },
-    { code: '+63' },
-    { code: '+64' },
-    { code: '+65' },
-    { code: '+66' },
-    { code: '+81' },
-    { code: '+82' },
-    { code: '+84' },
-    { code: '+86' },
-    { code: '+90' },
-    { code: '+91' },
-    { code: '+92' },
-    { code: '+93' },
-    { code: '+94' },
-    { code: '+98' },
-    { code: '+212' },
-    { code: '+213' },
-    { code: '+216' },
-    { code: '+218' },
-    { code: '+220' },
-    { code: '+221' },
-    { code: '+222' },
-    { code: '+223' },
-    { code: '+224' },
-    { code: '+225' },
-    { code: '+226' },
-    { code: '+227' },
-    { code: '+228' },
-    { code: '+229' },
-    { code: '+230' },
-    { code: '+231' },
-    { code: '+232' },
-    { code: '+233' },
-    { code: '+234' },
-    { code: '+235' },
-    { code: '+236' },
-    { code: '+237' },
-    { code: '+238' },
-    { code: '+239' },
-    { code: '+240' },
-    { code: '+241' },
-    { code: '+242' },
-    { code: '+243' },
-    { code: '+244' },
-    { code: '+245' },
-    { code: '+246' },
-    { code: '+247' },
-    { code: '+248' },
-    { code: '+249' },
-    { code: '+250' },
-    { code: '+251' },
-    { code: '+252' },
-    { code: '+253' },
-    { code: '+254' },
-    { code: '+255' },
-    { code: '+256' },
-    { code: '+257' },
-    { code: '+258' },
-    { code: '+259' },
-    { code: '+260' },
-    { code: '+261' },
-    { code: '+262' },
-    { code: '+263' },
-    { code: '+264' },
-    { code: '+265' },
-    { code: '+266' },
-    { code: '+267' },
-    { code: '+268' },
-    { code: '+269' },
-    { code: '+270' },
-    { code: '+271' },
-    { code: '+272' },
-    { code: '+273' },
-    { code: '+274' },
-    { code: '+275' },
-    { code: '+276' },
-    { code: '+277' },
-    { code: '+278' }
-];
-
   //Car models
   const carmodel = [
     { model: 'Audi A3' },
@@ -327,14 +210,6 @@ const CarListingForm = () => {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    // Personal Information
-    profilePhoto: null,
-    fullName: '',
-    country: '+44',
-    phoneNumber: '',
-    identificationType: "Driver's",
-    idNumber: '',
-    idPhoto: null,
     
     // Car Information
     model: 'Benz C class',
@@ -398,7 +273,7 @@ const CarListingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (step < 4) {
+    if (step < 3) {
       setStep(step + 1);
     } else {
       console.log('Form submitted:', formData);
@@ -409,106 +284,6 @@ const CarListingForm = () => {
   const handleBack = () => {
     setStep(step - 1);
   };
-  const renderPersonalInfo = () => (
-    <>
-      <h2 className="sub-title">Personal Information</h2>
-      <p className="description">FLiiTS needs your details to get started</p>
-
-      <div className="form-group">
-        <label>Profile Photo</label>
-        <div className="photo-upload">
-          <input
-            type="file"
-            id="profilePhoto"
-            accept="image/*"
-            onChange={(e) => handleFileChange(e, 'profilePhoto')}
-          />
-          <label htmlFor="profilePhoto" className="file-label">Choose File</label>
-          <span>{formData.profilePhoto ? formData.profilePhoto.name : 'No file chosen'}</span>
-          <button type="button" className="take-photo-btn">Take a Photo</button>
-        </div>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="fullName">Full Name</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="country">Country</label>
-          <select
-            id="country"
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-          >
-            {countryCodes.map((country, index) => (
-        <option key={index} value={country.code}>
-          {country.code}
-        </option>
-      ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone number</label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-            placeholder="000-000-000"
-            required
-          />
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="identificationType">Identification</label>
-          <select
-            id="identificationType"
-            name="identificationType"
-            value={formData.identificationType}
-            onChange={handleInputChange}
-          >
-            {idtype.map((idtypes, index) =>
-            (<option  key={index} value={idtypes.option}>
-              {idtypes.option}
-              </option> 
-            ))}
-
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="idNumber">ID number</label>
-          <input
-            type="text"
-            id="idNumber"
-            name="idNumber"
-            value={formData.idNumber}
-            onChange={handleInputChange}
-            placeholder="00-00-00-00"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <button type="button" className="upload-photo-btn">Take/Upload Photo</button>
-        </div>
-      </div>
-    </>
-  );
 
   const renderCarInfo = () => (
     <>
@@ -765,17 +540,16 @@ const CarListingForm = () => {
   );
 
   return (
-    <section className='carForm'>
-        <BookingHeader />
+    <div className='carForm'>
+      <BookingHeader />
         <br />
       <div className="list-your-car-container">
       <h1 className="main-title">List Your Car On FL<span className="highlight">ii</span>Ts</h1>
       
       <form onSubmit={handleSubmit}>
-        {step === 1 && renderPersonalInfo()}
-        {step === 2 && renderCarInfo()}
-        {step === 3 && renderCarPhotos()}
-        {step === 4 && renderGoals()}
+        {step === 1 && renderCarInfo()}
+        {step === 2 && renderCarPhotos()}
+        {step === 3 && renderGoals()}
 
         <div className="form-buttons">
           {step > 1 && (
@@ -784,12 +558,13 @@ const CarListingForm = () => {
             </button>
           )}
           <button type="submit" className="next-btn">
-            {step === 4 ? 'Submit' : 'Next'}
+            {step === 3 ? 'Submit' : 'Next'}
           </button>
         </div>
       </form>
     </div>
-      </section>
+      </div>
+  
   );
 };
 

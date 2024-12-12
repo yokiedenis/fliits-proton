@@ -1,13 +1,13 @@
 .login-page{
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/hero.jpg');
-  height: 75vh;
-  padding: 5px;
+  height: auto;
+  padding: 50px;
 }
 .login-container {
   width: 30%;
   padding: 1rem;
   text-align: center;
-  margin: 50px 0 40px 450px;
+  margin: 0 auto;
   border-radius: 10px;
   background-color: white;
 }

@@ -53,7 +53,7 @@ const Header = () => {
       <ul>
         <li>
           {!user ? (
-            <Link to="/signup">
+            <Link to="/Login">
              <FaUserPlus
               className="header-icon"
               id="acc-menu-icon"
