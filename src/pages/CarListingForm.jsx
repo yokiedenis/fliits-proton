@@ -351,19 +351,20 @@ const CarListingForm = () => {
         </div>
       </div>
 
+
+      <div className="form-row">
       <div className="form-group">
         <label htmlFor="licensePlate">License Plate Number</label>
         <input
           type="text"
           id="licensePlate"
           name="licensePlate"
+          className='plate-input'
           value={formData.licensePlate}
           onChange={handleInputChange}
           required
         />
       </div>
-
-      <div className="form-row">
         <div className="form-group">
           <label htmlFor="availabilityDays">Days</label>
           <select

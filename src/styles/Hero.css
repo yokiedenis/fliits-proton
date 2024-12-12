@@ -44,7 +44,7 @@
 
 .booking input[type="date"]:focus,
 .booking input[type="time"]:focus {
-    width: 80px; /* Adjusted width when focused */
+    width: 80px; 
 }
 
 #search {

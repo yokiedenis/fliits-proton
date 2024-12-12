@@ -37,7 +37,7 @@ function Login() {
         const user = userCredential.user;
         setTimeout(() => {
           navigate('/'); 
-        }, 500);
+        }, 100);
       })
       .catch((error) => {
         let customErrorMessage;
