@@ -10,6 +10,7 @@ import '@fontsource/roboto';
 import AfterSearch from './pages/AfterSearch';
 import CarInfoPage from './pages/CarInfoPage';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/Carshare" element={<Carshare />} />
         <Route path="/car-listing" element={<CarListingForm />} />
         <Route path="/AfterSearch" element={<AfterSearch/>} />

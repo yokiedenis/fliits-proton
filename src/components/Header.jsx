@@ -73,7 +73,7 @@ const Header = () => {
                     <FaHome className="Dashboard-icons" />
                     Dashboard
                   </Link>
-                  <Link to="/profile" className="dropdown-item">
+                  <Link to="/Profile" className="dropdown-item">
                     <FaUser className="Dashboard-icons" />
                     Profile
                   </Link>

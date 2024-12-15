@@ -1,0 +1,143 @@
+
+.profile-container {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('../assets/images/hero.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: auto; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* General Form Layout: Adjust spacing */
+  .profile-form {
+    background-color: rgba(255,255,255,0.9);
+    width: 70%; 
+    margin: 100px 0 30px 0; 
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(253, 253, 253, 0.1);
+    box-sizing: border-box; 
+  }
+  
+  
+  /* Section spacing */
+  .profile-section {
+    margin-bottom: 10px;
+    padding: 3px;
+  }
+  
+  /* Profile Picture */
+  .profile-picture {
+    text-align: center;
+  }
+  
+  .profile-photo {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('../assets/images/profile-user.png');
+    width: 120px;
+    height: 120px;
+    border: 5px solid #ffd700;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    margin: 10px auto;
+    background-size: cover;
+  }
+  
+  .Upload-picture {
+    margin: 5px;
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .Delete-picture {
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .upload-buttons button:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  /* Form Rows */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .profile-inputs {
+    flex: 1;
+    margin: 0 10px;
+  }
+
+  .profile-labels {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .name-inputs,
+  .profile-input-info,
+  .Bio-input-info {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  
+  /* Bio Textarea */
+  .Bio-input-info {
+    resize: none;
+    height: 80px;
+  }
+  
+  /* Buttons */
+  .submit-buttons {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .Submit-button{
+    margin: 5px;
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .Cancel-button{
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .Upload-picture:hover,
+  .Delete-picture:hover {
+    background-color: #ffd700;
+    color: black;
+  }
+  
