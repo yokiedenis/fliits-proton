@@ -13,7 +13,6 @@
     align-items: center;
   }
   
-  /* General Form Layout: Adjust spacing */
   .profile-form {
     background-color: rgba(255,255,255,0.9);
     width: 70%; 
@@ -24,14 +23,11 @@
     box-sizing: border-box; 
   }
   
-  
-  /* Section spacing */
   .profile-section {
     margin-bottom: 10px;
     padding: 3px;
   }
   
-  /* Profile Picture */
   .profile-picture {
     text-align: center;
   }
@@ -72,8 +68,7 @@
     background-color: black;
     color: white;
   }
-  
-  /* Form Rows */
+
   .form-row {
     display: flex;
     justify-content: space-between;
@@ -139,5 +134,46 @@
   .Delete-picture:hover {
     background-color: #ffd700;
     color: black;
+  }
+  
+  @media (max-width: 800px) {
+    
+    .profile-form {
+      width: 90%; 
+      padding: 10px; 
+    }
+  
+    .profile-photo {
+      width: 80px; 
+      height: 80px; 
+      margin: 5px auto;
+    }
+  
+    .Upload-picture,
+    .Delete-picture {
+      padding: 6px 12px; 
+      font-size: 14px; 
+    }
+  
+    .name-inputs,
+    .profile-input-info,
+    .Bio-input-info {
+      padding: 8px; 
+      font-size: 12px; 
+    }
+  
+    .Bio-input-info {
+      height: 60px; 
+    }
+    
+    .profile-labels {
+      font-size: 14px;
+    }
+  
+    .Submit-button,
+    .Cancel-button {
+      padding: 8px 16px; 
+      font-size: 14px; 
+    }
   }
   
