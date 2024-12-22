@@ -2,6 +2,10 @@ import { useState } from 'react';
 import Select from 'react-select';
 import BookingHeader from '../components/BookingHeader';
 import '../styles/CarListingForm.css';
+import { database, storage } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 const CarListingForm = () => {
 
@@ -206,7 +210,8 @@ const CarListingForm = () => {
   ];
 
 
-
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -271,16 +276,65 @@ const CarListingForm = () => {
     setSelectedFeatures(selectedOptions || []);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    setLoading(true); 
+  
     if (step < 3) {
       setStep(step + 1);
     } else {
-      console.log('Form submitted:', formData);
-      // Add final form submission logic here
+      // Prepare the form data for Firestore
+      const formDataToStore = {
+        model: formData.model,
+        year: formData.year,
+        type: formData.type,
+        color: formData.color,
+        licensePlate: formData.licensePlate,
+        availabilityDays: formData.availabilityDays,
+        availabilityHours: formData.availabilityHours,
+        seats: formData.seats,
+        fuelType: formData.fuelType,
+        transmission: formData.transmission,
+        features: selectedFeatures.map((feature) => feature.value),
+        carDescription: formData.carDescription,
+        renterConditions: formData.renterConditions,
+        goals: formData.goals,
+        additionalInfo: formData.additionalInfo
+      };
+  
+      try {
+        // Store car info in Firestore
+        const docRef = await addDoc(collection(database, 'carListings'), formDataToStore);
+  
+        // Upload car photos to Firebase Storage
+        const carPhotos = formData.carPhotos;
+        const uploadPromises = Object.keys(carPhotos).map(async (key) => {
+          const file = carPhotos[key];
+          if (file) {
+            const fileRef = ref(storage, `carPhotos/${docRef.id}/${key}`);
+            await uploadBytes(fileRef, file);
+          }
+        });
+  
+        // Wait for all uploads to complete
+        await Promise.all(uploadPromises);
+  
+        // Show success alert
+        alert('Car has been added successfully!');
+  
+        // Redirect to the home page after a brief delay
+        setTimeout(() => {
+          navigate('/');
+        }, 200); 
+  
+      } catch (error) {
+        console.error('Error submitting form data:', error);
+      } finally {
+        setLoading(false); 
+      }
     }
   };
-
   const handleBack = () => {
     setStep(step - 1);
   };
@@ -296,6 +350,7 @@ const CarListingForm = () => {
           <select
             id="model"
             name="model"
+            className='select-inputs'
             value={formData.model}
             onChange={handleInputChange}
           >
@@ -312,6 +367,7 @@ const CarListingForm = () => {
           <select
             id="year"
             name="year"
+            className='select-inputs'
             value={formData.year}
             onChange={handleInputChange}
           >
@@ -328,6 +384,7 @@ const CarListingForm = () => {
           <select
             id="type"
             name="type"
+            className='select-inputs'
             value={formData.type}
             onChange={handleInputChange}
           >
@@ -370,6 +427,7 @@ const CarListingForm = () => {
           <select
             id="availabilityDays"
             name="availabilityDays"
+            className='select-inputs'
             value={formData.availabilityDays}
             onChange={handleInputChange}
           >
@@ -386,6 +444,7 @@ const CarListingForm = () => {
           <select
             id="availabilityHours"
             name="availabilityHours"
+            className='select-inputs'
             value={formData.availabilityHours}
             onChange={handleInputChange}
           >
@@ -405,6 +464,7 @@ const CarListingForm = () => {
           <select
             id="seats"
             name="seats"
+            className='select-inputs'
             value={formData.seats}
             onChange={handleInputChange}
           >
@@ -421,6 +481,7 @@ const CarListingForm = () => {
           <select
             id="fuelType"
             name="fuelType"
+            className='select-inputs'
             value={formData.fuelType}
             onChange={handleInputChange}
           >
@@ -437,6 +498,7 @@ const CarListingForm = () => {
           <select
             id="transmission"
             name="transmission"
+            className='select-inputs'
             value={formData.transmission}
             onChange={handleInputChange}
           >
@@ -451,6 +513,7 @@ const CarListingForm = () => {
         <div className="form-group">
           <label htmlFor="features">More Features</label>
           <Select
+            className='select-inputs'
             id="moreFeatures"
             options={moreFeatures}
             isMulti
@@ -558,9 +621,10 @@ const CarListingForm = () => {
               Back
             </button>
           )}
-          <button type="submit" className="next-btn">
-            {step === 3 ? 'Submit' : 'Next'}
+          <button type="submit" className="next-btn" >
+          {(step === 3 ? 'Submit' : 'Next')}
           </button>
+
         </div>
       </form>
     </div>
