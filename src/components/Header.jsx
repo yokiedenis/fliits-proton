@@ -9,8 +9,7 @@ import NavMenu from './NavMenu';
 const Header = () => {
   const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null); // Store the authenticated user
-
+  const [user, setUser] = useState(null); 
   const auth = getAuth();
 
   useEffect(() => {

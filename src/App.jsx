@@ -11,6 +11,7 @@ import AfterSearch from './pages/AfterSearch';
 import CarInfoPage from './pages/CarInfoPage';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
     
         <Routes>
           {/* Define routes for each page */}
+          <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Dashboard" element={<Dashboard/>} />

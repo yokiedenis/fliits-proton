@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import {app} from '../firebaseConfig';
+import { app, database } from '../firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import { collection, addDoc } from "firebase/firestore";
 
 function Login() {
-  
+
   const auth = getAuth();
-  const provider = new GoogleAuthProvider;
+  const provider = new GoogleAuthProvider();
+  const collectionRef = collection(database, "users");
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -35,6 +37,19 @@ function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+
+        // Firestore storage of logged in users
+        addDoc(collectionRef, {
+          email: user.email,
+          uid: user.uid,
+          loggedInAt: new Date().toISOString(), 
+        })
+          .then(() => {
+            console.log("User data added to Firestore!");
+          })
+          .catch((err) => {
+            console.error("Error adding user data to Firestore:", err.message);
+          });
         setTimeout(() => {
           navigate('/'); 
         }, 100);
@@ -53,10 +68,24 @@ function Login() {
       });
   };
 
-  const handleClick = async (e) =>{
+  const handleClick = async (e) => {
     signInWithPopup(auth, provider)
       .then((userCredential) => {
         const user = userCredential.user;
+
+        // Firestore storage of logged in users
+        addDoc(collectionRef, {
+          email: user.email,
+          uid: user.uid,
+          loggedInAt: new Date().toISOString(), 
+        })
+          .then(() => {
+            console.log("User data added to Firestore!");
+          })
+          .catch((err) => {
+            console.error("Error adding user data to Firestore:", err.message);
+          });
+
         setTimeout(() => {
           navigate('/'); 
         }, 2000);
@@ -68,18 +97,19 @@ function Login() {
       .finally(() => {
         setLoading(false); 
       });
-  }
+  };
+
   return (
-  <div className="login-page">
-    <div className="login-container">
-      <h1 className="login-title">
-        Welcome to FL<span className="highlight">ii</span>TS
-      </h1>
-      <h3 onClick={handleClick}>Login With Google</h3>
+    <div className="login-page">
+      <div className="login-container">
+        <h1 className="login-title">
+          Welcome to FL<span className="highlight">ii</span>TS
+        </h1>
+        <h3 onClick={handleClick}>Login With Google</h3>
 
-      {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{error}</div>}
 
-      <form onSubmit={handleSubmit} className="signup-form">
+        <form onSubmit={handleSubmit} className="signup-form">
           <input
             type="email"
             name="email"
@@ -96,21 +126,24 @@ function Login() {
             value={formData.password}
             onChange={handleChange}
             className="login-input"
-             placeholder='Your Password'
+            placeholder='Your Password'
             required
           />
-        <button type="submit" className="login-button" disabled={loading}>
-          {loading ? 'Logining in...' : 'Login'}
-        </button>
-      </form>
-      <div className="Signup_link">
-        <span>Don’t have an account? </span>
-        <Link to="/Signup" className="footer-link" >
-          Sign up
-        </Link>
+          <Link to="/forgot-password" className="forgot-password-link">
+            Forgot Password?
+          </Link>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Logining in...' : 'Login'}
+          </button>
+        </form>
+        <div className="Signup_link">
+          <span>Don’t have an account? </span>
+          <Link to="/Signup" className="footer-link">
+            Sign up
+          </Link>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

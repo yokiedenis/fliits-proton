@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { app, database } from '../firebaseConfig';
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import '../styles/Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { collection, addDoc } from "firebase/firestore"; 
 
 function SignUp() {
   const auth = getAuth();
-  const provider =  new GoogleAuthProvider;
+  const provider = new GoogleAuthProvider();
+  const collectionRef = collection(database, "users");
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,12 +36,19 @@ function SignUp() {
     const { email, password } = formData;
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
+
+       // Firestore storage of created in users
+        await addDoc(collectionRef, {
+          email: user.email,
+          createdAt: new Date(),
+        });
+
         setSuccess('Account created successfully!');
         setTimeout(() => {
           navigate('/Login'); 
-        }, 2000);
+        }, 100);
       })
       .catch((error) => {
         const errorMessage = error.message || 'An error occurred during sign up.';
@@ -49,10 +59,21 @@ function SignUp() {
       });
   };
 
-  const handleClick = async (e) =>{
+  const handleClick = async () => {
+    setError(null); 
+    setSuccess(null); 
+    setLoading(true);
+
     signInWithPopup(auth, provider)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
+
+       // Firestore storage of created in users
+        await addDoc(collectionRef, {
+          email: user.email,
+          createdAt: new Date(),
+        });
+
         setSuccess('Account created successfully!');
         setTimeout(() => {
           navigate('/'); 
@@ -65,26 +86,27 @@ function SignUp() {
       .finally(() => {
         setLoading(false); 
       });
-  }
+  };
+
   return (
     <div className="signup-page">
-    <div className="signup-container">
-      <h1 className="signup-title">
-        Join FL<span className="highlight">ii</span>TS Today
-      </h1>
+      <div className="signup-container">
+        <h1 className="signup-title">
+          Join FL<span className="highlight">ii</span>TS Today
+        </h1>
 
-      <h3 onClick={handleClick}>Login With Google</h3>
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
+        <h3 onClick={handleClick}>Login With Google</h3>
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">{success}</div>}
 
-      <form onSubmit={handleSubmit} className="signup-form">
+        <form onSubmit={handleSubmit} className="signup-form">
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             className="form-input"
-            placeholder='Your Email'
+            placeholder="Your Email"
             required
           />
 
@@ -94,22 +116,22 @@ function SignUp() {
             value={formData.password}
             onChange={handleChange}
             className="form-input"
-             placeholder='Your Password'
+            placeholder="Your Password"
             required
           />
 
-        <button type="submit" className="signup-button" disabled={loading}>
-          {loading ? 'Signing up...' : 'Sign up'}
-        </button>
+          <button type="submit" className="signup-button" disabled={loading}>
+            {loading ? 'Signing up...' : 'Sign up'}
+          </button>
 
-        <div className="login-link">
-          Already have an account?{' '}
-          <Link to="/Login" className="footer-link" >
-          Login
-        </Link>
-        </div>
-      </form>
-    </div>
+          <div className="login-link">
+            Already have an account?{' '}
+            <Link to="/Login" className="footer-link">
+              Login
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

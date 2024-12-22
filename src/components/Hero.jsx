@@ -4,11 +4,6 @@ import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaSearch } from 'react-icons/fa
 import '../styles/Hero.css';
 
 const Hero = () => {
-
-
-
-
-
   return (
     <section className="hero">
       <form className="booking">

@@ -59,10 +59,9 @@
 }
 
 
-.form-group select{
+.form-group, .select-inputs{
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
 }
