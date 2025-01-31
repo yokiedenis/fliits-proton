@@ -867,8 +867,15 @@ const navigate = useNavigate();
                 </div>
                 <div className="profile-inputs">
                   <label className="profile-labels">ID Picture</label><br />
-                  <button className="Upload-picture" required>
+                  <button className="Upload-picture" onClick={() => document.getElementById('file-input').click()} required>
                     Upload
+                    <input 
+                    type="file" 
+                    id="file-input" 
+                    accept="image/*" 
+                    style={{ display: 'none' }}
+                    onChange={handleimagechange}
+                />
                   </button>
                 </div>
               </div>
@@ -897,7 +904,16 @@ const navigate = useNavigate();
                 </div>
                 <div className="profile-inputs">
                   <label className="profile-labels">License Picture</label><br />
-                  <button className="Upload-picture">Upload</button>
+                  <button className="Upload-picture" onClick={() => document.getElementById('file-input').click()}>
+                    Upload
+                    <input 
+                    type="file" 
+                    id="file-input" 
+                    accept="image/*" 
+                    style={{ display: 'none' }}
+                    onChange={handleimagechange}
+                />
+                  </button>
                 </div>
               </div>
             </div>

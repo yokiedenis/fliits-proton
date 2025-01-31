@@ -6,6 +6,7 @@ import { database, storage } from '../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL } from 'firebase/storage'; 
 
 const CarListingForm = () => {
 
@@ -215,59 +216,53 @@ const CarListingForm = () => {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    
-    // Car Information
-    model: 'Benz C class',
-    year: '2007',
-    type: 'Sedan',
+    model: '',
+    year: '',
+    type: '',
     color: '#000000',
     licensePlate: '',
-    availabilityDays: '1',
-    availabilityHours: '1',
-    seats: '2',
-    fuelType: 'Petrol',
-    transmission: 'Automatic',
-    features: 'AC',
-    
-    // Car Photos and Description
+    availabilityDays: '',
+    availabilityHours: '',
+    seats: '',
+    fuelType: '',
+    transmission: '',
+    features: [],
     carPhotos: {
       frontView: null,
       rearView: null,
       leftSideView: null,
       rightSideView: null,
       frontInterior: null,
-      backInterior: null
+      backInterior: null,
     },
     carDescription: '',
     renterConditions: '',
-    
-    // Goals
     goals: '',
-    additionalInfo: ''
+    additionalInfo: '',
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleFileChange = (e, field) => {
     const file = e.target.files[0];
     if (field.includes('View') || field.includes('Interior')) {
-      setFormData(prevState => ({
+      setFormData((prevState) => ({
         ...prevState,
         carPhotos: {
           ...prevState.carPhotos,
-          [field]: file
-        }
+          [field]: file,
+        },
       }));
     } else {
-      setFormData(prevState => ({
+      setFormData((prevState) => ({
         ...prevState,
-        [field]: file
+        [field]: file,
       }));
     }
   };
@@ -278,47 +273,40 @@ const CarListingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    setLoading(true); 
+    setLoading(true);
   
     if (step < 3) {
       setStep(step + 1);
+      setLoading(false);
     } else {
-      // Prepare the form data for Firestore
-      const formDataToStore = {
-        model: formData.model,
-        year: formData.year,
-        type: formData.type,
-        color: formData.color,
-        licensePlate: formData.licensePlate,
-        availabilityDays: formData.availabilityDays,
-        availabilityHours: formData.availabilityHours,
-        seats: formData.seats,
-        fuelType: formData.fuelType,
-        transmission: formData.transmission,
-        features: selectedFeatures.map((feature) => feature.value),
-        carDescription: formData.carDescription,
-        renterConditions: formData.renterConditions,
-        goals: formData.goals,
-        additionalInfo: formData.additionalInfo
-      };
-  
       try {
-        // Store car info in Firestore
-        const docRef = await addDoc(collection(database, 'carListings'), formDataToStore);
-  
-        // Upload car photos to Firebase Storage
+        // Upload car photos to Firebase Storage and get their download URLs
         const carPhotos = formData.carPhotos;
-        const uploadPromises = Object.keys(carPhotos).map(async (key) => {
+        const photoUrls = {};
+  
+        // Loop through each photo and upload it
+        for (const key in carPhotos) {
           const file = carPhotos[key];
           if (file) {
-            const fileRef = ref(storage, `carPhotos/${docRef.id}/${key}`);
-            await uploadBytes(fileRef, file);
+            const fileRef = ref(storage, `carPhotos/${Date.now()}_${key}`); // Unique file name
+            await uploadBytes(fileRef, file); // Upload the file
+            const downloadURL = await getDownloadURL(fileRef); // Get the download URL
+            photoUrls[key] = downloadURL; // Store the URL
           }
-        });
+        }
   
-        // Wait for all uploads to complete
-        await Promise.all(uploadPromises);
+        // Prepare the form data for Firestore
+        const formDataToStore = {
+          ...formData,
+          features: selectedFeatures.map((feature) => feature.value),
+          carPhotos: photoUrls, // Replace File objects with download URLs
+        };
+  
+        console.log('Form data to store:', formDataToStore);
+  
+        // Store car info in Firestore
+        const docRef = await addDoc(collection(database, 'carListings'), formDataToStore);
+        console.log('Document written with ID:', docRef.id);
   
         // Show success alert
         alert('Car has been added successfully!');
@@ -326,15 +314,16 @@ const CarListingForm = () => {
         // Redirect to the home page after a brief delay
         setTimeout(() => {
           navigate('/');
-        }, 200); 
-  
+        }, 200);
       } catch (error) {
         console.error('Error submitting form data:', error);
+        alert('An error occurred while submitting the form. Please try again.');
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     }
   };
+
   const handleBack = () => {
     setStep(step - 1);
   };
@@ -347,16 +336,10 @@ const CarListingForm = () => {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="model">Model</label>
-          <select
-            id="model"
-            name="model"
-            className='select-inputs'
-            value={formData.model}
-            onChange={handleInputChange}
-          >
-           {carmodel.map((items, index ) => (
-            <option key ={index} value={items.model}>
-              {items.model}
+          <select id="model" name="model" className="select-inputs" value={formData.model} onChange={handleInputChange} required>
+            {carmodel.map((item, index) => (
+              <option key={index} value={item.model}>
+                {item.model}
               </option>
             ))}
           </select>
@@ -364,78 +347,60 @@ const CarListingForm = () => {
 
         <div className="form-group">
           <label htmlFor="year">Year</label>
-          <select
-            id="year"
-            name="year"
-            className='select-inputs'
-            value={formData.year}
-            onChange={handleInputChange}
-          >
-            {caryear.map((items, index ) => (
-              <option key={index} value={items.year}>
-              {items.year}
+          <select id="year" name="year" className="select-inputs" value={formData.year} onChange={handleInputChange} required>
+            {caryear.map((item, index) => (
+              <option key={index} value={item.year}>
+                {item.year}
               </option>
-              ))}
+            ))}
           </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="type">Type</label>
-          <select
-            id="type"
-            name="type"
-            className='select-inputs'
-            value={formData.type}
-            onChange={handleInputChange}
-          >
-            {cartype.map((items, index)  => (
-              <option key ={index} value={items.type}>
-            {items.type}
-            </option>
-          ))}
+          <select id="type" name="type" className="select-inputs" value={formData.type} onChange={handleInputChange} required>
+            {cartype.map((item, index) => (
+              <option key={index} value={item.type}>
+                {item.type}
+              </option>
+            ))}
           </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="color">Color</label>
-          <input
-            type="color"
-            id="color"
-            name="color"
-            value={formData.color}
-            onChange={handleInputChange}
-          />
+          <input type="color" id="color" name="color" value={formData.color} onChange={handleInputChange} required />
         </div>
       </div>
 
-
       <div className="form-row">
-      <div className="form-group">
-        <label htmlFor="licensePlate">License Plate Number</label>
-        <input
-          type="text"
-          id="licensePlate"
-          name="licensePlate"
-          className='plate-input'
-          value={formData.licensePlate}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="licensePlate">License Plate Number</label>
+          <input
+            type="text"
+            id="licensePlate"
+            name="licensePlate"
+            className="plate-input"
+            value={formData.licensePlate}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="availabilityDays">Days</label>
           <select
             id="availabilityDays"
             name="availabilityDays"
-            className='select-inputs'
+            className="select-inputs"
             value={formData.availabilityDays}
             onChange={handleInputChange}
+            required
           >
-            {availDays.map((items, index) =>(
-              <option key={index} value={items.day}>
-                {items.day}
-                </option>
-              ))}
+            {availDays.map((item, index) => (
+              <option key={index} value={item.day}>
+                {item.day}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -444,35 +409,30 @@ const CarListingForm = () => {
           <select
             id="availabilityHours"
             name="availabilityHours"
-            className='select-inputs'
+            className="select-inputs"
             value={formData.availabilityHours}
             onChange={handleInputChange}
+            required
           >
-            {availHours.map((items, index) =>(
-              <option key={index} value={items.hour}>
-                {items.hour}
-                </option>
-              ))}
+            {availHours.map((item, index) => (
+              <option key={index} value={item.hour}>
+                {item.hour}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
-      <h3 className='features-heading'>Additional Details</h3>
+      <h3 className="features-heading">Additional Details</h3>
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="seats">Seats</label>
-          <select
-            id="seats"
-            name="seats"
-            className='select-inputs'
-            value={formData.seats}
-            onChange={handleInputChange}
-          >
-            {carSeats.map((items, index) =>(
-              <option key={index} value={items.seats}>
-                {items.seats}
-                </option>
-              ))}
+          <select id="seats" name="seats" className="select-inputs" value={formData.seats} onChange={handleInputChange} required>
+            {carSeats.map((item, index) => (
+              <option key={index} value={item.seats}>
+                {item.seats}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -481,15 +441,16 @@ const CarListingForm = () => {
           <select
             id="fuelType"
             name="fuelType"
-            className='select-inputs'
+            className="select-inputs"
             value={formData.fuelType}
             onChange={handleInputChange}
+            required
           >
-            {fuelType.map((items, index) =>(
-              <option key={index} value={items.type}>
-                {items.type}
-                </option>
-              ))}
+            {fuelType.map((item, index) => (
+              <option key={index} value={item.type}>
+                {item.type}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -498,29 +459,30 @@ const CarListingForm = () => {
           <select
             id="transmission"
             name="transmission"
-            className='select-inputs'
+            className="select-inputs"
             value={formData.transmission}
             onChange={handleInputChange}
+            required
           >
-             {transmissionType.map((items, index) =>(
-              <option key={index} value={items.type}>
-                {items.type}
-                </option>
-              ))}
+            {transmissionType.map((item, index) => (
+              <option key={index} value={item.type}>
+                {item.type}
+              </option>
+            ))}
           </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="features">More Features</label>
           <Select
-            className='select-inputs'
+            className="select-inputs"
             id="moreFeatures"
             options={moreFeatures}
             isMulti
             value={selectedFeatures}
             onChange={handleSelectChange}
             closeMenuOnSelect={false}
-            placeholder={formData.features}
+            placeholder="Select features"
           />
         </div>
       </div>
@@ -558,6 +520,7 @@ const CarListingForm = () => {
           value={formData.carDescription}
           onChange={handleInputChange}
           rows={4}
+          required
         />
       </div>
 
@@ -569,6 +532,7 @@ const CarListingForm = () => {
           value={formData.renterConditions}
           onChange={handleInputChange}
           rows={4}
+          required
         />
       </div>
     </>
@@ -587,6 +551,7 @@ const CarListingForm = () => {
           value={formData.goals}
           onChange={handleInputChange}
           rows={4}
+          required
         />
       </div>
 
@@ -604,33 +569,32 @@ const CarListingForm = () => {
   );
 
   return (
-    <div className='carForm'>
+    <div className="carForm">
       <BookingHeader />
-        <br />
+      <br />
       <div className="list-your-car-container">
-      <h1 className="main-title">List Your Car On FL<span className="highlight">ii</span>Ts</h1>
-      
-      <form onSubmit={handleSubmit}>
-        {step === 1 && renderCarInfo()}
-        {step === 2 && renderCarPhotos()}
-        {step === 3 && renderGoals()}
+        <h1 className="main-title">
+          List Your Car On FL<span className="highlight">ii</span>Ts
+        </h1>
 
-        <div className="form-buttons">
-          {step > 1 && (
-            <button type="button" className="back-btn" onClick={handleBack}>
-              Back
+        <form onSubmit={handleSubmit}>
+          {step === 1 && renderCarInfo()}
+          {step === 2 && renderCarPhotos()}
+          {step === 3 && renderGoals()}
+
+          <div className="form-buttons">
+            {step > 1 && (
+              <button type="button" className="back-btn" onClick={handleBack}>
+                Back
+              </button>
+            )}
+            <button type="submit" className="next-btn" disabled={loading}>
+              {loading ? 'Submitting...' : step === 3 ? 'Submit' : 'Next'}
             </button>
-          )}
-          <button type="submit" className="next-btn" >
-          {(step === 3 ? 'Submit' : 'Next')}
-          </button>
-
-        </div>
-      </form>
-    </div>
+          </div>
+        </form>
       </div>
-  
+    </div>
   );
 };
-
 export default CarListingForm;

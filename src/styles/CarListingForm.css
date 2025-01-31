@@ -73,7 +73,9 @@
   bottom: 9%; 
 }
 textarea {
-  width: 98%;
+  width: 94%;
+  height: 100px;
+  max-width: 94%;
   min-height: 100px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -102,7 +104,9 @@ input[type="color"] {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
+.select-inputs{
+  max-width: 100%;
+}
 /* Form Layout Adjustments */
 .form-row {
   display: grid;
@@ -175,7 +179,7 @@ input[type="color"] {
 @media (max-width: 768px) {
   
   .list-your-car-container{
-    padding: 10px;
+    padding: 1px;
     border-radius: 10px;
     font-size: 20px;
     width: 80%;
@@ -204,27 +208,20 @@ input[type="color"] {
     font-weight: bold;
   }
   
-  .form-group input[type="text"],
-  .form-group input[type="tel"],
-  .form-group input[type="email"],
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 5px;
-    font-size: 16px;
+  .plate-input{
+    max-width: 95%;
+    padding: 10px;
   }
-  
+  .select-inputs{
+    max-width: 100%;
+  }
   textarea {
-    width: 100%;
-    min-height: 100px;
+    max-width: 80%;
+    min-height: 80px;
     padding: 5px;
   }
   
   /* Input and Select Adjustments */
-  input[type="file"] {
-    display: none;
-  }
-  
   input[type="color"] {
     width: 100%;
     height: 40px;
@@ -235,12 +232,9 @@ input[type="color"] {
   
   /* Form Layout Adjustments */
   .form-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
   }
-  
   /* Photo Upload Styles */
   .photo-upload {
     display: flex;
