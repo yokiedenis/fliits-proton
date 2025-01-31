@@ -1,12 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaSearch } from 'react-icons/fa';
 import '../styles/Hero.css';
 
 const Hero = () => {
+  const [location, setLocation] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const searchParams = { location, startDate, endDate, startTime, endTime };
+    navigate('/AfterSearch', { state: { searchParams } });
+  };
+
   return (
     <section className="hero">
-      <form className="booking">
+      <form className="booking" onSubmit={handleSubmit}>
         <div className="location">
           <div className="booking-titles">
             <FaMapMarkerAlt size={24} />
@@ -18,6 +31,8 @@ const Hero = () => {
               name="destination"
               id="destination"
               placeholder="City, Hotel or Airport"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               required
             />
           </div>
@@ -33,6 +48,8 @@ const Hero = () => {
               type="text"
               name="start"
               placeholder="Add Date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
               onFocus={(e) => (e.target.type = 'date')}
               required
             />
@@ -40,6 +57,8 @@ const Hero = () => {
               type="text"
               name="stop"
               placeholder="Add Date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
               onFocus={(e) => (e.target.type = 'date')}
               required
             />
@@ -56,6 +75,8 @@ const Hero = () => {
               type="text"
               name="startTime"
               placeholder="Add Time"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
               onFocus={(e) => (e.target.type = 'time')}
               required
             />
@@ -63,16 +84,16 @@ const Hero = () => {
               type="text"
               name="stopTime"
               placeholder="Add Time"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
               onFocus={(e) => (e.target.type = 'time')}
               required
             />
           </div>
         </div>
-        <Link to='/AfterSearch'>
-        <button type="submit" id="search" >
+        <button type="submit" id="search">
           <FaSearch/>
         </button>
-        </Link>
       </form>
     </section>
   );
