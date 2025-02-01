@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaSearch } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import '../styles/Hero.css';
 
 const Hero = () => {
@@ -22,7 +22,6 @@ const Hero = () => {
       <form className="booking" onSubmit={handleSubmit}>
         <div className="location">
           <div className="booking-titles">
-            <FaMapMarkerAlt size={24} />
             <label htmlFor="destination">Location</label>
           </div>
           <div className="booking-inputs">
@@ -38,10 +37,10 @@ const Hero = () => {
           </div>
         </div>
         <div className="separator"></div>
+
         <div className="dates">
           <div className="booking-titles">
-            <FaCalendarAlt size={24} />
-            <label htmlFor="start">Date</label>
+            <label htmlFor="start">From</label>
           </div>
           <div className="booking-inputs">
             <input
@@ -53,31 +52,32 @@ const Hero = () => {
               onFocus={(e) => (e.target.type = 'date')}
               required
             />
-            <input
-              type="text"
-              name="stop"
-              placeholder="Add Date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              onFocus={(e) => (e.target.type = 'date')}
-              required
-            />
-          </div>
-        </div>
-        <div className="separator"></div>
-        <div className="time">
-          <div className="booking-titles">
-            <FaClock size={24}/>
-            <label htmlFor="start">Time</label>
-          </div>
-          <div className="booking-inputs">
-            <input
+             <input
               type="text"
               name="startTime"
               placeholder="Add Time"
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
               onFocus={(e) => (e.target.type = 'time')}
+              required
+            />
+            
+          </div>
+        </div>
+        <div className="separator"></div>
+
+        <div className="time">
+          <div className="booking-titles">
+            <label htmlFor="start">To</label>
+          </div>
+          <div className="booking-inputs">
+           <input
+              type="text"
+              name="stop"
+              placeholder="Add Date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              onFocus={(e) => (e.target.type = 'date')}
               required
             />
             <input

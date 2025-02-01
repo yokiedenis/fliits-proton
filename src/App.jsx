@@ -12,8 +12,10 @@ import CarInfoPage from './pages/CarInfoPage';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import ForgotPassword from './components/ForgotPassword';
+import FeedbackForm from './components/FeedbackForm';
 
 function App() {
+  
   
   return (
     <Router>
@@ -30,12 +32,16 @@ function App() {
         <Route path="/car-listing" element={<CarListingForm />} />
         <Route path="/AfterSearch" element={<AfterSearch/>} />
         <Route path="/CarInfoPage" element={<CarInfoPage />} />
+        <Route path="/FeedBackForm" element={<FeedbackForm />} />
         <Route path="/" element={<Home />} />
         </Routes>
        
         <Footer />
         </div>
       </Router>
+
+
+
   );
 }
 

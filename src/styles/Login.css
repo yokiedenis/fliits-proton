@@ -1,6 +1,6 @@
 .login-page{
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/hero.jpg');
-  height: 70vh;
+  height: auto;
   padding: 20px;
 }
 .login-container {
@@ -96,9 +96,6 @@ h3 {
 @media (max-width: 800px) {
   .login-container {
     width: 70%;
-    padding: 1rem;
-    text-align: center;
-    margin: 50px 0 40px 50px;
   }
 
   .login-title {

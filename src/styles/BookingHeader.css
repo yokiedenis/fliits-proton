@@ -1,28 +1,25 @@
 .headercontainer {
     background-color: white;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: fixed;
-    width: 100%;
     top: 0;
     z-index: 1000;
 }
 
 ul {
     list-style: none;
-    margin: 5px;
+    margin: 1px;
 }
 
 ul li {
     display: inline-block;
+    justify-content: space-between;
     margin: 0 8px;
 }
 
 .header-button {
     margin-left: 55%;
 }
-
 
 .logo a {
     font-size: 50px;
@@ -36,6 +33,7 @@ ul li {
     cursor: pointer;
     color: black; 
 }
+
 .Profile-avatar {
     width: 40px;
     height: 40px;
@@ -43,25 +41,35 @@ ul li {
     border-radius: 50%;
     cursor: pointer;
 }
-  
-  .bookingHeader {
+
+.bookingHeader {
     background-color: white;
-    padding: 10px;
+    padding: 5px;
     display: flex;
-    gap: 1px;
-}
+    gap: 5px;
+} 
 
 .bookingHeader input {
-    font-size: 18px;
+    color: black;
+    border: none;
     padding: 10px;
-    border-bottom: 2px solid #888;
-    border-left: none;
-    border-top: none;
-    border-right: none;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: transparent;
+    width: 100px;
 }
+
 .bookingHeader input[type="text"] {
     transition: width 0.3s ease;
 }
+
+.bookingHeader input[type="date"]:focus,
+.bookingHeader input[type="time"]:focus,
+.bookingHeader input[type="search"]:focus{
+    width: 150px; 
+}
+
+
 #Booking-search {
     background-color: transparent;
     font-size: 24px;
@@ -71,36 +79,19 @@ ul li {
 
 /* Responsiveness for home page */
 @media (max-width: 800px) {
-    .headercontainer {
-        margin-bottom: 5px;
+    .booking-label{
+        display: none;
     }
-
-    .share-car-button-header {
-        font-size: 15px;
-    }
-
-    .logo a {
-        font-size: 40px;
-    }
-
-    .share-car-button-header {
-        padding: 10px 20px;
-        font-size: 15px;
-        margin-left: 0px;
-    }
-
-    .header-button {
-        margin-left: 5%;
-    }
-
-    .header-icon {
-        font-size: 25px; 
-    }
-    .bookingHeader input {
-        font-size: 15px;
-        padding: 5px;
-    }
+    
+    .bookingHeader input[type="text"],
+    .bookingHeader input[type="date"],
+    .bookingHeader input[type="time"],
+    .bookingHeader input[type="search"]{
+       display: none;
+}
+    
     #Booking-search {
-        font-size: 18px;
+        display: none;
     }
+    
 }

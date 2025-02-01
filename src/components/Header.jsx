@@ -4,10 +4,10 @@ import '../styles/Header.css';
 import { FaBars, FaUser, FaHome, FaSignOutAlt,FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import NavMenu from './NavMenu';
+// import NavMenu from './NavMenu';
 
 const Header = () => {
-  const [navMenuOpen, setNavMenuOpen] = useState(false);
+  // const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [user, setUser] = useState(null); 
   const auth = getAuth();
@@ -20,26 +20,26 @@ const Header = () => {
     return () => unsubscribe();
   }, [auth]);
 
-  const handleClick = () => {
-    setNavMenuOpen((prev) => !prev);
-  };
+  // const handleClick = () => {
+  //   setNavMenuOpen((prev) => !prev);
+  // };
 
-  const handleOutsideClick = (e) => {
-    if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
-      setNavMenuOpen(false);
-    }
-  };
+  // const handleOutsideClick = (e) => {
+  //   if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
+  //     setNavMenuOpen(false);
+  //   }
+  // };
 
-  const handleLinkClick = () => {
-    setNavMenuOpen(false);
-  };
+  // const handleLinkClick = () => {
+  //   setNavMenuOpen(false);
+  // };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [navMenuOpen]);
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleOutsideClick);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleOutsideClick);
+  //   };
+  // }, [navMenuOpen]);
 
   return (
     <div className="headercontainer">
@@ -91,15 +91,15 @@ const Header = () => {
             </div>
           )}
         </li>
-        <li onClick={handleClick}>
+        {/* <li onClick={handleClick}>
           <FaBars className="header-icon" id="nav-menu-icon" />
-        </li>
+        </li> */}
       </ul>
-      {navMenuOpen && (
+      {/* {navMenuOpen && (
         <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
           <NavMenu onClose={() => setNavMenuOpen(false)} onLinkClick={handleLinkClick} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -1,11 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import BookingHeader from '../components/BookingHeader';
-import { FaFilter } from 'react-icons/fa';
 import cardata from '../components/cardata';
 import '../styles/AfterSearch.css';
 import CarCard from '../components/CarCard';
-import Map from '../components/Map';
 
 function AfterSearch() {
     const location = useLocation();
@@ -24,48 +22,19 @@ function AfterSearch() {
         <div className='AfterSearch-container'>
             <BookingHeader />
             <div className="search-Container">
-                <div className="search-filter">
-                    <div className="filter-icon">
-                        <FaFilter />
-                    </div>
-                    <div className="filters">
-                        <h5>Price</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>Vehicle type</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>Model</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>Seats</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>Electric</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>Deliver</h5>
-                    </div>
-                    <div className="filters">
-                        <h5>All filters</h5>
-                    </div>
-                </div>
+            <div className="search-params">
+                <p><label>Location:</label>{searchParams.location}</p>
+                <p><label>Start Date:</label> {searchParams.startDate}</p>
+                <p><label>End Date:</label> {searchParams.endDate}</p>
+                <p><label>Start Time:</label> {searchParams.startTime}</p>
+                <p><label>End Time:</label> {searchParams.endTime}</p>
+            </div>
             </div>
             <div className="separater"></div>
-            <div className="search-params">
-                <h3>Search Results:</h3>
-                <p>Location: {searchParams.location}</p>
-                <p>Start Date: {searchParams.startDate}</p>
-                <p>End Date: {searchParams.endDate}</p>
-                <p>Start Time: {searchParams.startTime}</p>
-                <p>End Time: {searchParams.endTime}</p>
-            </div>
+            
             <div className="Search-results">
                 <div className="car-results">
                     {carCards}
-                </div>
-                <div className="map-results">
-                    <Map />
                 </div>
             </div>
         </div>

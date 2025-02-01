@@ -5,7 +5,7 @@ import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <div className="footer">
       <div className="footer-content">
       <div className="footer-logo">
         <Link to='/'>FL<span style={{ color: 'gold' }}>ii</span>TS</Link>
@@ -58,7 +58,7 @@ const Footer = () => {
       </div>
 
       <p className="footer-bottom">&copy; {new Date().getFullYear()} My Company. All rights reserved.</p>
-    </footer>
+    </div>
   );
 };
 

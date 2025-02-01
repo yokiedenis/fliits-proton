@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/BookingHeader.css';
 import { FaBars, FaTimes, FaSearch, FaUserPlus, FaUser, FaHome, FaSignOutAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import NavMenu from './NavMenu';
+// import NavMenu from './NavMenu';
 
 const BookingHeader = () => {
-  const [navMenuOpen, setNavMenuOpen] = useState(false);
+  // const [navMenuOpen, setNavMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null); // Store the authenticated user
+  const [user, setUser] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [location, setLocation] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+   const navigate = useNavigate();
 
   const auth = getAuth();
 
@@ -20,26 +26,33 @@ const BookingHeader = () => {
     return () => unsubscribe();
   }, [auth]);
 
-  const handleClick = () => {
-    setNavMenuOpen((prev) => !prev);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const searchParams = { location, startDate, endDate, startTime, endTime };
+    navigate('/AfterSearch', { state: { searchParams } });
   };
 
-  const handleOutsideClick = (e) => {
-    if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
-      setNavMenuOpen(false);
-    }
-  };
 
-  const handleLinkClick = () => {
-    setNavMenuOpen(false);
-  };
+  // const handleClick = () => {
+  //   setNavMenuOpen((prev) => !prev);
+  // };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [navMenuOpen]);
+  // const handleOutsideClick = (e) => {
+  //   if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
+  //     setNavMenuOpen(false);
+  //   }
+  // };
+
+  // const handleLinkClick = () => {
+  //   setNavMenuOpen(false);
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleOutsideClick);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleOutsideClick);
+  //   };
+  // }, [navMenuOpen]);
 
   return (
     <div className="headercontainer">
@@ -48,16 +61,65 @@ const BookingHeader = () => {
           FL<span style={{ color: 'gold' }}>ii</span>TS
         </Link>
       </div>
-      <form className="bookingHeader">
-        <div className="location">
-          <input
+      <form className="bookingHeader" onSubmit={handleSubmit}>
+      <div className="booking-inputs">
+            <input
               type="search"
               name="destination"
               id="destination"
               placeholder="City, Hotel or Airport"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               required
             />
-        </div>
+          </div>
+        <div className="dates">
+                  <div className="booking-inputs">
+                  <label className='booking-label'>From</label>
+                    <input
+                      type="text"
+                      name="start"
+                      placeholder="Add Date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      onFocus={(e) => (e.target.type = 'date')}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="startTime"
+                      placeholder="Add Time"
+                      value={startTime}
+                      onChange={(e) => setStartTime(e.target.value)}
+                      onFocus={(e) => (e.target.type = 'time')}
+                      required
+                    />
+                  </div>
+                </div>
+      
+                <div className="time">
+                  <div className="booking-inputs">
+                  <label className='booking-label'>To</label>
+                    <input
+                      type="text"
+                      name="stop"
+                      placeholder="Add Date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      onFocus={(e) => (e.target.type = 'date')}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="stopTime"
+                      placeholder="Add Time"
+                      value={endTime}
+                      onChange={(e) => setEndTime(e.target.value)}
+                      onFocus={(e) => (e.target.type = 'time')}
+                      required
+                    />
+                  </div>
+                </div>
         <button type="submit" id="Booking-search">
           <FaSearch />
         </button>
@@ -104,15 +166,15 @@ const BookingHeader = () => {
             </div>
           )}
         </li>
-        <li onClick={handleClick}>
+        {/* <li onClick={handleClick}>
           <FaBars className="header-icon" id="nav-menu-icon" />
-        </li>
+        </li> */}
       </ul>
-      {navMenuOpen && (
+      {/* {navMenuOpen && (
         <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
           <NavMenu onClose={() => setNavMenuOpen(false)} onLinkClick={handleLinkClick} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
