@@ -750,211 +750,229 @@ const handleSubmit = async (e) => {
 const handleBack = () => {
   setStep(step - 1);
 };
-  const renderCarInfo = () => (
-    <>
-      <h2 className="sub-title">Car Information</h2>
-      <p className="description">Provide information about your car to help us match it with renters</p>
+const renderCarInfo = () => (
+  <>
+    <h2 className="sub-title">Car Information</h2>
+    <p className="description">Provide information about your car to help us match it with renters</p>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="model">Model</label>
-          <select id="model" name="model" className="select-inputs" value={formData.model} onChange={handleInputChange} required>
-            {carmodel.map((item, index) => (
-              <option key={index} value={item.model}>
-                {item.model}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="year">Year</label>
-          <select id="year" name="year" className="select-inputs" value={formData.year} onChange={handleInputChange} required>
-            {caryear.map((item, index) => (
-              <option key={index} value={item.year}>
-                {item.year}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="type">Type</label>
-          <select 
-            id="type" 
-            name="type" 
-            className="select-inputs" 
-            value={formData.type} 
-            onChange={handleInputChange} 
-            required>
-            {cartype.map((item, index) => (
-              <option key={index} value={item.type}>
-                {item.type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="color">Color</label>
-          <input type="color" id="color" name="color" value={formData.color} onChange={handleInputChange} required />
-        </div>
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="model">Model</label>
+        <select id="model" name="model" className="select-inputs" value={formData.model} onChange={handleInputChange} required>
+          <option value="" disabled>Select Model</option> {/* Placeholder */}
+          {carmodel.map((item, index) => (
+            <option key={index} value={item.model}>
+              {item.model}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="licensePlate">License Plate Number</label>
-          <input
-            type="text"
-            id="licensePlate"
-            name="licensePlate"
-            className="plate-input"
-            value={formData.licensePlate}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-      
-        <div className="form-group">
+      <div className="form-group">
+        <label htmlFor="year">Year</label>
+        <select id="year" name="year" className="select-inputs" value={formData.year} onChange={handleInputChange} required>
+          <option value="" disabled>Select Year</option> {/* Placeholder */}
+          {caryear.map((item, index) => (
+            <option key={index} value={item.year}>
+              {item.year}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="type">Type</label>
+        <select 
+          id="type" 
+          name="type" 
+          className="select-inputs" 
+          value={formData.type} 
+          onChange={handleInputChange} 
+          required>
+          <option value="" disabled>Select Type</option> {/* Placeholder */}
+          {cartype.map((item, index) => (
+            <option key={index} value={item.type}>
+              {item.type}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="color">Color</label>
+        <input type="color" id="color" name="color" value={formData.color} onChange={handleInputChange} required />
+      </div>
+    </div>
+
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="licensePlate">License Plate Number</label>
+        <input
+          type="text"
+          id="licensePlate"
+          name="licensePlate"
+          className="plate-input"
+          value={formData.licensePlate}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+    
+      <div className="form-group">
         <label htmlFor="country">Country</label>
-                  <select 
-                    id="country" 
-                    name="Country"
-                    className="select-inputs"
-                    onChange={(e) => {
-                      setSelectedCountry(e.target.value); 
-                      handleCountryChange(e);     
-                    }}
-                    required
-                    value={formData.country}
-                  >
-                    {country.map((items, index) => (
-                      <option key={index} value={items.name}>
-                        {items.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-          <div className="form-group">
-            <label htmlFor="country">City</label>
-            <select 
-              id="city" 
-              name="City"
-              className="select-inputs"
-              required
-              value={formData.city}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              disabled={!selectedCountry}
-            >
-              {selectedCountry && citiesByCountry[selectedCountry].map((city, index) => (
-                <option key={index} value={city}>
-                  {city}
-                    </option>
-                    ))}
-              </select>
-          </div>
-        <div className="form-group">
-          <label htmlFor="availabilityDays">Days</label>
-          <select
-            id="availabilityDays"
-            name="availabilityDays"
-            className="select-inputs"
-            value={formData.availabilityDays}
-            onChange={handleInputChange}
-            required
-          >
-            {availDays.map((item, index) => (
-              <option key={index} value={item.day}>
-                {item.day}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="availabilityHours">Hours</label>
-          <select
-            id="availabilityHours"
-            name="availabilityHours"
-            className="select-inputs"
-            value={formData.availabilityHours}
-            onChange={handleInputChange}
-            required
-          >
-            {availHours.map((item, index) => (
-              <option key={index} value={item.hour}>
-                {item.hour}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select 
+          id="country" 
+          name="Country"
+          className="select-inputs"
+          onChange={(e) => {
+            setSelectedCountry(e.target.value); 
+            handleCountryChange(e);     
+          }}
+          required
+          value={formData.country}
+        >
+          <option value="" disabled>Select Country</option> {/* Placeholder */}
+          {country.map((items, index) => (
+            <option key={index} value={items.name}>
+              {items.name}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <h3 className="features-heading">Additional Details</h3>
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="seats">Seats</label>
-          <select id="seats" name="seats" className="select-inputs" value={formData.seats} onChange={handleInputChange} required>
-            {carSeats.map((item, index) => (
-              <option key={index} value={item.seats}>
-                {item.seats}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="fuelType">Fuel Type</label>
-          <select
-            id="fuelType"
-            name="fuelType"
-            className="select-inputs"
-            value={formData.fuelType}
-            onChange={handleInputChange}
-            required
-          >
-            {fuelType.map((item, index) => (
-              <option key={index} value={item.type}>
-                {item.type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="transmission">Transmission</label>
-          <select
-            id="transmission"
-            name="transmission"
-            className="select-inputs"
-            value={formData.transmission}
-            onChange={handleInputChange}
-            required
-          >
-            {transmissionType.map((item, index) => (
-              <option key={index} value={item.type}>
-                {item.type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="features">More Features</label>
-          <Select
-            className="select-inputs"
-            id="moreFeatures"
-            options={moreFeatures}
-            isMulti
-            value={selectedFeatures}
-            onChange={handleSelectChange}
-            closeMenuOnSelect={false}
-            placeholder="Select features"
-          />
-        </div>
+      <div className="form-group">
+        <label htmlFor="city">City</label>
+        <select 
+          id="city" 
+          name="city"
+          className="select-inputs"
+          required
+          value={selectedCity}
+          onChange={(e) => {
+            setSelectedCity(e.target.value);
+            setFormData((prevState) => ({
+              ...prevState,
+              city: e.target.value, // Update formData with selected city
+            }));
+          }}
+          disabled={!selectedCountry}
+        >
+          <option value="" disabled>Select City</option> {/* Placeholder */}
+          {selectedCountry && citiesByCountry[selectedCountry].map((city, index) => (
+            <option key={index} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
       </div>
-    </>
-  );
+
+      <div className="form-group">
+        <label htmlFor="availabilityDays">Days</label>
+        <select
+          id="availabilityDays"
+          name="availabilityDays"
+          className="select-inputs"
+          value={formData.availabilityDays}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>Select Days</option> {/* Placeholder */}
+          {availDays.map((item, index) => (
+            <option key={index} value={item.day}>
+              {item.day}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="availabilityHours">Hours</label>
+        <select
+          id="availabilityHours"
+          name="availabilityHours"
+          className="select-inputs"
+          value={formData.availabilityHours}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>Select Hours</option> {/* Placeholder */}
+          {availHours.map((item, index) => (
+            <option key={index} value={item.hour}>
+              {item.hour}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <h3 className="features-heading">Additional Details</h3>
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="seats">Seats</label>
+        <select id="seats" name="seats" className="select-inputs" value={formData.seats} onChange={handleInputChange} required>
+          <option value="" disabled>Select Seats</option> {/* Placeholder */}
+          {carSeats.map((item, index) => (
+            <option key={index} value={item.seats}>
+              {item.seats}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="fuelType">Fuel Type</label>
+        <select
+          id="fuelType"
+          name="fuelType"
+          className="select-inputs"
+          value={formData.fuelType}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>Select Fuel Type</option> {/* Placeholder */}
+          {fuelType.map((item, index) => (
+            <option key={index} value={item.type}>
+              {item.type}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="transmission">Transmission</label>
+        <select
+          id="transmission"
+          name="transmission"
+          className="select-inputs"
+          value={formData.transmission}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>Select Transmission</option> {/* Placeholder */}
+          {transmissionType.map((item, index) => (
+            <option key={index} value={item.type}>
+              {item.type}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="features">More Features</label>
+        <Select
+          className="select-inputs"
+          id="moreFeatures"
+          options={moreFeatures}
+          isMulti
+          value={selectedFeatures}
+          onChange={handleSelectChange}
+          closeMenuOnSelect={false}
+          placeholder="Select Features"
+        />
+      </div>
+    </div>
+  </>
+);
 
   const renderCarPhotos = () => (
     <>

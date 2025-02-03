@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import addCarRoute from './routes/add-car.js'; 
-import profileRoute from './routes/profile.js'; 
-import searchRoute from './routes/search-route.js'; 
+// import profileRoute from './routes/profile.js'; 
+// import searchRoute from './routes/search-route.js'; 
 
 // Load environment variables
 dotenv.config();
@@ -21,10 +21,10 @@ app.use(express.json());
 app.use('/api', addCarRoute);
 
 // Use the profile route
-app.use('/api', profileRoute);
+// app.use('/api', profileRoute);
 
 // Use the search route
-app.use('/api', searchRoute);
+// app.use('/api', searchRoute);
 
 // Connect to MongoDB
 mongoose
