@@ -1,34 +1,30 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import "../styles/Profile.css";
-import { database, storage } from '../firebaseConfig';
-import { doc, setDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
 
 
 const Profile = () => {
 
 // State hooks
-const [Image, setImage] = useState(null);
-const [FullName, setFullName] = useState('');
-const [ProfileName, setProfileName] = useState('');
-const [Email, setEmail] = useState('');
-const [Phone, setPhone] = useState('');
-const [DOB, setDOB] = useState('');
-const [Gender, setGender] = useState('');
-const [Language, setLanguage] = useState('');
-const [CarType, setCarType] = useState('');
-const [Country, setCountry] = useState('');
-const [City, setCity] = useState('');
-const [idtype, setIdtype] = useState('');
-const [idnumber, setIdnumber] = useState('');
-const [license, setLicense] = useState('');
-const [licenseED, setLicenseED] = useState('');
-const [About, setAbout] = useState('');
+const [FullName, setFullName] = useState("");
+const [ProfileName, setProfileName] = useState("");
+const [Email, setEmail] = useState("");
+const [Phone, setPhone] = useState("");
+const [DOB, setDOB] = useState("");
+const [Gender, setGender] = useState("");
+const [Language, setLanguage] = useState("");
+const [CarType, setCarType] = useState("");
+const [idtype, setIdtype] = useState("");
+const [idnumber, setIdnumber] = useState("");
+const [license, setLicense] = useState("");
+const [licenseED, setLicenseED] = useState("");
+const [About, setAbout] = useState("");
+const [file, setFile] = useState(null); 
+const [selectedCountry, setSelectedCountry] = useState("");
+const [selectedCity, setSelectedCity] = useState("");
+const navigate = useNavigate(); 
 
-const [file, setFile] = useState(null);
-const navigate = useNavigate();
 
 
     //Gender
@@ -556,101 +552,77 @@ const navigate = useNavigate();
         {option: "National Identification"}
     ]
 
-    const [selectedCountry, setSelectedCountry] = useState("");
-    const [selectedCity, setSelectedCity] = useState("");
-
     const handleCountryChange = (e) => {
-        setSelectedCountry(e.target.value);
-        setSelectedCity(""); 
-    };
-
-    const handleimagechange = (event)=>{
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                document.getElementById('profile-photo').style.backgroundImage = `url(${reader.result})`;
-                };
-                reader.readAsDataURL(file);
-            }
-    }
-
-
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-  
-      // Store profile picture in Firebase Storage
-      let profilePicUrl = "";
-  
-      if (file) {
-          try {
-              const storageRef = ref(storage, "profile_pictures/" + file.name);
-              const uploadTask = uploadBytesResumable(storageRef, file);
-  
-              // Wait for the upload to finish and get the download URL
-              await new Promise((resolve, reject) => {
-                  uploadTask.on(
-                      "state_changed",
-                      null, // You can use this to show progress if you want
-                      (error) => reject(error), // Reject if there's an error
-                      async () => {
-                          try {
-                              // Get the download URL once the upload is complete
-                              profilePicUrl = await getDownloadURL(uploadTask.snapshot.ref);
-                              resolve(); // Resolve the promise after getting the URL
-                          } catch (error) {
-                              reject(error);
-                          }
-                      }
-                  );
-              });
-          } catch (error) {
-              console.error("Error uploading file:", error);
-              return; // Exit early if file upload fails
-          }
-      }
-  
-      // Save profile data to Firestore (including profile picture URL if available)
-      saveProfileData(profilePicUrl);
-
-      navigate("/");
+      setSelectedCountry(e.target.value);
+      setSelectedCity(""); 
   };
   
-  // Save profile data to Firestore
-  const saveProfileData = async (profilePicUrl) => {
-      try {
-          const profileData = {
-              Image,
-              FullName,
-              ProfileName,
-              Email,
-              Phone,
-              DOB,
-              Gender,
-              Language,
-              CarType,
-              Country,
-              City,
-              idtype,
-              idnumber,
-              license,
-              licenseED,
-              About,
-              profilePicUrl
+  const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+          setFile(file); // update the state with the selected file
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              document.getElementById('profile-photo').style.backgroundImage = `url(${reader.result})`;
           };
-  
-          // Save the data to Firestore in the 'profiles' collection
-          await setDoc(doc(database, "profiles", ProfileName), profileData);
-          alert("Profile saved successfully!");
-      } catch (error) {
-          console.error("Error saving profile data:", error);
+          reader.readAsDataURL(file);
       }
+  };
+  
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      
+      // const formData = new FormData();
+      
+      // formData.append('FullName', FullName);
+      // formData.append('ProfileName', ProfileName);
+      // formData.append('Email', Email);
+      // formData.append('Phone', Phone);
+      // formData.append('DOB', DOB);
+      // formData.append('Gender', Gender);
+      // formData.append('Language', Language);
+      // formData.append('CarType', CarType);
+      // formData.append('Country', selectedCountry);
+      // formData.append('City', selectedCity);
+      // formData.append('idtype', idtype);
+      // formData.append('idnumber', idnumber);
+      // formData.append('license', license);
+      // formData.append('licenseED', licenseED);
+      // formData.append('About', About);
+    
+      // if (file) {
+      //     formData.append('file', file);
+      // }
+  
+      // const profileInput = document.getElementById('profilePicture');
+      // const idInput = document.getElementById('idPicture');
+      // const licenseInput = document.getElementById('licensePicture');
+  
+      // if (profileInput.files[0]) formData.append('profilePicture', profileInput.files[0]);
+      // if (idInput.files[0]) formData.append('idPicture', idInput.files[0]);
+      // if (licenseInput.files[0]) formData.append('licensePicture', licenseInput.files[0]);
+    
+      // try {
+      //     const response = await fetch('http://localhost:5000/api/profile', {
+      //         method: 'POST',
+      //         body: formData,
+      //     });
+  
+      //     if (response.ok) {
+      //         alert("Profile saved successfully!");
+      //         navigate("/");
+      //     } else {
+      //         alert("Failed to save profile.");
+      //     }
+      // } catch (error) {
+      //     console.error("Error saving profile data:", error);
+      // }
   };
     
   return (
     <div className="profile-container">
       <Header />
-      <form className="profile-form" onSubmit={handleSubmit}>
+      <form className="profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
         {/* Profile Picture Section */}
             <div className="profile-section">
             <div className="profile-picture">
@@ -658,25 +630,26 @@ const navigate = useNavigate();
                 <div className="upload-buttons">
                 <button 
                     className="Upload-picture" 
-                    onClick={() => document.getElementById('file-input').click()}
+                    onClick={() => document.getElementById('profilePicture').click()}
                 >
                     Upload Picture
                 </button>
                 <button 
                     className="Delete-picture"
                     onClick={() => {
-                    document.getElementById('file-input').value = '';  
+                    document.getElementById('profile-picture-input').value = '';  
                     document.getElementById('profile-photo').style.backgroundImage = '';  
+                    setFile(null);
                     }}
                 >
                     Delete Picture
                 </button>
                 <input 
                     type="file" 
-                    id="file-input" 
+                    id="profilePicture" 
                     accept="image/*" 
                     style={{ display: 'none' }}
-                    onChange={handleimagechange}
+                    onChange={handleImageChange}
                 />
                 </div>
             </div>
@@ -804,11 +777,11 @@ const navigate = useNavigate();
                   <select 
                     className="profile-input-info"
                     onChange={(e) => {
-                      setCountry(e.target.value); 
+                      setSelectedCountry(e.target.value); 
                       handleCountryChange(e);     
                     }}
                     required
-                    value={Country}
+                    value={selectedCountry}
                   >
                     {country.map((items, index) => (
                       <option key={index} value={items.name}>
@@ -867,16 +840,20 @@ const navigate = useNavigate();
                 </div>
                 <div className="profile-inputs">
                   <label className="profile-labels">ID Picture</label><br />
-                  <button className="Upload-picture" onClick={() => document.getElementById('file-input').click()} required>
+                  <button 
+                    type="button"  // Prevent form submission
+                    className="Upload-picture" 
+                    onClick={() => document.getElementById('idPicture').click()}
+                  >
                     Upload
-                    <input 
-                    type="file" 
-                    id="file-input" 
-                    accept="image/*" 
-                    style={{ display: 'none' }}
-                    onChange={handleimagechange}
-                />
                   </button>
+                  <input 
+                    type="file" 
+                    id="idPicture" 
+                    accept="image/*" 
+                    style={{ display: 'none' }} 
+                    onChange={handleImageChange}
+                  />
                 </div>
               </div>
             </div>
@@ -904,16 +881,20 @@ const navigate = useNavigate();
                 </div>
                 <div className="profile-inputs">
                   <label className="profile-labels">License Picture</label><br />
-                  <button className="Upload-picture" onClick={() => document.getElementById('file-input').click()}>
+                  <button 
+                    type="button"  // Prevent form submission
+                    className="Upload-picture" 
+                    onClick={() => document.getElementById('licensePicture').click()}
+                  >
                     Upload
-                    <input 
-                    type="file" 
-                    id="file-input" 
-                    accept="image/*" 
-                    style={{ display: 'none' }}
-                    onChange={handleimagechange}
-                />
                   </button>
+                  <input 
+                    type="file" 
+                    id="licensePicture" 
+                    accept="image/*" 
+                    style={{ display: 'none' }} 
+                    onChange={handleImageChange}
+                  />
                 </div>
               </div>
             </div>
@@ -931,7 +912,7 @@ const navigate = useNavigate();
 
             {/* Submit Buttons */}
             <div className="submit-buttons">
-              <button type="submit" className="Submit-button">Save Profile</button>
+              <button type="submit" className="Submit-button" >Save Profile</button>
               <button type="button" className="Cancel-button">Cancel</button>
             </div>
       </form>
