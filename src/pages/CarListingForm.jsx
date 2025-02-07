@@ -622,6 +622,13 @@ const [formData, setFormData] = useState({
   fuelType: '',
   transmission: '',
   features: [],
+  dailyRate: '',
+  weeklyRate: '',
+  monthlyRate: '',
+  securityDeposit: '',
+  extraMileageFee: '',
+  lateReturnFee: '',
+  cleaningFee: '',
   carPhotos: {
     frontView: null,
     rearView: null,
@@ -680,12 +687,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
 
-  if (step < 3) {
+  if (step < 4) {
     setStep(step + 1);
     setLoading(false);
   } else {
     try {
-      // Ensure formData includes the correct values before sending
+
       const formDataToStore = {
         ...formData,
         country: selectedCountry || formData.country,
@@ -697,17 +704,24 @@ const handleSubmit = async (e) => {
       const formDataToSend = new FormData();
       formDataToSend.append('model', formDataToStore.model);
       formDataToSend.append('year', formDataToStore.year);
-      formDataToSend.append('type', formDataToStore.type);  
+      formDataToSend.append('type', formDataToStore.type);
       formDataToSend.append('color', formDataToStore.color);
-      formDataToSend.append('licensePlate', formDataToStore.licensePlate); 
-      formDataToSend.append('country', formDataToStore.country); 
-      formDataToSend.append('city', formDataToStore.city); 
+      formDataToSend.append('licensePlate', formDataToStore.licensePlate);
+      formDataToSend.append('country', formDataToStore.country);
+      formDataToSend.append('city', formDataToStore.city);
       formDataToSend.append('availabilityDays', formDataToStore.availabilityDays);
       formDataToSend.append('availabilityHours', formDataToStore.availabilityHours);
       formDataToSend.append('seats', formDataToStore.seats);
       formDataToSend.append('fuelType', formDataToStore.fuelType);
       formDataToSend.append('transmission', formDataToStore.transmission);
       formDataToSend.append('features', formDataToStore.features.join(','));
+      formDataToSend.append('dailyRate', formDataToStore.dailyRate);
+      formDataToSend.append('weeklyRate', formDataToStore.weeklyRate);
+      formDataToSend.append('monthlyRate', formDataToStore.monthlyRate);
+      formDataToSend.append('securityDeposit', formDataToStore.securityDeposit);
+      formDataToSend.append('extraMileageFee', formDataToStore.extraMileageFee);
+      formDataToSend.append('lateReturnFee', formDataToStore.lateReturnFee);
+      formDataToSend.append('cleaningFee', formDataToStore.cleaningFee);
       formDataToSend.append('carDescription', formDataToStore.carDescription);
       formDataToSend.append('renterConditions', formDataToStore.renterConditions);
       formDataToSend.append('goals', formDataToStore.goals);
@@ -974,6 +988,108 @@ const renderCarInfo = () => (
   </>
 );
 
+const renderPricingInfo = () => (
+  <>
+    <h2 className="sub-title">Pricing Information</h2>
+    <p className="description">Set your car’s rental price and additional charges.</p>
+
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="dailyRate">Daily Rate ($)</label>
+        <input
+          type="number"
+          id="dailyRate"
+          name="dailyRate"
+          className="plate-input"
+          value={formData.dailyRate}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="weeklyRate">Weekly Rate ($)</label>
+        <input
+          type="number"
+          id="weeklyRate"
+          name="weeklyRate"
+          className="plate-input"
+          value={formData.weeklyRate}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="monthlyRate">Monthly Rate ($)</label>
+        <input
+          type="number"
+          id="monthlyRate"
+          name="monthlyRate"
+          className="plate-input"
+          value={formData.monthlyRate}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="securityDeposit">Security Deposit ($)</label>
+        <input
+          type="number"
+          id="securityDeposit"
+          name="securityDeposit"
+          className="plate-input"
+          value={formData.securityDeposit}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+    </div>
+
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="extraMileageFee">Extra Mileage Fee ($/mile)</label>
+        <input
+          type="number"
+          id="extraMileageFee"
+          name="extraMileageFee"
+          className="plate-input"
+          value={formData.extraMileageFee}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="lateReturnFee">Late Return Fee ($/hour)</label>
+        <input
+          type="number"
+          id="lateReturnFee"
+          name="lateReturnFee"
+          className="plate-input"
+          value={formData.lateReturnFee}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="cleaningFee">Cleaning Fee ($)</label>
+        <input
+          type="number"
+          id="cleaningFee"
+          name="cleaningFee"
+          className="plate-input"
+          value={formData.cleaningFee}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+    </div>
+  </>
+);
+
   const renderCarPhotos = () => (
     <>
       <h2 className="sub-title">Upload Car Photos</h2>
@@ -1064,8 +1180,9 @@ const renderCarInfo = () => (
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
           {step === 1 && renderCarInfo()}
-          {step === 2 && renderCarPhotos()}
-          {step === 3 && renderGoals()}
+          {step === 2 && renderPricingInfo()}
+          {step === 3 && renderCarPhotos()}
+          {step === 4 && renderGoals()}
 
           <div className="form-buttons">
             {step > 1 && (
@@ -1074,7 +1191,7 @@ const renderCarInfo = () => (
               </button>
             )}
             <button type="submit" className="next-btn" disabled={loading}>
-              {loading ? 'Submitting...' : step === 3 ? 'Submit' : 'Next'}
+              {loading ? 'Submitting...' : step === 4 ? 'Submit' : 'Next'}
             </button>
           </div>
         </form>

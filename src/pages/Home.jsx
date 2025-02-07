@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import '../styles/Home.css';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Reviews from '../components/ReviewCard';
@@ -8,24 +9,26 @@ import CarImage from '../assets/images/Share.webp'
 import ReviewData from '../components/ReviewData'
 import FeedbackButton from '../components/FeedbackButton';
 
-
-
 const Home = () => {
 
   const reviewcard = ReviewData.map(items => {
-    return(
-    <Reviews 
-    key = {items.id}
-    items = {items}
-    />
-  );
+    return (
+      <Reviews 
+        key={items.id} 
+        items={items} 
+      />
+    );
   });
 
-  const [activeSection, setActiveSection] = useState('riders'); // Set 'riders' as the default
+  const [activeSection, setActiveSection] = useState('riders'); 
 
-  const showRiders = () => setActiveSection('riders');
-  const showHosts = () => setActiveSection('hosts');
-
+  const showRiders = () => {
+    setActiveSection('riders');
+  };
+  
+  const showHosts = () => {
+    setActiveSection('hosts');
+  };
 
   return (
     <div className="home">
@@ -37,11 +40,13 @@ const Home = () => {
       <p className="content-heading">Share Your Car With FL<span style={{ color: 'gold' }}>ii</span>TS</p>
       <div className="content-section">
         <div className="content-image">
-          <img src= {CarImage} alt="Share your car with FLiiTS" />
+          <img src={CarImage} alt="Share your car with FLiiTS" />
         </div>
         <div className="content-text">
           <div className="content-subtext">
-            <p className="section-subtext">Unlock the potential of your vehicle by joining the <b>FL<span style={{ color: 'gold' }}>ii</span>TS</b> community. Earn extra income by renting out your car when you're not using it. It's simple, safe, and rewarding.</p><br />
+            <p className="section-subtext">
+              Unlock the potential of your vehicle by joining the <b>FL<span style={{ color: 'gold' }}>ii</span>TS</b> community. Earn extra income by renting out your car when you're not using it. It's simple, safe, and rewarding.
+            </p><br />
             <Link to='/car-listing' className="share-car-button">Share Your Car</Link>
           </div>
         </div>
@@ -100,8 +105,8 @@ const Home = () => {
       <br />
       <h1 className='Review-Heading'>Recent Feedback</h1>
       <section className='Review-section'>
-      {reviewcard }
-    </section>
+        {reviewcard }
+      </section>
       <br />
     </div>
   );

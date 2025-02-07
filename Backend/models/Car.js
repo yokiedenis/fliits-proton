@@ -14,6 +14,13 @@ const carSchema = new Schema({
   fuelType: { type: String, required: true },
   transmission: { type: String, required: true },
   features: [String],
+  dailyRate: { type: Number, required: true, default: 0 },
+  weeklyRate: { type: Number, required: true, default: 0 },
+  monthlyRate: { type: Number, required: true, default: 0 },
+  securityDeposit: { type: Number, required: true, default: 0 },
+  extraMileageFee: { type: Number, required: true, default: 0 },
+  lateReturnFee: { type: Number, required: true, default: 0 },
+  cleaningFee: { type: Number, required: true, default: 0 },
   carPhotos: {
     frontView: String,
     rearView: String,
@@ -28,7 +35,6 @@ const carSchema = new Schema({
   additionalInfo: String,
 });
 
-// Model creation
 const Car = _model('Car', carSchema);
 
 export default Car;
