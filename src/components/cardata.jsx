@@ -5,7 +5,7 @@ const cardata = [
         name: 'BMW 2018',
         trips: '12',
         rating: '4.5',
-        stars: [4],
+        stars: [3],
         location: 'Kampala',
         price: '85'
     },
@@ -15,7 +15,7 @@ const cardata = [
         name: 'Mercedes Benz GLE 2018',
         trips: '18',
         rating: '5.0',
-        stars: [5],
+        stars: [3],
         location: 'Nairobi',
         price: '100'
     },{
@@ -24,7 +24,7 @@ const cardata = [
         name: 'Mercedes Benz GLE 2018',
         trips: '18',
         rating: '5.0',
-        stars: [5],
+        stars: [3],
         location: 'Nairobi',
         price: '100'
     },
@@ -34,7 +34,7 @@ const cardata = [
         name: 'Mercedes Benz GLE 2018',
         trips: '18',
         rating: '5.0',
-        stars: [5],
+        stars: [3],
         location: 'Nairobi',
         price: '100'
     }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import BookingHeader from '../components/BookingHeader';
 import '../styles/CarListingForm.css';
@@ -608,6 +608,10 @@ const [loading, setLoading] = useState(false);
 const [selectedFeatures, setSelectedFeatures] = useState([]);
 const [step, setStep] = useState(1);
 
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
 const [formData, setFormData] = useState({
   model: '',
   year: '',
@@ -773,7 +777,7 @@ const renderCarInfo = () => (
       <div className="form-group">
         <label htmlFor="model">Model</label>
         <select id="model" name="model" className="select-inputs" value={formData.model} onChange={handleInputChange} required>
-          <option value="" disabled>Select Model</option> {/* Placeholder */}
+          <option value="" disabled>Select Model</option> 
           {carmodel.map((item, index) => (
             <option key={index} value={item.model}>
               {item.model}

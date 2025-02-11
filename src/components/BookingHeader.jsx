@@ -32,28 +32,6 @@ const BookingHeader = () => {
     navigate('/AfterSearch', { state: { searchParams } });
   };
 
-
-  // const handleClick = () => {
-  //   setNavMenuOpen((prev) => !prev);
-  // };
-
-  // const handleOutsideClick = (e) => {
-  //   if (navMenuOpen && !e.target.closest('.nav-menu') && !e.target.closest('#nav-menu-icon')) {
-  //     setNavMenuOpen(false);
-  //   }
-  // };
-
-  // const handleLinkClick = () => {
-  //   setNavMenuOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleOutsideClick);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleOutsideClick);
-  //   };
-  // }, [navMenuOpen]);
-
   return (
     <div className="headercontainer">
       <div className="logo">
@@ -166,15 +144,7 @@ const BookingHeader = () => {
             </div>
           )}
         </li>
-        {/* <li onClick={handleClick}>
-          <FaBars className="header-icon" id="nav-menu-icon" />
-        </li> */}
       </ul>
-      {/* {navMenuOpen && (
-        <div className={`nav-menu ${navMenuOpen ? 'nav-menu-active' : ''}`}>
-          <NavMenu onClose={() => setNavMenuOpen(false)} onLinkClick={handleLinkClick} />
-        </div>
-      )} */}
     </div>
   );
 };

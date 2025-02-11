@@ -17,15 +17,15 @@ function LandingPage() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
       if (user) {
         navigate('/Carshare');
       }
     });
-
     return () => unsubscribe();
-  }, [navigate]);
+  }, [navigate],[]);
 
 
   return (
@@ -54,7 +54,7 @@ function LandingPage() {
             it easy and secure to turn your car into a source of extra income.
           </p>
           <p className="feature-cta">Start sharing today and watch your earnings grow!</p>
-          <button className="button-primary">Get Started</button>
+          <Link to={isLoggedIn ? "/car-listing" : "/Login"}className="button-primary">Get Started</Link> 
         </div>
       </section>
 

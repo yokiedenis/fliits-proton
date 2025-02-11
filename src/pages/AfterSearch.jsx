@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import BookingHeader from '../components/BookingHeader';
 import cardata from '../components/cardata';
@@ -8,6 +8,11 @@ import CarCard from '../components/CarCard';
 function AfterSearch() {
     const location = useLocation();
     const { searchParams } = location.state || { searchParams: {} };
+
+    useEffect(() => {
+    window.scrollTo(0, 0);
+    }, []);
+
 
     const carCards = cardata.map(items => {
         return (

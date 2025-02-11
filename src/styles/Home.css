@@ -56,7 +56,7 @@
 
 
 /* How it works section */
-.works-section {
+.works-sections {
     background-color: #f5f5f5;
 }
 
@@ -67,7 +67,7 @@
     text-align: center;
 }
 
-.how-we-work {
+.how-we-work-section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -76,47 +76,48 @@
     margin-top: -50px;
 }
 
-.hosts-list, .rider-list { 
+.hosts-content, .rider-content { 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    padding: 20px;
     margin: 5px;
     background-color: white;
     border-radius: 20px;
     font-size: 18px;
     text-align: left;
-    height: 35vh;
+    height: auto;
 }
 
-.works-content {
+.works-contents {
     display: none;
     margin: 0 auto;
     height: auto;
 }
 
-.works-content.active {
-    display: block;
+.works-contents.active {
+    display: block !important;
     margin: 0 auto;
     margin-top: 30px;
     padding: 0px;
    
 }
 
-.fliits-options-buttons {
+.fliits-options-button {
     text-align: center;
     display: flex;
     justify-content: space-between;
     margin: 0px;
 }
 
-.fliits-work-buttons.active {
+.fliits-work-button.active {
     border-bottom: 5px solid #FFD700;
 }
 
-.fliits-work-buttons {
+.fliits-work-button {
     background-color: transparent;
     border: none;
     padding: 0 200px 0;
     margin: 5px;
+    z-index: 10;
 }
 .Review-section{
     background-color: #f5f5f5;
@@ -137,12 +138,12 @@
 }
 
 .Review-section::-webkit-scrollbar-thumb {
-    background-color: black; /* Color of the scrollbar thumb */
-    border-radius: 4px; /* Rounded corners on the scrollbar thumb */
+    background-color: black; 
+    border-radius: 4px; 
 }
 
 .Review-section::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Background of the scrollbar track */
+    background-color: #f1f1f1; 
 }
 /*Responsiveness for home page*/
 @media (max-width: 800px){
@@ -172,24 +173,24 @@
     }
 
     /* Responsiveness for the how we work section*/
-    .fliits-work-buttons{
+    .fliits-work-button{
         padding: 0 50px 0;
     }
-    .fliits-options-buttons{
+    .fliits-options-button{
         margin: 5px;
     }
     .client-headings{
-        font-size: 15px;
+        font-size: 24px;
     }
     .how-we-work{
         flex-direction: column;
     }
-    .hosts-list,
-    .rider-list {
+    .hosts-content,
+    .rider-content {
         flex: none;
         max-width: 100%;
         height: auto;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     /*Responsiveness for book your style section*/
@@ -203,37 +204,76 @@
     .label1{
         font-size: 14px;
     }
+    .share-car-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
 
-    /* Responsiveness for the review section
-    .review-card{
-        width: 100%;
-        padding: 1px;
-        margin: 3px;
-    }
-    .review-image  img{
-        width: 70px;
-        height: 70px;
-    }
-    .review-message{
-        font-size: 13px;
-        margin-top: -30px;
-    }
-    .reviewer-name{
-        margin: 0 auto;
-        padding: 5px;
-    }
-    .profile-name{
+
+/* Responsiveness for foldable phones */
+@media (max-width: 400px) {
+
+    /* Adjust heading sizes */
+    .content-heading {
         font-size: 20px;
-        margin-top: 3px;
+        margin-top: 20px;
+        padding-top: 5px;
     }
-    .profile-type{
-        font-size: 12px;
+
+    /* Content section adjustments */
+    .content-section {
+        flex-direction: column;
+        align-items: center;
     }
-    .review-ratings{
+
+    .content-image,
+    .content-text {
+        width: 100%;
         text-align: center;
     }
-    .rating-star{
-        width: 7%;
-        margin-top: -10px;
-    } */
+
+    .content-image img {
+        max-width: 90%;
+        height: auto;
+    }
+
+    .content-subtext {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    /* How it works section */
+    .fliits-work-button {
+        padding: 5px 30px;
+        font-size: 14px;
+    }
+
+    .client-headings {
+        font-size: 18px;
+    }
+
+    .how-we-work-section {
+        flex-direction: column;
+    }
+
+    .hosts-content,
+    .rider-content {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* Book your style section */
+    .card-container {
+        width: 80%;
+    }
+
+    .label1 {
+        font-size: 12px;
+    }
+    .share-car-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
 }

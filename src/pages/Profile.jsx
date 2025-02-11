@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import{ useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/Profile.css";
 import { useNavigate } from 'react-router-dom';
@@ -552,6 +552,10 @@ const navigate = useNavigate();
         {option: "National Identification"}
     ]
 
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    }, []);
+
     const handleCountryChange = (e) => {
       setSelectedCountry(e.target.value);
       setSelectedCity(""); 
@@ -637,7 +641,7 @@ const navigate = useNavigate();
                 <button 
                     className="Delete-picture"
                     onClick={() => {
-                    document.getElementById('profile-picture-input').value = '';  
+                    document.getElementById('profilePicture').value = '';  
                     document.getElementById('profile-photo').style.backgroundImage = '';  
                     setFile(null);
                     }}
@@ -729,6 +733,7 @@ const navigate = useNavigate();
                     value={Gender}
                     onChange={(e) => setGender(e.target.value)}
                   >
+                    <option value="" disabled>Select Gender</option>
                     {gender.map((items, index) => (
                       <option key={index} value={items.option}>
                         {items.option}
@@ -744,6 +749,7 @@ const navigate = useNavigate();
                     value={Language}
                     onChange={(e) => setLanguage(e.target.value)}
                   >
+                    <option value="" disabled>Select Language</option>
                     {languages.map((items, index) => (
                       <option key={index} value={items.option}>
                         {items.option}
@@ -765,6 +771,7 @@ const navigate = useNavigate();
                     value={CarType}
                     onChange={(e) => setCarType(e.target.value)}
                   >
+                    <option value="" disabled>Select Type</option>
                     {cartype.map((items, index) => (
                       <option key={index} value={items.type}>
                         {items.type}
@@ -783,6 +790,7 @@ const navigate = useNavigate();
                     required
                     value={selectedCountry}
                   >
+                    <option value="" disabled>Select Country</option>
                     {country.map((items, index) => (
                       <option key={index} value={items.name}>
                         {items.name}
@@ -800,6 +808,7 @@ const navigate = useNavigate();
                     onChange={(e) => setSelectedCity(e.target.value)}
                     disabled={!selectedCountry}
                   >
+                    <option value="" disabled>Select City</option>
                     {selectedCountry && citiesByCountry[selectedCountry].map((city, index) => (
                       <option key={index} value={city}>
                         {city}
@@ -821,6 +830,7 @@ const navigate = useNavigate();
                     value={idtype}
                     onChange={(e) => setIdtype(e.target.value)}
                   >
+                    <option value="" disabled>Select ID Type</option>
                     {IDtype.map((items, index) => (
                       <option key={index} value={items.option}>
                         {items.option}

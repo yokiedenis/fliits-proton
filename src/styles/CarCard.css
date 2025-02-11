@@ -1,12 +1,13 @@
 .Card-container{
-    width: 95%;
+    width: 100%;
     display: flex;
     background-color: #d9d9d9;
     margin: 10px;
     border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .car-info{
-    margin: 10px 0 0 10px;
+    margin: 20px 0 0 20px;
 }
 .car-img{
     width: 40%;
@@ -48,37 +49,79 @@
 }
 @media(max-width: 800px){
     .car-info{
-        margin: 1px;
+        margin: 5px;
     }
     .car-img{
         width: 50%;
-        margin: 8px;
+        margin: 0;
+        border-radius: 10px 0 0 10px;
     }
     .car-name{
         padding: 2px;
-        font-size: 14px;
+        font-size: 18px;
         overflow: hidden;
         white-space: wrap;      
     }
     .car-rating{
-        font-size: 12px;
+        font-size: 14px;
         margin-top: 0;
         padding: 2px;
     }
     .car-star{
-        display: none;
+        padding: 5px;
     }
     .car-trip{
-        font-size: 16px;
+        padding: 5px;
+        font-size: 18px;
     }
     .car-location p{
-        font-size: 14px;
+        font-size: 18px;
+        margin-top: 0;
+        padding: 5px;
+    }
+    .car-price{
+        font-size: 24px;
+        padding: 2px;
+        margin: 0 0 0 100px;
+    }
+}
+
+@media(max-width: 400px){
+    .car-info{
+        margin: 5px;
+    }
+    .car-img{
+        width: 50%;
+        margin: 0;
+        border-radius: 10px 0 0 10px;
+    }
+    .car-name{
+        padding: 2px;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: wrap;      
+    }
+    .car-rating{
+        font-size: 10px;
         margin-top: 0;
         padding: 2px;
     }
-    .car-price{
-        font-size: 14px;
+    .car-star{
         padding: 2px;
-        margin: 0 0 0 40px;
+        font-size: 12px;
+    }
+    .car-trip{
+        padding: 2px;
+        font-size: 14px;
+    }
+    .car-location p{
+        font-size: 16px;
+        margin-top: 0;
+        padding: 5px;
+    }
+    .car-price{
+        font-size: 18px;
+        padding: 2px;
+        margin: 0 0 0 100px;
     }
 }
