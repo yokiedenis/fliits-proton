@@ -62,12 +62,39 @@
     }
 
     .cards {
-        width: 85%; 
+        width: 80%; 
         margin: 10px auto; 
     }
 
     .cards img {
         height: 20vh; 
+    }
+
+    .label1 {
+        font-size: 16px; 
+        padding-bottom: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    
+    .card-container {
+        padding: 5px;
+        width: 50%; 
+    }
+
+    .cars {
+        justify-content: flex-start; 
+        overflow-x: scroll;
+    }
+
+    .cards {
+        width: 80%; 
+        margin: 10px auto; 
+    }
+
+    .cards img {
+        height: 15vh; 
     }
 
     .label1 {
