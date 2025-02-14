@@ -1,8 +1,31 @@
-import React, {useState} from "react";
+import{ useState, useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/Profile.css";
+import { useNavigate } from 'react-router-dom';
+
 
 const Profile = () => {
+
+// State hooks
+const [FullName, setFullName] = useState("");
+const [ProfileName, setProfileName] = useState("");
+const [Email, setEmail] = useState("");
+const [Phone, setPhone] = useState("");
+const [DOB, setDOB] = useState("");
+const [Gender, setGender] = useState("");
+const [Language, setLanguage] = useState("");
+const [CarType, setCarType] = useState("");
+const [idtype, setIdtype] = useState("");
+const [idnumber, setIdnumber] = useState("");
+const [license, setLicense] = useState("");
+const [licenseED, setLicenseED] = useState("");
+const [About, setAbout] = useState("");
+const [file, setFile] = useState(null); 
+const [selectedCountry, setSelectedCountry] = useState("");
+const [selectedCity, setSelectedCity] = useState("");
+const navigate = useNavigate(); 
+
+
 
     //Gender
     const gender =[
@@ -521,8 +544,7 @@ const Profile = () => {
         "Zambia": ["Lusaka", "Kitwe", "Ndola", "Livingstone"],
         "Zimbabwe": ["Harare", "Bulawayo", "Chitungwiza", "Mutare"]
       };
-    
-
+  
     
     //ID type
     const IDtype =[
@@ -530,31 +552,81 @@ const Profile = () => {
         {option: "National Identification"}
     ]
 
-
-
-    const [selectedCountry, setSelectedCountry] = useState("");
-    const [selectedCity, setSelectedCity] = useState("");
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    }, []);
 
     const handleCountryChange = (e) => {
-        setSelectedCountry(e.target.value);
-        setSelectedCity(""); 
-    };
-
-    const handleimagechange = (event)=>{
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                document.getElementById('profile-photo').style.backgroundImage = `url(${reader.result})`;
-                };
-                reader.readAsDataURL(file);
-            }
-    }
+      setSelectedCountry(e.target.value);
+      setSelectedCity(""); 
+  };
+  
+  const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+          setFile(file); // update the state with the selected file
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              document.getElementById('profile-photo').style.backgroundImage = `url(${reader.result})`;
+          };
+          reader.readAsDataURL(file);
+      }
+  };
+  
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      
+      // const formData = new FormData();
+      
+      // formData.append('FullName', FullName);
+      // formData.append('ProfileName', ProfileName);
+      // formData.append('Email', Email);
+      // formData.append('Phone', Phone);
+      // formData.append('DOB', DOB);
+      // formData.append('Gender', Gender);
+      // formData.append('Language', Language);
+      // formData.append('CarType', CarType);
+      // formData.append('Country', selectedCountry);
+      // formData.append('City', selectedCity);
+      // formData.append('idtype', idtype);
+      // formData.append('idnumber', idnumber);
+      // formData.append('license', license);
+      // formData.append('licenseED', licenseED);
+      // formData.append('About', About);
+    
+      // if (file) {
+      //     formData.append('file', file);
+      // }
+  
+      // const profileInput = document.getElementById('profilePicture');
+      // const idInput = document.getElementById('idPicture');
+      // const licenseInput = document.getElementById('licensePicture');
+  
+      // if (profileInput.files[0]) formData.append('profilePicture', profileInput.files[0]);
+      // if (idInput.files[0]) formData.append('idPicture', idInput.files[0]);
+      // if (licenseInput.files[0]) formData.append('licensePicture', licenseInput.files[0]);
+    
+      // try {
+      //     const response = await fetch('http://localhost:5000/api/profile', {
+      //         method: 'POST',
+      //         body: formData,
+      //     });
+  
+      //     if (response.ok) {
+      //         alert("Profile saved successfully!");
+      //         navigate("/");
+      //     } else {
+      //         alert("Failed to save profile.");
+      //     }
+      // } catch (error) {
+      //     console.error("Error saving profile data:", error);
+      // }
+  };
     
   return (
     <div className="profile-container">
       <Header />
-      <form className="profile-form">
+      <form className="profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
         {/* Profile Picture Section */}
             <div className="profile-section">
             <div className="profile-picture">
@@ -562,234 +634,297 @@ const Profile = () => {
                 <div className="upload-buttons">
                 <button 
                     className="Upload-picture" 
-                    onClick={() => document.getElementById('file-input').click()}
+                    onClick={() => document.getElementById('profilePicture').click()}
                 >
                     Upload Picture
                 </button>
                 <button 
                     className="Delete-picture"
                     onClick={() => {
-                    document.getElementById('file-input').value = '';  
+                    document.getElementById('profilePicture').value = '';  
                     document.getElementById('profile-photo').style.backgroundImage = '';  
+                    setFile(null);
                     }}
                 >
                     Delete Picture
                 </button>
                 <input 
                     type="file" 
-                    id="file-input" 
+                    id="profilePicture" 
                     accept="image/*" 
                     style={{ display: 'none' }}
-                    onChange={handleimagechange}
+                    onChange={handleImageChange}
                 />
                 </div>
             </div>
             </div>
 
 
-        {/* Personal Information */}
-        <div className="profile-section">
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Full Name</label>
-              <input 
-              type="text" 
-              className="name-inputs" 
-              placeholder="John Dave" 
-              required
-              />
+                  {/* Personal Information */}
+            <div className="profile-section">
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Full Name</label>
+                  <input 
+                    type="text" 
+                    className="name-inputs" 
+                    placeholder="John Dave" 
+                    required
+                    value={FullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">Profile Name</label>
+                  <input 
+                    type="text" 
+                    className="name-inputs" 
+                    placeholder="JohnD123" 
+                    required
+                    value={ProfileName}
+                    onChange={(e) => setProfileName(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Email Address</label>
+                  <input 
+                    type="email" 
+                    className="name-inputs" 
+                    placeholder="Johndave@mail.com" 
+                    required
+                    value={Email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    className="name-inputs" 
+                    placeholder="0700-000-000" 
+                    required
+                    value={Phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">Profile Name</label>
-              <input 
-              type="text" 
-              className="name-inputs" 
-              placeholder="JohnD123" 
-              required
-              />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Email Address</label>
-              <input 
-              type="email" 
-              className="name-inputs" 
-              placeholder="Johndave@mail.com" 
-              required
-              />
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">Phone Number</label>
-              <input 
-              type="tel" 
-              className="name-inputs" 
-              placeholder="0700-000-000" 
-              required
-              />
-            </div>
-          </div>
-        </div>
 
-        {/* Date of Birth and Gender */}
-        <div className="profile-section">
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Date of Birth</label>
-              <input 
-              type="date" 
-              className="profile-input-info" 
-              required
-              />
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">Gender</label>
-              <select 
-              className="profile-input-info"
-              required
-              >
-               {gender.map((items, index) =>(
-                   <option key={index} value={items.option}>
-                    {items.option}
-                    </option>
-               ))}
-              </select>
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">Language</label>
-              <select 
-              className="profile-input-info"
-              required
-              >
-                {languages.map((items, index) =>(
-                <option key={index} value={items.option}>
-                    {items.option}
-                    </option>
-            ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Vehicle Preferences */}
-        <div className="profile-section">
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Preferred Vehicle Type</label>
-              <select 
-              className="profile-input-info"
-              required
-              >
-               {cartype.map((items,index) => (
-                <option key={index} value={items.type}>
-                    {items.type}
-                    </option>
-                ))}
-              </select>
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">Country</label>
-              <select 
-              className="profile-input-info"
-              onChange={handleCountryChange}
-              required
-              >
-                {country.map((items, index) =>(
-                    <option key={index} value={items.name}>
-                    {items.name}
-                    </option>
-                ))}
-              </select>
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">City/Town</label>
-              <select 
-              className="profile-input-info"
-              required
-              id="city"
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              disabled={!selectedCountry}
-              >
-               {selectedCountry && citiesByCountry[selectedCountry].map((city, index) => (
-                        <option key={index} value={city}>
-                            {city}
-                        </option>
+            {/* Date of Birth and Gender */}
+            <div className="profile-section">
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Date of Birth</label>
+                  <input 
+                    type="date" 
+                    className="profile-input-info" 
+                    required
+                    value={DOB}
+                    onChange={(e) => setDOB(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">Gender</label>
+                  <select 
+                    className="profile-input-info"
+                    required
+                    value={Gender}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <option value="" disabled>Select Gender</option>
+                    {gender.map((items, index) => (
+                      <option key={index} value={items.option}>
+                        {items.option}
+                      </option>
                     ))}
-              </select>
+                  </select>
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">Language</label>
+                  <select 
+                    className="profile-input-info"
+                    required
+                    value={Language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                  >
+                    <option value="" disabled>Select Language</option>
+                    {languages.map((items, index) => (
+                      <option key={index} value={items.option}>
+                        {items.option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Proof of Identification*/}
-        <div className="profile-section">
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Identification Type</label>
-              <select 
-              className="profile-input-info"
-              required
-              >
-               {IDtype.map((items, index)=>(
-                <option key={index} value={items.option}>
-                {items.option}
-                </option>
-               ))}
-              </select>
+            {/* Vehicle Preferences */}
+            <div className="profile-section">
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Preferred Vehicle Type</label>
+                  <select 
+                    className="profile-input-info"
+                    required
+                    value={CarType}
+                    onChange={(e) => setCarType(e.target.value)}
+                  >
+                    <option value="" disabled>Select Type</option>
+                    {cartype.map((items, index) => (
+                      <option key={index} value={items.type}>
+                        {items.type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">Country</label>
+                  <select 
+                    className="profile-input-info"
+                    onChange={(e) => {
+                      setSelectedCountry(e.target.value); 
+                      handleCountryChange(e);     
+                    }}
+                    required
+                    value={selectedCountry}
+                  >
+                    <option value="" disabled>Select Country</option>
+                    {country.map((items, index) => (
+                      <option key={index} value={items.name}>
+                        {items.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">City/Town</label>
+                  <select 
+                    className="profile-input-info"
+                    required
+                    id="city"
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                    disabled={!selectedCountry}
+                  >
+                    <option value="" disabled>Select City</option>
+                    {selectedCountry && citiesByCountry[selectedCountry].map((city, index) => (
+                      <option key={index} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">ID Number</label>
-              <input 
-              type="text" 
-              className="profile-input-info" 
-              required
-              />
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">ID Picture</label><br />
-              <button className="Upload-picture" 
-              required>
-                Upload
-                </button>
-            </div>
-          </div>
-        </div>
 
-        {/* ID and Driver's License */}
-        <div className="profile-section">
-          <div className="form-row">
-            <div className="profile-inputs">
-              <label className="profile-labels">Driver's License number</label>
-              <input 
-              type="text" 
-              className="profile-input-info" 
-              />
+            {/* Proof of Identification */}
+            <div className="profile-section">
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Identification Type</label>
+                  <select 
+                    className="profile-input-info"
+                    required
+                    value={idtype}
+                    onChange={(e) => setIdtype(e.target.value)}
+                  >
+                    <option value="" disabled>Select ID Type</option>
+                    {IDtype.map((items, index) => (
+                      <option key={index} value={items.option}>
+                        {items.option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">ID Number</label>
+                  <input 
+                    type="text" 
+                    className="profile-input-info" 
+                    required
+                    value={idnumber}
+                    onChange={(e) => setIdnumber(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">ID Picture</label><br />
+                  <button 
+                    type="button"  // Prevent form submission
+                    className="Upload-picture" 
+                    onClick={() => document.getElementById('idPicture').click()}
+                  >
+                    Upload
+                  </button>
+                  <input 
+                    type="file" 
+                    id="idPicture" 
+                    accept="image/*" 
+                    style={{ display: 'none' }} 
+                    onChange={handleImageChange}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">License Expiry Date</label>
-              <input 
-              type="date" 
-              className="profile-input-info" 
-              />
-            </div>
-            <div className="profile-inputs">
-              <label className="profile-labels">License Picture</label><br />
-              <button className="Upload-picture">Upload</button>
-            </div>
-          </div>
-        </div>
 
-        {/* Bio Section */}
-        <div className="profile-section">
-          <label className="profile-labels">Bio/About Me</label>
-          <textarea className="Bio-input-info" placeholder="Tell us about yourself..."></textarea>
-        </div>
+            {/* ID and Driver's License */}
+            <div className="profile-section">
+              <div className="form-row">
+                <div className="profile-inputs">
+                  <label className="profile-labels">Driver's License number</label>
+                  <input 
+                    type="text" 
+                    className="profile-input-info" 
+                    value={license}
+                    onChange={(e) => setLicense(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">License Expiry Date</label>
+                  <input 
+                    type="date" 
+                    className="profile-input-info" 
+                    value={licenseED}
+                    onChange={(e) => setLicenseED(e.target.value)}
+                  />
+                </div>
+                <div className="profile-inputs">
+                  <label className="profile-labels">License Picture</label><br />
+                  <button 
+                    type="button"  // Prevent form submission
+                    className="Upload-picture" 
+                    onClick={() => document.getElementById('licensePicture').click()}
+                  >
+                    Upload
+                  </button>
+                  <input 
+                    type="file" 
+                    id="licensePicture" 
+                    accept="image/*" 
+                    style={{ display: 'none' }} 
+                    onChange={handleImageChange}
+                  />
+                </div>
+              </div>
+            </div>
 
-        {/* Submit Buttons */}
-        <div className="submit-buttons">
-          <button type="submit" className="Submit-button">Save Profile</button>
-          <button type="button" className="Cancel-button">Cancel</button>
-        </div>
+            {/* Bio Section */}
+            <div className="profile-section">
+              <label className="profile-labels">Bio/About Me</label>
+              <textarea 
+                className="Bio-input-info" 
+                placeholder="Tell us about yourself..." 
+                value={About}
+                onChange={(e) => setAbout(e.target.value)}
+              ></textarea>
+            </div>
+
+            {/* Submit Buttons */}
+            <div className="submit-buttons">
+              <button type="submit" className="Submit-button" >Save Profile</button>
+              <button type="button" className="Cancel-button">Cancel</button>
+            </div>
       </form>
     </div>
   );

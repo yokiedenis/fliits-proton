@@ -11,6 +11,8 @@ export default function Dashboard() {
   const [sidebarVisible, setSidebarVisible] = useState(false); 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     const fetchUserData = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/userdata', { 
@@ -41,7 +43,7 @@ export default function Dashboard() {
     { label: 'Dashboard', icon: <FaHome className="Dashboard-icons"/> },
     { label: 'Profile', icon: <FaUser className="Dashboard-icons"/> },
     { label: 'Add/Edit Car', icon: <FaCar className="Dashboard-icons"/> },
-    { label: 'Track Vehicle', icon: <FaSearch className="Dashboard-icons"/> },
+    { label: 'Listings', icon: <FaSearch className="Dashboard-icons"/> },
     { label: 'Trip history', icon: <FaHistory className="Dashboard-icons"/> },
     { label: 'Transactions', icon: <FaMoneyBill className="Dashboard-icons"/> },
     { label: 'Reports', icon: <FaFileAlt className="Dashboard-icons"/> },

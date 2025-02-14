@@ -2,49 +2,45 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoutes from './routes/auth.js'; 
+import addCarRoute from './routes/add-car.js'; 
+// import profileRoute from './routes/profile.js'; 
+// import searchRoute from './routes/search-route.js'; 
 
+// Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/fliits';
 
-// Enable CORS
+// Middleware
 app.use(cors());
+app.use(express.json()); 
 
-// MongoDB connection string
-const MONGO_URI =
-  process.env.MONGO_URI || 'mongodb://localhost:27017/fliits';
+// Use the add-car route
+app.use('/api', addCarRoute);
+
+// Use the profile route
+// app.use('/api', profileRoute);
+
+// Use the search route
+// app.use('/api', searchRoute);
 
 // Connect to MongoDB
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
+  .then(() => console.log('✅ MongoDB Connected'))
   .catch((err) => {
-    console.error('MongoDB connection error:', err);
+    console.error('❌ MongoDB Connection Error:', err);
     process.exit(1); 
   });
 
-// Middleware
-app.use(express.json()); 
-
-// Routes
-app.use('/api/auth', authRoutes); 
-
-// Health Check Endpoint
+// Sample Route
 app.get('/', (req, res) => {
-  res.status(200).send('FLiiTS API is running!');
+  res.send('🚀 Fliits API is running...');
 });
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    error: 'An internal server error occurred. Please try again later.',
-  });
-});
-
-// Start the server
+// Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

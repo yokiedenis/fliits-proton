@@ -107,7 +107,7 @@ node Server.js
 Once both servers are running, open your browser and go to [http://localhost:5173](http://localhost:5173) to see the app in action. The backend API will typically run on [http://localhost:5000](http://localhost:5000).
 
 ## Usage
-
+Access the site at [fliits.firebaseapp.com](https://fliits.firebaseapp.com/)
 1. **Sign Up / Log In**: Create an account or log in to access FLiiTS features.
 2. **Search for Cars**: Use the search functionality to filter available cars by location, time, and availability.
 3. **Book a Vehicle**: Choose your desired car and book it for a specified period.

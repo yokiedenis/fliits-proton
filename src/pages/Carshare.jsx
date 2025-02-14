@@ -1,15 +1,31 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
 import BookingHeader from '../components/BookingHeader';
 import { FaCar, FaCalendarAlt, FaKey, FaDollarSign, FaHandshake } from 'react-icons/fa';
 import FeaturesImage from '../assets/images/car-share.webp'
 import '../styles/CarShare.css';
+import { auth } from '../firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function LandingPage() {
   const [activePackage, setActivePackage] = useState('secure');
 
   const showSecure = () => setActivePackage('secure');
   const showStandard = () => setActivePackage('standard');
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+      if (user) {
+        navigate('/Carshare');
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate],[]);
 
 
   return (
@@ -21,7 +37,7 @@ function LandingPage() {
         <div className="hero-content">
           <p className="hero-heading">Turn Your Car into Extra Cash!</p>
           <p className="hero-subheading">Share your car, earn effortlessly. No commitments, no hassles just opportunities.</p><br />
-          <Link to="/car-listing" className="button-primary">Get Started</Link> 
+          <Link to={isLoggedIn ? "/car-listing" : "/Login"}className="button-primary">Get Started</Link> 
         </div>
       </section>
 
@@ -38,7 +54,7 @@ function LandingPage() {
             it easy and secure to turn your car into a source of extra income.
           </p>
           <p className="feature-cta">Start sharing today and watch your earnings grow!</p>
-          <button className="button-primary">Get Started</button>
+          <Link to={isLoggedIn ? "/car-listing" : "/Login"}className="button-primary">Get Started</Link> 
         </div>
       </section>
 

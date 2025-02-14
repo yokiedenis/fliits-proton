@@ -16,3 +16,15 @@
     color: white;
     transition: 1ms;
 }
+
+/* Responsiveness for share car button on foldable phones */
+@media (max-width: 400px) {
+    .share-car-button-header {
+        font-size: 14px; 
+        padding: 8px 20px; 
+        margin-left: 0; 
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+}

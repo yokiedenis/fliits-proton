@@ -5,21 +5,21 @@ import '../styles/CarCard.css'
 
 function CarCard({items}) {
 
-  //for loop for handling display of rating stars
+  const [iconColor, setIconColor] = useState('black');
+  const navigate = useNavigate();
+
 let ratingIcon = [];
 for(let icon = 0; icon < (items.stars);  icon++){
       ratingIcon.push(<FaStar key={icon}/>);
 }
 
-//function for changing color of the like icon when clicked
-const [iconColor, setIconColor] = useState('black');
+
 const handleClick = (e) =>{
-  e.stopPropagation(); // Prevents triggering the parent container's click event
+  e.stopPropagation(); 
   setIconColor(iconColor === 'black' ? 'gold' : 'black')
 };
 
-//function to handle  clicks to display car info
-const navigate = useNavigate();
+
 const CarInfo = () => {
   navigate('/CarInfoPage', { state: { car:items } });
 };
@@ -31,7 +31,7 @@ const CarInfo = () => {
     <div className="car-info">
       <div className="car-name">
       <h4>{items.name}</h4>
-      <div className='heart-icon'><FaHeart style={{ color: iconColor, cursor: 'pointer' }} onClick={handleClick}/></div>
+      <div className='heart-icon'><FaHeart style={{ color: iconColor, cursor: 'pointer', marginLeft: '10px' }} onClick={handleClick}/></div>
       </div>
 
       <div className="car-rating">

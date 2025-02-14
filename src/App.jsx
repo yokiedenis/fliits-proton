@@ -19,32 +19,26 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {/* Authentication Routes */}
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-
-          {/* User Dashboard & Profile */}
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-
-          {/* Car Sharing & Listings */}
-          <Route path="/carshare" element={<Carshare />} />
-          <Route path="/car-listing" element={<CarListingForm />} />
-          <Route path="/after-search" element={<AfterSearch />} />
-          <Route path="/car-info" element={<CarInfoPage />} />
-
-          {/* Payment Section */}
-          <Route path="/payment-info" element={<PaymentInfo />} />
-
-          {/* Home Route */}
-          <Route path="/" element={<Home />} />
+          {/* Define routes for each page */}
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Carshare" element={<Carshare />} />
+        <Route path="/car-listing" element={<CarListingForm />} />
+        <Route path="/AfterSearch" element={<AfterSearch/>} />
+        <Route path="/CarInfoPage" element={<CarInfoPage />} />
+        <Route path="/FeedBackForm" element={<FeedbackForm />} />
+        <Route path="/car-info" element={<CarInfoPage />} />
+        <Route path="/payment-info" element={<PaymentInfo />} />
+        <Route path="/" element={<Home />} />
         </Routes>
 
-        {/* Footer Component */}
         <Footer />
-      </div>
-    </Router>
+        </div>
+      </Router>
+
   );
 }
 
