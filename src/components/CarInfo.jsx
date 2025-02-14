@@ -2,12 +2,7 @@ import React from 'react'
 import {FaMedal, FaGasPump, FaCouch, FaStar, FaCogs, FaCarSide, FaMapMarkerAlt, FaPlay, FaSnowflake, FaBatteryFull, FaCheck} from 'react-icons/fa'
 import  '../styles/CarInfoPage.css'
 
-function CarInfo({items}) { 
-  const navigate = useNavigate();
-
-  const handleBooking = () => {
-    navigate('/payment-info'); // Navigate to the PaymentInfo page
-  };
+function CarInfo({items}) {
   return (
     <div>
         <div className="car-pics">
@@ -66,7 +61,7 @@ function CarInfo({items}) {
         <div className="total-price">
           <p className='price'>${items.total_price}</p>
           <p className='booked-days'>{items.total_days} Days, {items.total_time} Min</p>
-          <button className='booking-button' onClick={handleBooking} >Book</button>
+          <button className='booking-button'>Book</button>
         </div>
 
         <div className="booking-date-time">
@@ -112,4 +107,4 @@ function CarInfo({items}) {
   )
 }
 
-export default CarInfo;
+export default CarInfo
