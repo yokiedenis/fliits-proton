@@ -158,5 +158,3 @@ For any inquiries, suggestions, or feedback, feel free to contact us:
 
 - **Kasy Jonan**: [jonanrayan06@gmail.com](mailto:jonanrayan06@gmail.com)
 - **GitHub**: [Kasy256](https://github.com/Kasy256)
-
-this is update
