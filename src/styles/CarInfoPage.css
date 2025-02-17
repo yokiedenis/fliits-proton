@@ -118,11 +118,16 @@
 }
 .booking-button{
     background-color: #ffd700;
+    color: black;
     font-size: 18px;
     font-weight: bold;
     padding: 5px 50px;
     border: 0px;
     border-radius: 10px;
+}
+.booking-button:hover{
+    background-color: black;
+    color: white;
 }
 .from-to-date{
     font-size: 22px;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app, database } from '../firebaseConfig';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styles/Login.css';
 import { collection, addDoc } from "firebase/firestore";
 
@@ -11,6 +11,7 @@ function Login() {
   const provider = new GoogleAuthProvider();
   const collectionRef = collection(database, "users");
   const navigate = useNavigate();
+  const location = useLocation();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -50,8 +51,10 @@ function Login() {
           .catch((err) => {
             console.error("Error adding user data to Firestore:", err.message);
           });
+
+        const redirectTo = new URLSearchParams(location.search).get('redirect') || '/';
         setTimeout(() => {
-          navigate('/'); 
+          navigate(redirectTo); 
         }, 100);
       })
       .catch((error) => {
@@ -86,9 +89,10 @@ function Login() {
             console.error("Error adding user data to Firestore:", err.message);
           });
 
+        const redirectTo = new URLSearchParams(location.search).get('redirect') || '/';
         setTimeout(() => {
-          navigate('/'); 
-        }, 2000);
+          navigate(redirectTo);
+        }, 100);
       })
       .catch((error) => {
         const errorMessage = error.message || 'An error occurred during sign up.';

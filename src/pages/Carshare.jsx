@@ -17,16 +17,19 @@ function LandingPage() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
-      if (user) {
-        navigate('/Carshare');
-      }
     });
     return () => unsubscribe();
-  }, [navigate],[]);
+  }, []);
 
+  const handleButtonClick = () => {
+    if (isLoggedIn) {
+      navigate('/car-listing');
+    } else {
+      navigate(`/Login?redirect=/car-listing`);
+    }
+  };
 
   return (
     <div className="landing-page">
@@ -37,7 +40,7 @@ function LandingPage() {
         <div className="hero-content">
           <p className="hero-heading">Turn Your Car into Extra Cash!</p>
           <p className="hero-subheading">Share your car, earn effortlessly. No commitments, no hassles just opportunities.</p><br />
-          <Link to={isLoggedIn ? "/car-listing" : "/Login"}className="button-primary">Get Started</Link> 
+          <button onClick={handleButtonClick} className="button-primary">Get Started</button> 
         </div>
       </section>
 
