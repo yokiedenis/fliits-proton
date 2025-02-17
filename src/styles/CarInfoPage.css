@@ -285,3 +285,133 @@
         padding: 5px 30px;
     }
 }
+
+@media(max-width: 400px){
+    .car-info-section{
+        flex-direction: column;
+    }
+    .car-pics {
+        flex-direction: column;
+        padding: 2px; 
+        gap: 3px;
+        margin-top: 20px;
+    }
+    .main-pic-section {
+        width: 100%;
+    }
+    .more-pics {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: scroll;
+        border-radius: 10px;
+    }
+    .sub-pics {
+        width: 30%;
+        margin: 1px;
+    }
+    .car-profile {
+        width: 100%;
+        margin: 1px;
+    }
+    .car-pricing {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .car-model {
+        font-size: 18px;
+    }
+    .key-features {
+        flex-direction: column;
+        margin: 10px;
+        gap: 10px;
+    }
+    .feature {
+        font-size: 12px;
+    }
+    .icons {
+        font-size: 18px;
+    }
+    .host-profile {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .host {
+        padding: 5px;
+        gap: 5px;
+    }
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+    .host-name {
+        margin: 10px 0 0 0;
+        font-size: 12px;
+    }
+    .ownership p {
+        font-size: 16px;
+        margin: 20px 0 0 0;
+    }
+    .description-heading {
+        font-size: 16px;
+        margin: 10px;
+    }
+    .car-description {
+        margin: 10px;
+        width: 100%;
+        font-size: 12px;
+    }
+    .more-features {
+        gap: 5px;
+        margin: 10px;
+    }
+    .conditions {
+        margin: 10px;
+    }
+    .total-price {
+        padding: 5px;
+        margin: 10px;
+    }
+    .price {
+        font-size: 20px;
+    }
+    .booked-days {
+        font-size: 12px;
+    }
+    .booking-button {
+        font-size: 14px;
+        padding: 5px 20px;
+    }
+    .from-to-date {
+        font-size: 16px;
+        margin: 5px 10px;
+    }
+    .date-time-input {
+        margin: 5px;
+    }
+    .book-date-time {
+        font-size: 12px;
+        padding: 0px;
+        margin: 2px 5px;
+    }
+    .booking-location {
+        font-size: 14px;
+        margin: 10px 5px;
+    }
+    .booked-location {
+        font-size: 14px;
+        padding: 2px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin: 0px 5px;
+        width: 100%;
+    }
+    .inquires-section {
+        padding: 5px;
+        text-align: center;
+        margin: 5px;
+    }
+    .inquires-button {
+        font-size: 14px;
+        padding: 5px 20px;
+    }
+}
