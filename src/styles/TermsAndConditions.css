@@ -58,7 +58,6 @@ input[type="checkbox"]{
 @media (max-width: 400px) {
     .terms-and-conditions-container {
         padding: 5px;
-        margin-top: 5px;
     }
 
     .terms-and-conditions p {

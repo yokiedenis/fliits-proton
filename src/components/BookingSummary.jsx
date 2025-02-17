@@ -31,7 +31,7 @@ const BookingSummary = () => {
                     </div>
                     <div className="host-details">
                         <p className='H-title'>Email</p>
-                        <p className='H-reply'><a href="mailto:jonanrayan06@gmail.com">jonanrayan06@gmail.com</a></p>
+                        <p className='H-reply'><a href="mailto:fliits@gmail.com">fliits@gmail.com</a></p>
                     </div>
                 </div>
             </div>

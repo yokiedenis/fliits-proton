@@ -140,18 +140,9 @@ ul li {
         margin-bottom: 5px;
     }
 
-    .share-car-button-header {
-        font-size: 15px;
-    }
-
     .logo a {
         font-size: 40px;
-    }
-
-    .share-car-button-header {
-        padding: 10px 20px;
-        font-size: 15px;
-        margin-left: 0px;
+        
     }
 
     .header-button {
@@ -168,26 +159,12 @@ ul li {
 /* Responsiveness for header on foldable phones */
 @media (max-width: 400px) {
     .headercontainer {
-        padding: 2px;
-        margin-bottom: 5px;
-    }
-
-    .share-car-button-header {
-        font-size: 12px;
+        padding: 5px;
     }
 
     .logo a {
         font-size: 30px;
-    }
-
-    .share-car-button-header {
-        padding: 8px 15px;
-        font-size: 12px;
         margin-left: 0px;
-    }
-
-    .header-button {
-        margin-left: 5%;
     }
 
     .header-icon {
