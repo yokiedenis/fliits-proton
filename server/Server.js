@@ -12,7 +12,7 @@ import addCarRoute from './routes/add-car.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/fliits';
+const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(cors());
@@ -31,8 +31,8 @@ app.use('/api', addCarRoute);
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('✅ MongoDB Connected'))
-  .catch((err) => {
-    console.error('❌ MongoDB Connection Error:', err);
+  .catch((error) => {
+    console.error('❌ MongoDB Connection Error:', error);
     process.exit(1); 
   });
 
